@@ -10,4 +10,5 @@ require('core.plugin_config.nvim-autopairs')
 require('core.plugin_config.comment')
 require('core.plugin_config.test')
 require('core.plugin_config.dap')
+require('core.plugin_config.noice')
 

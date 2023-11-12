@@ -43,15 +43,6 @@ local plugins = {
       })
     end,
   },
-  -- other really handy stuff
-  'windwp/nvim-autopairs',
-  'numToStr/Comment.nvim',
-  {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
-    dependencies = { { 'nvim-lua/plenary.nvim' } }
-  },
-  "folke/neodev.nvim",
   -- LSP
   {
     'williamboman/mason.nvim',
@@ -76,7 +67,25 @@ local plugins = {
   "mfussenegger/nvim-dap",
   "rcarriga/nvim-dap-ui",
   "jay-babu/mason-nvim-dap.nvim",
-  "theHamsta/nvim-dap-virtual-text"
+  "theHamsta/nvim-dap-virtual-text",
+
+  -- other really handy stuff
+  'windwp/nvim-autopairs',
+  'numToStr/Comment.nvim',
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.1',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  "folke/neodev.nvim",
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  }
 }
 
 local opts = {}
