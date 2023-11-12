@@ -8,3 +8,6 @@ require('core.plugin_config.lsp_config')
 require('core.plugin_config.completions')
 require('core.plugin_config.nvim-autopairs')
 require('core.plugin_config.comment')
+require('core.plugin_config.test')
+require('core.plugin_config.dap')
+

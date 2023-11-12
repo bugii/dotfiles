@@ -1,7 +1,11 @@
+-- Find all lsps supported by mason
+-- https://github.com/williamboman/mason-lspconfig.nvim
+
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls', 'tsserver' }
+  ensure_installed = { 'lua_ls', 'tsserver', 'csharp_ls' }
 })
+require('neodev').setup()
 local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local null_ls = require('null-ls')
@@ -42,7 +46,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format()
     end, { buffer = ev.buf, desc = 'format buffer' })
-    vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
+    vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols,
+      { desc = '[D]ocument [S]ymbols' })
     vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
       { desc = '[W]orkspace [S]ymbols' })
   end,
@@ -64,6 +69,9 @@ lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
+      completion = {
+        callSnippet = "Replace"
+      },
       diagnostics = {
         globals = { 'vim' }
       }
@@ -80,6 +88,9 @@ lspconfig.vuels.setup {
   capabilities = capabilities,
 }
 lspconfig.tailwindcss.setup {
+  capabilities = capabilities,
+}
+lspconfig.csharp_ls.setup {
   capabilities = capabilities,
 }
 

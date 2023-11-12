@@ -51,16 +51,32 @@ local plugins = {
     tag = '0.1.1',
     dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
+  "folke/neodev.nvim",
   -- LSP
   {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason-registry',
     'neovim/nvim-lspconfig',
   },
   'jose-elias-alvarez/null-ls.nvim',
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  -- Testing
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "marilari88/neotest-vitest"
+    }
+  },
+  -- Debugging
+  "mfussenegger/nvim-dap",
+  "rcarriga/nvim-dap-ui",
+  "jay-babu/mason-nvim-dap.nvim",
+  "theHamsta/nvim-dap-virtual-text"
 }
 
 local opts = {}
