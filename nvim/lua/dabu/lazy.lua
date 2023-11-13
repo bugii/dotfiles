@@ -178,7 +178,6 @@ local plugins = {
   -- Testing
   {
     "nvim-neotest/neotest",
-    event = "LspAttach",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
@@ -228,7 +227,7 @@ local plugins = {
 
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag = '0.1.4',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local builtin = require('telescope.builtin')
@@ -279,7 +278,7 @@ local plugins = {
   },
 
   -- Plugins from subdirectory
-  { import = 'core.plugins' },
+  { import = 'dabu.plugins' },
 }
 
 local opts = {}

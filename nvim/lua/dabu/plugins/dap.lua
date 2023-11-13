@@ -3,7 +3,12 @@ return {
   dependencies = {
     "theHamsta/nvim-dap-virtual-text",
     "rcarriga/nvim-dap-ui",
-    "mason-org/mason-registry"
+    {
+      "williamboman/mason.nvim",
+      opts = {
+        ensure_installed = { 'js-debug-adapater', 'netcoredbg' }
+      }
+    }
   },
   config = function()
     local dap, dapui, mason_registry, virtual_text = require("dap"), require("dapui"), require('mason-registry'),

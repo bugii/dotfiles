@@ -1,3 +1,3 @@
-require('core.keymaps')
-require('core.lazy')
-require('core.autocmds')
+require('dabu.keymaps')
+require('dabu.lazy')
+require('dabu.autocmds')
