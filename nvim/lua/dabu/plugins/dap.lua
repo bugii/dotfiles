@@ -60,7 +60,7 @@ return {
       }
     end
 
-    dap.adapters.coreclr = {
+    dap.adapters["netcoredbg"] = {
       type = "executable",
       command = mason_registry.get_package('netcoredbg'):get_install_path() .. "/netcoredbg",
       args = { '--interpreter=vscode' }
@@ -102,7 +102,7 @@ return {
 
     local config = {
       {
-        type = "coreclr",
+        type = "netcoredbg",
         name = "launch - netcoredbg",
         request = "launch",
         program = function()

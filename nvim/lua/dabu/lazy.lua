@@ -123,7 +123,9 @@ local plugins = {
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
-      'L3MON4D3/LuaSnip'
+      'L3MON4D3/LuaSnip',
+      'rafamadriz/friendly-snippets',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       local cmp = require('cmp');
@@ -152,10 +154,6 @@ local plugins = {
     end
 
   },
-
-  -- Snippets
-  'rafamadriz/friendly-snippets',
-  'saadparwaiz1/cmp_luasnip',
 
   -- Show open keybindings
   {
@@ -190,7 +188,9 @@ local plugins = {
       neotest.setup({
         adapters = {
           require('neotest-vitest'),
-          require('neotest-dotnet')
+          require('neotest-dotnet')({
+            discovery_root = "solution"
+          })
         },
       })
 
@@ -223,6 +223,7 @@ local plugins = {
     end
 
   },
+
   'numToStr/Comment.nvim',
 
   {
@@ -248,6 +249,7 @@ local plugins = {
     end
   },
 
+  -- Pretty stuff
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -277,8 +279,12 @@ local plugins = {
     end
   },
 
+  "folke/trouble.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+
   -- Plugins from subdirectory
   { import = 'dabu.plugins' },
+  { import = 'dabu.plugins.lsp' },
 }
 
 local opts = {}

@@ -3,7 +3,13 @@ return {
   dependencies = {
     'jose-elias-alvarez/null-ls.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    "folke/neodev.nvim"
+    "folke/neodev.nvim",
+    {
+      "williamboman/mason.nvim",
+      opts = {
+        ensure_installed = { 'omnisharp' }
+      }
+    }
   },
   config = function()
     require('neodev').setup({
@@ -13,6 +19,7 @@ return {
     local lspconfig = require('lspconfig')
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     local null_ls = require('null-ls')
+
 
     -- Global mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -94,7 +101,9 @@ return {
     lspconfig.tailwindcss.setup {
       capabilities = capabilities,
     }
-    lspconfig.csharp_ls.setup {
+    lspconfig.omnisharp.setup {
+      cmd = { require('mason-registry').get_package("omnisharp"):get_install_path() .. "/omnisharp" },
+      enable_roslyn_analyzers = true,
       capabilities = capabilities,
     }
 
