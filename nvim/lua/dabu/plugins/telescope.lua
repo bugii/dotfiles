@@ -6,11 +6,22 @@ return {
 		"ThePrimeagen/git-worktree.nvim",
 	},
 	config = function()
+		local telescope = require("telescope")
 		local builtin = require("telescope.builtin")
 		local themes = require("telescope.themes")
-		require("telescope").load_extension("git_worktree")
 
-		vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find in Files" })
+		telescope.load_extension("git_worktree")
+
+		telescope.setup({
+			pickers = {
+				find_files = {
+					-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+				},
+			},
+		})
+
+		vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find File" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
 		vim.keymap.set("n", "<leader>ff", function()
