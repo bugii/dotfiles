@@ -35,13 +35,18 @@ return {
 			"n",
 			"<leader>gw",
 			require("telescope").extensions.git_worktree.git_worktrees,
-			{ desc = "Show [G]it [W]orktrees" }
+			{ desc = "[G]it [W]orktrees" }
 		)
 		vim.keymap.set(
 			"n",
-			"<leader>cgw",
+			"<leader>gw",
 			require("telescope").extensions.git_worktree.create_git_worktree,
-			{ desc = "[C]reate [G]it [W]orktrees" }
+			{ desc = "[G]it [W]orktrees [C]reate" }
 		)
+
+		vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[G]it [B]ranches" })
+		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[G]it [C]ommits" })
+		vim.keymap.set("n", "<leader>gbc", builtin.git_bcommits, { desc = "[G]it [B]uffer [C]ommits" })
+		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[G]it [S]tatus" })
 	end,
 }
