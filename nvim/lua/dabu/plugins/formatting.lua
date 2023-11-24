@@ -16,7 +16,7 @@ return {
 				yaml = { { "prettierd", "prettier" } },
 				markdown = { { "prettierd", "prettier" } },
 				graphql = { { "prettierd", "prettier" } },
-				csharp = { "csharpier" },
+				cs = { "csharpier" },
 			},
 			format_on_save = {
 				async = false,
