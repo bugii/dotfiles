@@ -11,7 +11,7 @@ return {
 		require("mason").setup()
 
 		require("mason-lspconfig").setup({
-			ensure_installed = { "lua_ls", "tsserver", "omnisharp" },
+			ensure_installed = { "lua_ls", "tsserver", "omnisharp", "pyright" },
 		})
 
 		require("mason-nvim-dap").setup({

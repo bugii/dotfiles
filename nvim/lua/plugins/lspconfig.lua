@@ -129,5 +129,8 @@ return {
 			enable_roslyn_analyzers = true,
 			capabilities = capabilities,
 		})
+		lspconfig.pyright.setup({
+			capabilities = capabilities,
+		})
 	end,
 }

@@ -15,6 +15,7 @@ return {
 				"json5",
 				"markdown",
 				"c_sharp",
+				"python",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
