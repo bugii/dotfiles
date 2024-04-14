@@ -9,6 +9,7 @@ return {
 				ensure_installed = { "js-debug-adapter", "netcoredbg" },
 			},
 		},
+		"nvim-neotest/nvim-nio",
 	},
 	config = function()
 		local dap, dapui, mason_registry, virtual_text =
