@@ -1,61 +1,63 @@
 return {
-  "hrsh7th/nvim-cmp",
-  event = 'InsertEnter',
-  dependencies = {
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
-    "rafamadriz/friendly-snippets",
-    'onsails/lspkind.nvim'
-  },
-  config = function()
-    local cmp = require("cmp")
-    local luasnip = require("luasnip")
-    local lspkind = require('lspkind')
-    require("luasnip.loaders.from_vscode").lazy_load()
+	"hrsh7th/nvim-cmp",
+	event = "InsertEnter",
+	dependencies = {
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+		"saadparwaiz1/cmp_luasnip",
+		"rafamadriz/friendly-snippets",
+		"onsails/lspkind.nvim",
+	},
+	config = function()
+		local cmp = require("cmp")
+		local luasnip = require("luasnip")
+		local lspkind = require("lspkind")
+		require("luasnip.loaders.from_vscode").lazy_load()
 
-    cmp.setup({
-      mapping = cmp.mapping.preset.insert({
-        ["<C-o>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if luasnip.jumpable(1) then
-            luasnip.jump(1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+		cmp.setup({
+			sources = {
+				{ name = "nvim_lsp" },
+				{ name = "buffer" },
+				{ name = "path" },
+				{ name = "luasnip" },
+			},
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      }),
+			mapping = cmp.mapping.preset.insert({
+				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+				["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+				["<C-y>"] = cmp.mapping(
+					cmp.mapping.confirm({
+						behavior = cmp.ConfirmBehavior.Insert,
+						select = true,
+					}),
+					{ "i", "c" }
+				),
+			}),
 
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
+			snippet = {
+				expand = function(args)
+					luasnip.lsp_expand(args.body)
+				end,
+			},
 
-      sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer" },
-        { name = "path" },
-      }),
+			formatting = {
+				format = lspkind.cmp_format({
+					maxwidth = 50,
+				}),
+			},
+		})
 
-      formatting = {
-        format = lspkind.cmp_format({
-          maxwidth = 50,
-          elipsis_char = '...'
-        })
-      }
-    })
-  end,
+		vim.keymap.set({ "i", "s" }, "<c-k>", function()
+			if luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			end
+		end, { silent = true })
+
+		vim.keymap.set({ "i", "s" }, "<c-j>", function()
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			end
+		end, { silent = true })
+	end,
 }
