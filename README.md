@@ -1,4 +1,4 @@
-# dotfiles
+# My dotfiles :)
 
 To use those dotfiles on a new machine install GNU Stow first. On mac this can be done via brew:
 
