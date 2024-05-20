@@ -3,6 +3,11 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+[ -f "/home/dario/.ghcup/env" ] && source "/home/dario/.ghcup/env" # ghcup-env
+# The next line updates PATH for Netlify's Git Credential Helper.
+test -f '/home/dario/.config/netlify/helper/path.zsh.inc' && source '/home/dario/.config/netlify/helper/path.zsh.inc'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -23,6 +28,9 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
+zinit light lukechilds/zsh-nvm
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -70,39 +78,11 @@ alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
 
-export NVM_DIR="$HOME/.nvm"
+# export NVM_DIR="$HOME/.nvm"
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="$HOME/.local/bin/:$PATH"
 
-[ -f "/home/dario/.ghcup/env" ] && source "/home/dario/.ghcup/env" # ghcup-env
-# The next line updates PATH for Netlify's Git Credential Helper.
-test -f '/home/dario/.config/netlify/helper/path.zsh.inc' && source '/home/dario/.config/netlify/helper/path.zsh.inc'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Shell integrations
 source <(fzf --zsh)
 eval "$(zoxide init --cmd cd zsh)"
-
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
-      nvm use
-    fi
-  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
