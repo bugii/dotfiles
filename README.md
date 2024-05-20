@@ -27,4 +27,4 @@ For all the tools to work properly you may need to install the following:
 2. Shell: zsh
 3. Tmux, and tpm (tmux plugin manager).
 4. Neovim
-5. Utilities: Fzf, git
+5. Utilities: Fzf, zoxide, git
