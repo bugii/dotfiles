@@ -4,7 +4,7 @@ return {
 		version = "*",
 		config = function()
 			require("toggleterm").setup({
-				open_mapping = [[<F2>]],
+				open_mapping = [[<C-M-p>]],
 				direction = "float",
 			})
 			local Terminal = require("toggleterm.terminal").Terminal

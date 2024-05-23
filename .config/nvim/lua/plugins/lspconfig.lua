@@ -9,7 +9,7 @@ return {
 	},
 	config = function()
 		require("neodev").setup({
-			library = { plugins = { "neotest" }, types = true },
+			library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
 		})
 
 		local lspconfig = require("lspconfig")
