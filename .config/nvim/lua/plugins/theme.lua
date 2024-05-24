@@ -10,16 +10,23 @@ return {
 				integrations = {
 					cmp = true,
 					gitsigns = true,
-					nvimtree = true,
 					treesitter = true,
 					noice = true,
 					neotest = true,
 					mason = true,
-					lsp_trouble = true,
 					which_key = true,
-					dap = {
+					leap = true,
+					dap = true,
+					dap_ui = true,
+					notify = true,
+					telescope = {
 						enabled = true,
-						enable_ui = true, -- enable nvim-dap-ui
+					},
+					native_lsp = {
+						enabled = true,
+					},
+					indent_blankline = {
+						enabled = true,
 					},
 					-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 				},
