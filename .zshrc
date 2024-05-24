@@ -36,7 +36,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 export NVM_LAZY_LOAD=true
-export NVM_AUTO_USE=true
 zinit light lukechilds/zsh-nvm
 
 # Add in snippets
