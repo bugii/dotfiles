@@ -6,7 +6,7 @@ return {
 
 		config = function()
 			require("catppuccin").setup({
-				flavour = "frappe", -- latte, frappe, macchiato, mocha
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
 				integrations = {
 					cmp = true,
 					gitsigns = true,
@@ -22,6 +22,23 @@ return {
 						enable_ui = true, -- enable nvim-dap-ui
 					},
 					-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+				},
+				color_overrides = {
+					mocha = {
+						base = "#000000",
+						mantle = "#000000",
+						crust = "#000000",
+					},
+				},
+				highlight_overrides = {
+					mocha = function(C)
+						return {
+							TabLineSel = { bg = C.pink },
+							CmpBorder = { fg = C.surface2 },
+							Pmenu = { bg = C.none },
+							TelescopeBorder = { link = "FloatBorder" },
+						}
+					end,
 				},
 			})
 
