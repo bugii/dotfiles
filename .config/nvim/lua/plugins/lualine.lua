@@ -3,14 +3,23 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
-				icons_enabled = true,
+				icons_enabled = false,
 				theme = "catppuccin",
+				section_separators = "",
+				component_separators = "",
 			},
 			tabline = {
-				lualine_a = { "branch" },
-				lualine_b = { { "filename", path = 1 } },
-				lualine_c = {},
-				lualine_x = {},
+				lualine_a = {
+					{
+						"mode",
+						fmt = function(str)
+							return str:sub(1, 1)
+						end,
+					},
+				},
+				lualine_b = { "branch" },
+				lualine_c = { { "filename", path = 1 }, { "diagnostics", sources = { "nvim_lsp" } } },
+				lualine_x = { "encoding" },
 				lualine_y = {},
 				lualine_z = {},
 			},
