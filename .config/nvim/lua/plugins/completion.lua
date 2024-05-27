@@ -50,8 +50,9 @@ return {
 
 		cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
 			sources = {
-				{ name = "nvim_lsp" },
 				{ name = "vim-dadbod-completion" },
+				{ name = "luasnip" },
+				{ name = "nvim_lsp" },
 				{ name = "buffer" },
 			},
 		})
