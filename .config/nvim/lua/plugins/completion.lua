@@ -48,6 +48,14 @@ return {
 			},
 		})
 
+		cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+			sources = {
+				{ name = "nvim_lsp" },
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
+			},
+		})
+
 		vim.keymap.set({ "i", "s" }, "<c-k>", function()
 			if luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()

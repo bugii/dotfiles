@@ -17,6 +17,7 @@ return {
 				"markdown",
 				"c_sharp",
 				"python",
+				"regex",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
