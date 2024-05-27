@@ -19,14 +19,14 @@ return {
 				graphql = { "prettier" },
 				cs = { "csharpier" },
 			},
-			format_on_save = {
-				async = false,
-				timeout_ms = 1000,
+			format_after_save = {
+				lsp_fallback = true,
 			},
 		})
 
 		vim.keymap.set({ "n", "v" }, "<leader>f", function()
 			conform.format({
+				lsp_fallback = true,
 				timeout_ms = 500,
 			})
 		end, { desc = "Format file or range (in visual mode)" })

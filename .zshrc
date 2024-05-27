@@ -44,6 +44,7 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::asdf
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -84,10 +85,9 @@ alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
 
-# export NVM_DIR="$HOME/.nvm"
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.local/bin/:$HOME/nvim/bin:$PATH"
 
 # Shell integrations
 source <(fzf --zsh)

@@ -2,7 +2,6 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
-	version = "0.9.2",
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- A list of parser names, or "all"
