@@ -18,7 +18,20 @@ return {
 				markdown = { "prettier" },
 				graphql = { "prettier" },
 				cs = { "csharpier" },
+				sql = { "sqlfluff" },
 			},
+			formatters = {
+				sqlfluff = {
+					command = "sqlfluff",
+					args = { "fix", "-" },
+					stdin = true,
+					cwd = require("conform.util").root_file({
+						".sqlfluff",
+					}),
+					require_cwd = false,
+				},
+			},
+
 			format_after_save = {
 				lsp_fallback = true,
 			},
