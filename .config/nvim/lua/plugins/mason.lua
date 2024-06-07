@@ -23,6 +23,7 @@ return {
 				"jsonls",
 				"vuels",
 				"tailwindcss",
+				"elixirls",
 			},
 		})
 

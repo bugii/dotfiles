@@ -1,0 +1,91 @@
+@define-color background rgb(245, 194, 231);
+@define-color text rgb(69, 71, 90);
+
+* {
+  border: none;
+  border-radius: 0;
+  /* `otf-font-awesome` is required to be installed for icons */
+  /* font-family: Liberation Mono; */
+  min-height: 20px;
+  color: @text;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#workspaces {
+  margin-right: 8px;
+  border-radius: 10px;
+  transition: none;
+  background: @background;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+  transition: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  border-radius: inherit;
+  background: @background;
+}
+
+#workspaces button.focused {
+  color: white;
+}
+
+#language {
+  padding-left: 16px;
+  padding-right: 8px;
+  border-radius: 10px 0px 0px 10px;
+  transition: none;
+  background: @background;
+}
+
+#keyboard-state {
+  margin-right: 8px;
+  padding-right: 16px;
+  border-radius: 0px 10px 10px 0px;
+  transition: none;
+  background: @background;
+}
+
+#clock {
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  transition: none;
+  background: @background;
+}
+
+#temperature {
+  margin-right: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  transition: none;
+  background: @background;
+}
+
+#temperature.critical {
+  background-color: #eb4d4b;
+}
+
+#tray {
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  transition: none;
+  background: @background;
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}

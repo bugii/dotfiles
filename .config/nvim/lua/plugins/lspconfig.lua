@@ -125,6 +125,15 @@ return {
 				})
 			end,
 
+			["elixirls"] = function()
+				lspconfig.elixirls.setup({
+					capabilities = capabilities,
+					cmd = {
+						require("mason-registry").get_package("elixir-ls"):get_install_path() .. "/language_server.sh",
+					},
+				})
+			end,
+
 			["omnisharp"] = function()
 				lspconfig.omnisharp.setup({
 					cmd = { require("mason-registry").get_package("omnisharp"):get_install_path() .. "/omnisharp" },
