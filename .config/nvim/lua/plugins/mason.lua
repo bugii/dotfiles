@@ -34,12 +34,12 @@ return {
 		require("mason-tool-installer").setup({
 			ensure_installed = {
 				-- formatters
-				-- prettier is installed on a project level and thus we anyways want to use the project-specific versions
+				"prettierd",
 				"stylua",
 				"autopep8",
 				"csharpier",
 				-- linters
-				-- eslint is installed on a project level and thus we anyways want to use the project-specific versions
+				"eslint_d",
 				"pylint",
 			},
 		})
