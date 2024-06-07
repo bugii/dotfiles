@@ -18,6 +18,7 @@ return {
 				"c_sharp",
 				"python",
 				"regex",
+				"sql",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)

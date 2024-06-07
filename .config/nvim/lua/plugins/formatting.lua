@@ -6,19 +6,32 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
+				javascript = { "prettier", "prettierd" },
+				typescript = { { "prettier", "prettierd" } },
+				javascriptreact = { { "prettier", "prettierd" } },
+				typescriptreact = { { "prettier", "prettierd" } },
 				python = { "autopep8" },
-				css = { "prettier" },
-				html = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
-				graphql = { "prettier" },
+				css = { { "prettier", "prettierd" } },
+				html = { { "prettier", "prettierd" } },
+				json = { { "prettier", "prettierd" } },
+				yaml = { { "prettier", "prettierd" } },
+				markdown = { { "prettier", "prettierd" } },
+				graphql = { { "prettier", "prettierd" } },
 				cs = { "csharpier" },
+				sql = { "sqlfluff" },
 			},
+			formatters = {
+				sqlfluff = {
+					command = "sqlfluff",
+					args = { "fix", "-" },
+					stdin = true,
+					cwd = require("conform.util").root_file({
+						".sqlfluff",
+					}),
+					require_cwd = false,
+				},
+			},
+
 			format_after_save = {
 				lsp_fallback = true,
 			},
