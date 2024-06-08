@@ -2,7 +2,7 @@
     "margin": "20 20 0 20",
     "modules-left": ["hyprland/workspaces", "hyprland/language", "keyboard-state"],
     "modules-center": ["clock"],
-    "modules-right": ["temperature", "battery", "tray"],
+    "modules-right": ["temperature", "battery", "tray", "custom/notification"],
 
 
     //***************************
@@ -11,7 +11,7 @@
 
 
     "hyprland/language": {
-        "format": "{} ",
+        "format": "{}",
         "min-length": 5,
         "tooltip": false
     },
@@ -26,7 +26,6 @@
     },
 
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%a, %d %b, %I:%M %p}"
     },
 
@@ -39,10 +38,7 @@
     },
 
     "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", "", "", ""],
         "tooltip": false,
@@ -51,5 +47,26 @@
     "tray": {
         "icon-size": 16,
         "spacing": 0
+    },
+
+    "custom/notification": {
+      "tooltip": false,
+      "format": "{icon}",
+      "format-icons": {
+        "notification": "<span foreground='red'><sup></sup></span>",
+        "none": "",
+        "dnd-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-none": "",
+        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
     },
 }
