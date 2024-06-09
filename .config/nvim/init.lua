@@ -1,7 +1,9 @@
 vim.o.termguicolors = true
-vim.g.python3_host_prog = "/home/dario/python3nvim"
+-- vim.g.python3_host_prog = "/home/dario/python3nvim"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+vim.opt.clipboard = "unnamedplus"
 vim.opt.relativenumber = true
 vim.opt.breakindent = true
 vim.opt.scrolloff = 10
