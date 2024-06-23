@@ -19,6 +19,7 @@ return {
 				graphql = { { "prettier", "prettierd" } },
 				cs = { "csharpier" },
 				sql = { "sqlfluff" },
+				rust = { "rustfmt" },
 			},
 			formatters = {
 				sqlfluff = {
