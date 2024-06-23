@@ -7,6 +7,7 @@ return {
 	debug_key_events = false,
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
+	window_background_opacity = 0.9,
 
 	font = wezterm.font_with_fallback({
 		"GeistMono Nerd Font",
