@@ -13,8 +13,8 @@ return {
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
-				"tsserver",
-				"omnisharp",
+				"ts_ls",
+				"csharp_ls",
 				"pyright",
 				"bashls",
 				"cssls",

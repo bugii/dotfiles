@@ -26,9 +26,6 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
-				-- Enable completion triggered by <c-x><c-o>
-				vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
 				-- Buffer local mappings.
 				vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", { buffer = ev.buf, desc = "references" })
 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "go declaration" })
@@ -131,14 +128,6 @@ return {
 					cmd = {
 						require("mason-registry").get_package("elixir-ls"):get_install_path() .. "/language_server.sh",
 					},
-				})
-			end,
-
-			["omnisharp"] = function()
-				lspconfig.omnisharp.setup({
-					cmd = { require("mason-registry").get_package("omnisharp"):get_install_path() .. "/omnisharp" },
-					enable_roslyn_analyzers = true,
-					capabilities = capabilities,
 				})
 			end,
 		})

@@ -7,8 +7,9 @@ return {
 				theme = "catppuccin",
 				section_separators = "",
 				component_separators = "",
+				globalstatus = true,
 			},
-			tabline = {
+			sections = {
 				lualine_a = {
 					{
 						"mode",
@@ -25,8 +26,8 @@ return {
 			},
 
 			-- by unsetting sections and inactive_sessions I can only have lualine as a tabline
-			sections = {},
-			inactive_sessions = {},
+			-- sections = {},
+			-- inactive_sessions = {},
 		})
 	end,
 }

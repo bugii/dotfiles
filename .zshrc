@@ -88,6 +88,7 @@ alias c='clear'
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="$HOME/.local/bin/:$HOME/nvim/bin:$PATH"
+export EDITOR='nvim'
 
 # Shell integrations
 source <(fzf --zsh)
