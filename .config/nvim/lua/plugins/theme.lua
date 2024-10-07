@@ -31,23 +31,23 @@ return {
 					},
 					-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 				},
-				color_overrides = {
-					mocha = {
-						base = "#000000",
-						mantle = "#000000",
-						crust = "#000000",
-					},
-				},
-				highlight_overrides = {
-					mocha = function(C)
-						return {
-							TabLineSel = { bg = C.pink },
-							CmpBorder = { fg = C.surface2 },
-							Pmenu = { bg = C.none },
-							TelescopeBorder = { link = "FloatBorder" },
-						}
-					end,
-				},
+				-- color_overrides = {
+				-- 	mocha = {
+				-- 		base = "#000000",
+				-- 		mantle = "#000000",
+				-- 		crust = "#000000",
+				-- 	},
+				-- },
+				-- highlight_overrides = {
+				-- 	mocha = function(C)
+				-- 		return {
+				-- 			TabLineSel = { bg = C.pink },
+				-- 			CmpBorder = { fg = C.surface2 },
+				-- 			Pmenu = { bg = C.none },
+				-- 			TelescopeBorder = { link = "FloatBorder" },
+				-- 		}
+				-- 	end,
+				-- },
 			})
 
 			-- setup must be called before loading

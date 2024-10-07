@@ -1,0 +1,6 @@
+- path: "~/dotfiles"
+  tmuxinator: "~/dotfiles/.tmuxinator.yml"
+
+- path: "~/Projects/aop.git"
+  tmuxinator: "~/Projects/aop.git/.tmuxinator.yml"
+  type: "worktreeroot"
