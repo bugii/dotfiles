@@ -24,6 +24,7 @@ return {
 				"vuels",
 				"tailwindcss",
 				"elixirls",
+				"rust_analyzer",
 			},
 		})
 
