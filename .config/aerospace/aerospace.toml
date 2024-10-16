@@ -180,6 +180,10 @@ if.app-id = 'com.1password.1password'
 run = ['layout floating']
 
 [[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = ['move-node-to-workspace c']
+
+[[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
 run = ['move-node-to-workspace b']
 
@@ -196,7 +200,7 @@ if.app-id = 'com.microsoft.teams2'
 run = ['move-node-to-workspace t']
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.outlook'
+if.app-id = 'com.microsoft.Outlook'
 run = ['move-node-to-workspace m']
 
 [[on-window-detected]]
@@ -209,4 +213,8 @@ run = ['move-node-to-workspace p']
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
+run = ['move-node-to-workspace p']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
 run = ['move-node-to-workspace p']
