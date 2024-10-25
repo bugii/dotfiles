@@ -13,6 +13,14 @@ fi
 [ -f "/home/dario/.ghcup/env" ] && source "/home/dario/.ghcup/env" # ghcup-env
 # The next line updates PATH for Netlify's Git Credential Helper.
 test -f '/home/dario/.config/netlify/helper/path.zsh.inc' && source '/home/dario/.config/netlify/helper/path.zsh.inc'
+
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Set the directory we want to store zinit and plugins
@@ -89,3 +97,5 @@ export EDITOR='nvim'
 # Shell integrations
 source <(fzf --zsh)
 eval "$(zoxide init --cmd cd zsh)"
+
+export PATH=$PATH:/Users/dabu/.spicetify
