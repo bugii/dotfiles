@@ -3,22 +3,38 @@ source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
 
-sketchybar --bar position=top height=25 blur_radius=30 color=$BAR_COLOR
+PADDINGS=3
 
-default=(
-  padding_left=0
-  padding_right=0
-  icon.font="SF Pro:Semibold:12.0"
-  label.font="GeistMono Nerd Font:Bold:12.0"
+bar=(
+  color=$BAR_COLOR
+  height=25
+  shadow=on
+  position=top
+  padding_right=10
+  padding_left=10
+  corner_radius=8
+  y_offset=10
+  margin=10
+  blur_radius=20
+  notch_width=0
+)
+
+sketchybar --bar "${bar[@]}"
+
+defaults=(
+  updates=when_shown
+  icon.font="SF Pro:Semibold:13.0"
+  label.font="GeistMono Nerd Font:Bold:13.0"
   icon.color=$ICON_COLOR
   label.color=$LABEL_COLOR
-  icon.padding_left=8
-  icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=4
-  background.color=$BAR_COLOR
+  icon.padding_left=$PADDINGS
+  icon.padding_right=$PADDINGS
+  label.padding_left=$PADDINGS
+  label.padding_right=10
+  background.corner_radius=8
 )
-sketchybar --default "${default[@]}"
+
+sketchybar --default "${defaults[@]}"
 
 # --- Left Side Items ---
 source $ITEM_DIR/front_app.sh

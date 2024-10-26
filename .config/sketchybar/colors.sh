@@ -9,11 +9,14 @@ export MAGENTA=0xffc6a0f6
 export GREY=0xff939ab7
 export SKY=0xff91d7e3
 export PINK=0xfff5bde6
+export PEACH=0xfffab387
+export ROSEWATER=0xfff5e0dc
+export SURFACE0=0xff313244
+export BASE=0xff1e1e2e
 export TRANSPARENT=0x00000000
-export ITEM_COLOR=0xff1e1e2e
 
 # General bar colors
-export BAR_COLOR=$ITEM_COLOR 
-export ICON_COLOR=$WHITE 
-export LABEL_COLOR=$WHITE 
+export BAR_COLOR=$SURFACE0
+export ICON_COLOR=$ROSEWATER
+export LABEL_COLOR=$ROSEWATER
 
