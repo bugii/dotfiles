@@ -6,6 +6,7 @@ return {
 		"folke/neodev.nvim",
 		"williamboman/mason.nvim",
 		"nvim-telescope/telescope.nvim",
+		"ray-x/lsp_signature.nvim",
 	},
 	config = function()
 		require("neodev").setup({
@@ -15,6 +16,7 @@ return {
 		local lspconfig = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local lsp_signatures = require("lsp_signature")
 
 		-- Global mappings.
 		vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Diagnostic: open float" })
@@ -26,6 +28,8 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
+				lsp_signatures.on_attach({}, ev.buf)
+
 				-- Buffer local mappings.
 				vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", { buffer = ev.buf, desc = "references" })
 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "go declaration" })
