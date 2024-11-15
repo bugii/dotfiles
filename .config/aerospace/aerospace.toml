@@ -7,8 +7,7 @@ after-login-command = []
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-  'exec-and-forget /usr/local/bin/borders active_color=0xffc6a0f6 inactive_color=0xff1e1e2e width=4.0',
-  'exec-and-forget /usr/local/bin/sketchybar',
+  'exec-and-forget borders active_color=0xffc6a0f6 inactive_color=0xff1e1e2e width=4.0',
 ]
 
 # Start AeroSpace at login
@@ -59,8 +58,7 @@ inner.horizontal = 10
 inner.vertical =   10
 outer.left =       10
 outer.bottom =     10
-# 25 (height of sketchybar) + 10 (sketchybar offset top) + 10 (to align bottom)
-outer.top =        45
+outer.top =        10
 outer.right =      10
 
 # 'main' binding mode declaration
