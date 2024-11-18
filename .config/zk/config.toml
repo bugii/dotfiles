@@ -170,9 +170,8 @@ dead-link = "error"
 
 daily = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
 
-# Edit the last modified note.
-edlast = "zk edit --limit 1 --sort modified- $@"
-
 # Edit the notes selected interactively among the notes created the last two weeks.
 recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"
+
+i = 'zk edit --interactive'
 
