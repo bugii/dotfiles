@@ -5,11 +5,44 @@ return {
 		local lint = require("lint")
 
 		lint.linters_by_ft = {
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
+			javascript = { "eslint" },
+			typescript = { "eslint" },
+			javascriptreact = { "eslint" },
+			typescriptreact = { "eslint" },
 			sql = { "sqlfluff" },
+		}
+
+		local binary_name = "eslint" -- Replace this with the desired binary name.
+		lint.linters.eslint = {
+			cmd = function()
+				local node_module_dir = vim.fs.root(0, "node_modules")
+				local eslint_path = node_module_dir .. "/node_modules/.bin/" .. binary_name
+				print(eslint_path)
+				if vim.fn.filereadable(eslint_path) == 1 then
+					return eslint_path
+				else
+					return binary_name
+				end
+			end,
+			args = {
+				"--format",
+				"json",
+				"--stdin",
+				"--stdin-filename",
+				function()
+					return vim.api.nvim_buf_get_name(0)
+				end,
+			},
+			stdin = true,
+			stream = "stdout",
+			ignore_exitcode = true,
+			parser = function(output, bufnr)
+				local result = require("lint.linters.eslint").parser(output, bufnr)
+				for _, d in ipairs(result) do
+					d.source = binary_name
+				end
+				return result
+			end,
 		}
 
 		lint.linters.sqlfluff = {

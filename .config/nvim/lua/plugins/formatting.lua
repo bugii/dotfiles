@@ -31,6 +31,13 @@ return {
 					}),
 					require_cwd = false,
 				},
+				csharpier = {
+					command = "dotnet",
+					args = { "csharpier", "--write-stdout" },
+					stdin = true,
+					-- in order to respect the locally intalled installation (using dotnet tools)
+					cwd = require("conform.util").root_file(".config"),
+				},
 			},
 
 			format_after_save = {
