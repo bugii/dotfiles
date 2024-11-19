@@ -37,6 +37,8 @@ export NVM_LAZY_LOAD=true
 zinit light lukechilds/zsh-nvm
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
 
 # Add in snippets
 zinit snippet OMZP::git
