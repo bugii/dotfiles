@@ -101,7 +101,13 @@ return {
 			end,
 		})
 
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		-- To work with folding, we have to manually enable the capabilities
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities.textDocument.foldingRange = {
+			dynamicRegistration = false,
+			lineFoldingOnly = true,
+		}
+
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
