@@ -12,12 +12,52 @@ return {
 			sql = { "sqlfluff" },
 		}
 
-		local binary_name = "eslint" -- Replace this with the desired binary name.
+		-- INFO: if there was a way to specifiy the path to the eslint binary, that would enable this use case
+		-- lint.linters.eslint_d = {
+		-- 	cmd = function()
+		-- 		print(vim.fs.root(0, "eslint.config.mjs"))
+		-- 		return "eslint_d"
+		-- 	end,
+		-- 	args = {
+		-- 		"--format",
+		-- 		"json",
+		-- 		"--config",
+		-- 		function()
+		-- 			local config = vim.fs.find(
+		-- 				"eslint.config.mjs",
+		-- 				{ upward = true, path = vim.api.nvim_buf_get_name(0), limit = 1 }
+		-- 			)
+		-- 			if config and #config > 0 then
+		-- 				print(config[1])
+		-- 				return config[1]
+		-- 			end
+		-- 		end,
+		-- 		"--stdin",
+		-- 		"--stdin-filename",
+		-- 		function()
+		-- 			return vim.api.nvim_buf_get_name(0)
+		-- 		end,
+		-- 	},
+		-- 	-- INFO: or something like this
+		-- 	--cwd = vim.fs.root(0, "eslint.config.mjs"),
+		-- 	stdin = true,
+		-- 	stream = "both",
+		-- 	ignore_exitcode = true,
+		-- 	parser = function(output, bufnr)
+		-- 		print(output)
+		-- 		local result = require("lint.linters.eslint").parser(output, bufnr)
+		-- 		for _, d in ipairs(result) do
+		-- 			d.source = "eslint_d"
+		-- 		end
+		-- 		return result
+		-- 	end,
+		-- }
+		--
+		local binary_name = "eslint"
 		lint.linters.eslint = {
 			cmd = function()
 				local node_module_dir = vim.fs.root(0, "node_modules")
 				local eslint_path = node_module_dir .. "/node_modules/.bin/" .. binary_name
-				print(eslint_path)
 				if vim.fn.filereadable(eslint_path) == 1 then
 					return eslint_path
 				else
@@ -27,6 +67,16 @@ return {
 			args = {
 				"--format",
 				"json",
+				"--config",
+				function()
+					local config = vim.fs.find(
+						"eslint.config.mjs",
+						{ upward = true, path = vim.api.nvim_buf_get_name(0), limit = 1 }
+					)
+					if config and #config > 0 then
+						return config[1]
+					end
+				end,
 				"--stdin",
 				"--stdin-filename",
 				function()
@@ -34,7 +84,7 @@ return {
 				end,
 			},
 			stdin = true,
-			stream = "stdout",
+			stream = "both",
 			ignore_exitcode = true,
 			parser = function(output, bufnr)
 				local result = require("lint.linters.eslint").parser(output, bufnr)
