@@ -69,6 +69,7 @@ return {
 				"json",
 				"--config",
 				function()
+					-- TODO: make it work for all valid config names
 					local config = vim.fs.find(
 						"eslint.config.mjs",
 						{ upward = true, path = vim.api.nvim_buf_get_name(0), limit = 1 }
