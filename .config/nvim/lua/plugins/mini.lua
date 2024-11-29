@@ -3,6 +3,7 @@ return {
 	version = "*",
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-treesitter/nvim-treesitter-textobjects" },
 	config = function()
+		require("mini.starter").setup()
 		require("mini.basics").setup()
 		require("mini.bracketed").setup()
 		require("mini.pairs").setup()
@@ -33,8 +34,29 @@ return {
 		vim.keymap.set("n", "<leader>fh", MiniPick.builtin.help, { desc = "[F]ind [H]elp" })
 		vim.keymap.set("n", "<leader>fb", MiniPick.builtin.buffers, { desc = "[F]ind [B]uffers" })
 
+		vim.keymap.set("n", "<leader>fib", MiniExtra.pickers.buf_lines, { desc = "[F]ind [I]n [B]uffers" })
 		vim.keymap.set("n", "<leader>fd", MiniExtra.pickers.diagnostic, { desc = "[F]ind [D]iagnostics" })
-		vim.keymap.set("n", "<leader>gb", MiniExtra.pickers.git_branches, { desc = "[G]it [B]ranches" })
+		vim.keymap.set("n", "<leader>gb", function()
+			MiniExtra.pickers.git_branches({ scope = "local" }, {
+				source = {
+					name = "Git Branches",
+					choose = function(item)
+						local branch = item:match("%s+(%S+)%s+")
+						vim.fn.jobstart({ "git", "switch", branch }, {
+							stdout_buffered = true,
+							stderr_buffered = true,
+							on_stdout = function(_, data)
+								print(vim.inspect(data))
+							end,
+							on_stderr = function(_, data)
+								print("failed to check out " .. branch)
+								print(vim.inspect(data))
+							end,
+						})
+					end,
+				},
+			})
+		end, { desc = "[G]it [B]ranches" })
 		vim.keymap.set("n", "<leader>gc", MiniExtra.pickers.git_commits, { desc = "[G]it [C]ommits" })
 		vim.keymap.set("n", "<leader>gh", MiniExtra.pickers.git_commits, { desc = "[G]it [H]unks" })
 		vim.keymap.set("n", "<leader>fk", MiniExtra.pickers.keymaps, { desc = "[F]ind [K]eymaps" })
