@@ -5,17 +5,17 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"folke/neodev.nvim",
 		"williamboman/mason.nvim",
-		"nvim-telescope/telescope.nvim",
+		"echasnovski/mini.nvim",
 		"ray-x/lsp_signature.nvim",
 	},
 	config = function()
 		require("neodev").setup({
 			library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
 		})
+		local MiniExtra = require("mini.extra")
 
 		local lspconfig = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local lsp_signatures = require("lsp_signature")
 
 		-- Global mappings.
@@ -31,27 +31,20 @@ return {
 				lsp_signatures.on_attach({}, ev.buf)
 
 				-- Buffer local mappings.
-				vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", { buffer = ev.buf, desc = "references" })
+				vim.keymap.set("n", "gr", function()
+					MiniExtra.pickers.lsp({ scope = "references" })
+				end, { buffer = ev.buf, desc = "references" })
 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "go declaration" })
-				vim.keymap.set(
-					"n",
-					"gd",
-					"<cmd>Telescope lsp_definitions<CR>",
-					{ buffer = ev.buf, desc = "go definition" }
-				)
+				vim.keymap.set("n", "gd", function()
+					MiniExtra.pickers.lsp({ scope = "definition" })
+				end, { buffer = ev.buf, desc = "go definition" })
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
-				vim.keymap.set(
-					"n",
-					"gi",
-					"<cmd>Telescope lsp_implementations<CR>",
-					{ buffer = ev.buf, desc = "go implementation" }
-				)
-				vim.keymap.set(
-					"n",
-					"gt",
-					"<cmd>Telescope lsp_type_definitions<CR>",
-					{ buffer = ev.buf, desc = "go type definition" }
-				)
+				vim.keymap.set("n", "gi", function()
+					MiniExtra.pickers.lsp({ scope = "implementation" })
+				end, { buffer = ev.buf, desc = "go implementation" })
+				vim.keymap.set("n", "gt", function()
+					MiniExtra.pickers.lsp({ scope = "type_definition" })
+				end, { buffer = ev.buf, desc = "go type definition" })
 				vim.keymap.set(
 					"n",
 					"<C-s>",
@@ -85,18 +78,6 @@ return {
 					"<leader>ca",
 					vim.lsp.buf.code_action,
 					{ buffer = ev.buf, desc = "code action" }
-				)
-				vim.keymap.set(
-					"n",
-					"<leader>ds",
-					require("telescope.builtin").lsp_document_symbols,
-					{ desc = "[D]ocument [S]ymbols" }
-				)
-				vim.keymap.set(
-					"n",
-					"<leader>ws",
-					require("telescope.builtin").lsp_dynamic_workspace_symbols,
-					{ desc = "[W]orkspace [S]ymbols" }
 				)
 			end,
 		})

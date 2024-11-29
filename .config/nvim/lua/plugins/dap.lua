@@ -1,3 +1,4 @@
+-- TODO: replace telescope functions with mini.pick
 return {
 	"rcarriga/nvim-dap-ui",
 	event = { "VeryLazy" },
