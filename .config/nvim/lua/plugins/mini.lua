@@ -10,6 +10,11 @@ return {
 		require("mini.surround").setup()
 		require("mini.indentscope").setup()
 		require("mini.visits").setup()
+		require("mini.animate").setup({
+			cursor = {
+				enable = false,
+			},
+		})
 		local MiniAi = require("mini.ai")
 		local MiniFiles = require("mini.files")
 		local MiniExtra = require("mini.extra")
