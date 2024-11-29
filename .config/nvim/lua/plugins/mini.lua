@@ -24,6 +24,9 @@ return {
 		MiniPick.setup()
 
 		MiniAi.setup({
+			search_method = "cover_or_next",
+			-- with a smaller value (default is 50...) many times it wont work (even if "cover" would be enough) properly
+			n_lines = 500,
 			custom_textobjects = {
 				-- Function definition (needs treesitter queries with these captures)
 				m = MiniAi.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
