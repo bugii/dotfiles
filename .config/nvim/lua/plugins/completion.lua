@@ -7,12 +7,10 @@ return {
 		{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
-		"onsails/lspkind.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
-		local lspkind = require("lspkind")
 		require("luasnip.loaders.from_vscode").lazy_load()
 
 		cmp.setup({
@@ -40,12 +38,6 @@ return {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
 				end,
-			},
-
-			formatting = {
-				format = lspkind.cmp_format({
-					maxwidth = 50,
-				}),
 			},
 		})
 

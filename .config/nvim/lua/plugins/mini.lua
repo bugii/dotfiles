@@ -3,12 +3,14 @@ return {
 	version = "*",
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-treesitter/nvim-treesitter-textobjects" },
 	config = function()
+		require("mini.icons").setup()
 		require("mini.basics").setup()
 		require("mini.bracketed").setup()
 		require("mini.pairs").setup()
 		require("mini.surround").setup()
 		require("mini.indentscope").setup()
 		require("mini.visits").setup()
+		require("mini.statusline").setup()
 		local MiniAi = require("mini.ai")
 		local MiniFiles = require("mini.files")
 		local MiniExtra = require("mini.extra")
