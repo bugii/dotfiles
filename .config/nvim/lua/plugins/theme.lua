@@ -44,7 +44,6 @@ return {
 	-- 			-- 			TabLineSel = { bg = C.pink },
 	-- 			-- 			CmpBorder = { fg = C.surface2 },
 	-- 			-- 			Pmenu = { bg = C.none },
-	-- 			-- 			TelescopeBorder = { link = "FloatBorder" },
 	-- 			-- 		}
 	-- 			-- 	end,
 	-- 			-- },
