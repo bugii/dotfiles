@@ -1,4 +1,5 @@
 return {
+	{ "folke/tokyonight.nvim", priority = 1000, opts = { style = "night" } },
 	-- {
 	-- 	"catppuccin/nvim",
 	-- 	name = "catppuccin",
@@ -88,8 +89,6 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
-
-	{ "folke/tokyonight.nvim", priority = 1000, opts = { style = "night" } },
 
 	-- {
 	-- 	"EdenEast/nightfox.nvim",
