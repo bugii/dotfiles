@@ -12,11 +12,7 @@ return {
 		require("mini.indentscope").setup()
 		require("mini.visits").setup()
 		require("mini.statusline").setup()
-		require("mini.animate").setup({
-			cursor = {
-				enable = false,
-			},
-		})
+		require("mini.diff").setup()
 		local MiniAi = require("mini.ai")
 		local MiniFiles = require("mini.files")
 		local MiniExtra = require("mini.extra")

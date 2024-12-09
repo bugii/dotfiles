@@ -54,40 +54,50 @@ return {
 	-- 	end,
 	-- },
 
-	{
-		"rebelot/kanagawa.nvim",
-		priority = 1000,
-		config = function()
-			require("kanagawa").setup({
-				colors = {
-					theme = {
-						all = {
-							ui = {
-								bg_gutter = "none",
-							},
-						},
-					},
-				},
-			})
+	-- {
+	-- 	"rebelot/kanagawa.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("kanagawa").setup({
+	-- 			colors = {
+	-- 				theme = {
+	-- 					all = {
+	-- 						ui = {
+	-- 							bg_gutter = "none",
+	-- 						},
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 		})
+	--
+	-- 		-- vim.cmd("colorscheme kanagawa-wave")
+	-- 		vim.cmd("colorscheme kanagawa-dragon")
+	-- 		-- vim.cmd("colorscheme kanagawa-lotus")
+	--
+	-- 		vim.api.nvim_create_autocmd("ColorScheme", {
+	-- 			pattern = "kanagawa",
+	-- 			callback = function()
+	-- 				if vim.o.background == "light" then
+	-- 					vim.fn.system("kitty +kitten themes Kanagawa_light")
+	-- 				elseif vim.o.background == "dark" then
+	-- 					vim.fn.system("kitty +kitten themes Kanagawa_dragon")
+	-- 				else
+	-- 					vim.fn.system("kitty +kitten themes Kanagawa")
+	-- 				end
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 
-			-- vim.cmd("colorscheme kanagawa-wave")
-			vim.cmd("colorscheme kanagawa-dragon")
-			-- vim.cmd("colorscheme kanagawa-lotus")
+	{ "folke/tokyonight.nvim", priority = 1000, opts = { style = "night" } },
 
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				pattern = "kanagawa",
-				callback = function()
-					if vim.o.background == "light" then
-						vim.fn.system("kitty +kitten themes Kanagawa_light")
-					elseif vim.o.background == "dark" then
-						vim.fn.system("kitty +kitten themes Kanagawa_dragon")
-					else
-						vim.fn.system("kitty +kitten themes Kanagawa")
-					end
-				end,
-			})
-		end,
-	},
-
-	-- { "folke/tokyonight.nvim", priority = 1000, opts = { style = "storm" } },
+	-- {
+	-- 	"EdenEast/nightfox.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("nightfox").setup()
+	--
+	-- 		vim.cmd("colorscheme nightfox")
+	-- 	end,
+	-- },
 }
