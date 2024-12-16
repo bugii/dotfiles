@@ -13,6 +13,7 @@ return {
 		require("mini.visits").setup()
 		require("mini.statusline").setup()
 		require("mini.diff").setup()
+		local MiniHipatterns = require("mini.hipatterns")
 		local MiniAi = require("mini.ai")
 		local MiniFiles = require("mini.files")
 		local MiniExtra = require("mini.extra")
@@ -28,6 +29,19 @@ return {
 			custom_textobjects = {
 				-- Function definition (needs treesitter queries with these captures)
 				m = MiniAi.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+			},
+		})
+
+		MiniHipatterns.setup({
+			highlighters = {
+				-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+				fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+				hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+				todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+				note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+				-- Highlight hex color strings (`#rrggbb`) using that color
+				hex_color = MiniHipatterns.gen_highlighter.hex_color(),
 			},
 		})
 

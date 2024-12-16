@@ -2,11 +2,10 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"saghen/blink.cmp",
 		"folke/neodev.nvim",
 		"williamboman/mason.nvim",
 		"echasnovski/mini.nvim",
-		"ray-x/lsp_signature.nvim",
 	},
 	config = function()
 		require("neodev").setup({
@@ -16,7 +15,6 @@ return {
 
 		local lspconfig = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
-		local lsp_signatures = require("lsp_signature")
 
 		-- Global mappings.
 		vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Diagnostic: open float" })
@@ -28,8 +26,6 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
-				lsp_signatures.on_attach({}, ev.buf)
-
 				-- Buffer local mappings.
 				vim.keymap.set("n", "gr", function()
 					MiniExtra.pickers.lsp({ scope = "references" })
@@ -83,7 +79,7 @@ return {
 		})
 
 		-- To work with folding, we have to manually enable the capabilities
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		capabilities.textDocument.foldingRange = {
 			dynamicRegistration = false,
 			lineFoldingOnly = true,
