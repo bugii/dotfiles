@@ -1,5 +1,12 @@
 return {
-	{ "folke/tokyonight.nvim", priority = 1000, opts = { style = "night" } },
+	{
+		"folke/tokyonight.nvim",
+		priority = 1000,
+		config = function()
+			require("tokyonight").setup()
+			vim.cmd([[colorscheme tokyonight-storm]])
+		end,
+	},
 	-- {
 	-- 	"catppuccin/nvim",
 	-- 	name = "catppuccin",
