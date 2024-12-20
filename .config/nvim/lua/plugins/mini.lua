@@ -10,9 +10,9 @@ return {
 		require("mini.pairs").setup()
 		require("mini.surround").setup()
 		require("mini.indentscope").setup()
-		require("mini.visits").setup()
 		require("mini.statusline").setup()
 		require("mini.diff").setup()
+		local MiniVisits = require("mini.visits")
 		local MiniHipatterns = require("mini.hipatterns")
 		local MiniAi = require("mini.ai")
 		local MiniFiles = require("mini.files")
@@ -21,6 +21,7 @@ return {
 		MiniFiles.setup()
 		MiniExtra.setup()
 		MiniPick.setup()
+		MiniVisits.setup()
 
 		MiniAi.setup({
 			search_method = "cover_or_next",
@@ -48,6 +49,15 @@ return {
 		vim.keymap.set("n", "-", function()
 			MiniFiles.open(vim.api.nvim_buf_get_name(0))
 		end, { desc = "Open Files" })
+
+		local sort_recent = MiniVisits.gen_sort.default({ recency_weight = 1 })
+		vim.keymap.set("n", "L", function()
+			MiniVisits.iterate_paths("backward", nil, { sort = sort_recent })
+		end, { desc = "Go to last visited path" })
+
+		vim.keymap.set("n", "H", function()
+			MiniVisits.iterate_paths("forward", nil, { sort = sort_recent })
+		end, { desc = "Go to next visited path" })
 
 		vim.keymap.set("n", "<C-p>", MiniPick.builtin.files, { desc = "Find File" })
 		vim.keymap.set("n", "<leader>fg", MiniPick.builtin.grep_live, { desc = "[F]ind by [G]rep" })
@@ -81,6 +91,8 @@ return {
 		vim.keymap.set("n", "<leader>gh", MiniExtra.pickers.git_commits, { desc = "[G]it [H]unks" })
 		vim.keymap.set("n", "<leader>fk", MiniExtra.pickers.keymaps, { desc = "[F]ind [K]eymaps" })
 
-		vim.keymap.set("n", "<leader>vr", MiniExtra.pickers.visit_paths, { desc = "[V]isit [R]ecents" })
+		vim.keymap.set("n", "<leader>vr", function()
+			MiniExtra.pickers.visit_paths({ recency_weight = 1 })
+		end, { desc = "[V]isit [R]ecents" })
 	end,
 }

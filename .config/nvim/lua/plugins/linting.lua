@@ -15,6 +15,7 @@ return {
 		lint.linters.eslint_d = {
 			cmd = function()
 				local project_root = vim.fs.root(0, "node_modules")
+				vim.env.ESLINT_D_MISS = "fail"
 				vim.env.ESLINT_D_ROOT = project_root
 				return "eslint_d"
 			end,
