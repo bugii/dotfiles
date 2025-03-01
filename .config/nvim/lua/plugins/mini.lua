@@ -5,7 +5,7 @@ return {
 	config = function()
 		require("mini.icons").setup()
 		require("mini.starter").setup()
-		require("mini.basics").setup()
+		local MiniBasics = require("mini.basics")
 		require("mini.bracketed").setup()
 		require("mini.pairs").setup()
 		require("mini.surround").setup()
@@ -22,6 +22,14 @@ return {
 		MiniExtra.setup()
 		MiniPick.setup()
 		MiniVisits.setup()
+
+		MiniBasics.setup({
+			autocommands = {
+				-- highlight on yank is done by glimmer plugin (and i dont really care about the terminal one that's part of the same config option 'basic')
+				basic = false,
+				relnum_in_visual_mode = true,
+			},
+		})
 
 		MiniAi.setup({
 			search_method = "cover_or_next",
