@@ -26,7 +26,7 @@ return {
 				function()
 					-- TODO: make it work for all valid config names
 					local config = vim.fs.find(
-						"eslint.config.mjs",
+						{ "eslint.config.mjs", "eslint.config.js", "eslint.config.ts" },
 						{ upward = true, path = vim.api.nvim_buf_get_name(0), limit = 1 }
 					)
 					if config and #config > 0 then
