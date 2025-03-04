@@ -5,13 +5,13 @@ return {
 		"saghen/blink.cmp",
 		"folke/neodev.nvim",
 		"williamboman/mason.nvim",
-		"echasnovski/mini.nvim",
+		-- "echasnovski/mini.nvim",
 	},
 	config = function()
 		require("neodev").setup({
 			library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
 		})
-		local MiniExtra = require("mini.extra")
+		-- local MiniExtra = require("mini.extra")
 
 		local lspconfig = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
@@ -27,20 +27,20 @@ return {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
 				-- Buffer local mappings.
-				vim.keymap.set("n", "gr", function()
-					MiniExtra.pickers.lsp({ scope = "references" })
-				end, { buffer = ev.buf, desc = "references" })
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "go declaration" })
-				vim.keymap.set("n", "gd", function()
-					MiniExtra.pickers.lsp({ scope = "definition" })
-				end, { buffer = ev.buf, desc = "go definition" })
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
-				vim.keymap.set("n", "gi", function()
-					MiniExtra.pickers.lsp({ scope = "implementation" })
-				end, { buffer = ev.buf, desc = "go implementation" })
-				vim.keymap.set("n", "gt", function()
-					MiniExtra.pickers.lsp({ scope = "type_definition" })
-				end, { buffer = ev.buf, desc = "go type definition" })
+				-- vim.keymap.set("n", "gr", function()
+				-- 	MiniExtra.pickers.lsp({ scope = "references" })
+				-- end, { buffer = ev.buf, desc = "references" })
+				-- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "go declaration" })
+				-- vim.keymap.set("n", "gd", function()
+				-- 	MiniExtra.pickers.lsp({ scope = "definition" })
+				-- end, { buffer = ev.buf, desc = "go definition" })
+				-- vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
+				-- vim.keymap.set("n", "gi", function()
+				-- 	MiniExtra.pickers.lsp({ scope = "implementation" })
+				-- end, { buffer = ev.buf, desc = "go implementation" })
+				-- vim.keymap.set("n", "gt", function()
+				-- 	MiniExtra.pickers.lsp({ scope = "type_definition" })
+				-- end, { buffer = ev.buf, desc = "go type definition" })
 				vim.keymap.set(
 					"n",
 					"<C-s>",
