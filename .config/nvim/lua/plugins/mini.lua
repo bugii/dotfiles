@@ -18,7 +18,11 @@ return {
     local MiniFiles = require("mini.files")
     local MiniExtra = require("mini.extra")
     local MiniPick = require("mini.pick")
-    MiniFiles.setup()
+    MiniFiles.setup({
+      mappings = {
+        close = "<ESC>",
+      },
+    })
     MiniExtra.setup()
     MiniPick.setup()
     MiniVisits.setup()
