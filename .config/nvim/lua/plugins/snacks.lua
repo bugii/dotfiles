@@ -6,6 +6,8 @@ return {
     image = {},
     gitbrowse = {},
     picker = {},
+    statuscolumn = {},
+    rename = {},
   },
   keys = {
     {
@@ -18,7 +20,6 @@ return {
       function() Snacks.scratch.select() end,
       desc = "Select Scratch Buffer",
     },
-
     {
       "<C-p>",
       function() Snacks.picker.smart() end,
