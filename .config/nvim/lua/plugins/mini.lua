@@ -6,7 +6,7 @@ return {
     require("mini.icons").setup()
     local MiniBasics = require("mini.basics")
     require("mini.bracketed").setup()
-    require("mini.pairs").setup()
+    -- require("mini.pairs").setup()
     require("mini.surround").setup()
     require("mini.indentscope").setup()
     require("mini.statusline").setup()
@@ -39,7 +39,6 @@ return {
       autocommands = {
         -- highlight on yank is done by glimmer plugin (and i dont really care about the terminal one that's part of the same config option 'basic')
         basic = false,
-        relnum_in_visual_mode = true,
       },
     })
 

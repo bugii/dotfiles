@@ -19,3 +19,7 @@ vim.opt.wrap = true
 
 require("keymaps")
 require("lazy_config")
+
+-- TODO: change to theme in ghostty when changing in nvim (fuzzy match)
+-- TODO: tab completion in codepilot does not always seem to work?
+-- TODO: shift-H and shift-L act kinda weird? find out why... maybe directories are the problem.. because from there i can't easily go back because it has the same keybind haha
