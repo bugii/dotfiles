@@ -6,18 +6,18 @@ return {
     require("mini.icons").setup()
     local MiniBasics = require("mini.basics")
     require("mini.bracketed").setup()
-    -- require("mini.pairs").setup()
+    require("mini.pairs").setup()
     require("mini.surround").setup()
     require("mini.indentscope").setup()
     require("mini.statusline").setup()
     require("mini.diff").setup()
     local MiniSessions = require("mini.sessions")
-    local MiniVisits = require("mini.visits")
     local MiniHipatterns = require("mini.hipatterns")
     local MiniAi = require("mini.ai")
     local MiniFiles = require("mini.files")
     local MiniExtra = require("mini.extra")
-    local MiniPick = require("mini.pick")
+    require("mini.jump").setup()
+    require("mini.jump2d").setup()
     MiniFiles.setup({
       mappings = {
         close = "<ESC>",
@@ -29,8 +29,6 @@ return {
     })
 
     MiniExtra.setup()
-    MiniPick.setup()
-    MiniVisits.setup()
     MiniSessions.setup({
       autoread = true,
     })
@@ -66,20 +64,5 @@ return {
     })
 
     vim.keymap.set("n", "-", function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end, { desc = "Open Files" })
-
-    local sort_recent = MiniVisits.gen_sort.default({ recency_weight = 1 })
-    vim.keymap.set(
-      "n",
-      "L",
-      function() MiniVisits.iterate_paths("backward", nil, { sort = sort_recent }) end,
-      { desc = "Go to last visited path" }
-    )
-
-    vim.keymap.set(
-      "n",
-      "H",
-      function() MiniVisits.iterate_paths("forward", nil, { sort = sort_recent }) end,
-      { desc = "Go to next visited path" }
-    )
   end,
 }
