@@ -6,31 +6,32 @@ return {
     require("mini.icons").setup()
     local MiniBasics = require("mini.basics")
     require("mini.bracketed").setup()
-    -- require("mini.pairs").setup()
+    require("mini.pairs").setup()
     require("mini.surround").setup()
     require("mini.indentscope").setup()
-    require("mini.statusline").setup()
     require("mini.diff").setup()
     local MiniSessions = require("mini.sessions")
-    local MiniVisits = require("mini.visits")
     local MiniHipatterns = require("mini.hipatterns")
     local MiniAi = require("mini.ai")
     local MiniFiles = require("mini.files")
     local MiniExtra = require("mini.extra")
-    local MiniPick = require("mini.pick")
+    require("mini.git").setup()
+    require("mini.tabline").setup()
+    local MiniStatusline = require("mini.statusline")
+    require("mini.jump").setup()
+    local MiniBufremove = require("mini.bufremove")
     MiniFiles.setup({
       mappings = {
         close = "<ESC>",
       },
     })
+
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesActionRename",
       callback = function(event) Snacks.rename.on_rename_file(event.data.from, event.data.to) end,
     })
 
     MiniExtra.setup()
-    MiniPick.setup()
-    MiniVisits.setup()
     MiniSessions.setup({
       autoread = true,
     })
@@ -66,20 +67,33 @@ return {
     })
 
     vim.keymap.set("n", "-", function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end, { desc = "Open Files" })
+    MiniBufremove.setup()
+    vim.keymap.set("n", "<C-x>", function() MiniBufremove.delete() end, { desc = "Open Files" })
 
-    local sort_recent = MiniVisits.gen_sort.default({ recency_weight = 1 })
-    vim.keymap.set(
-      "n",
-      "L",
-      function() MiniVisits.iterate_paths("backward", nil, { sort = sort_recent }) end,
-      { desc = "Go to last visited path" }
-    )
+    MiniStatusline.setup({
+      content = {
+        active = function()
+          local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+          local git = MiniStatusline.section_git({ trunc_width = 40 })
+          local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+          local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+          local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
+          local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+          local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+          local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+          local grapple = require("grapple").statusline()
 
-    vim.keymap.set(
-      "n",
-      "H",
-      function() MiniVisits.iterate_paths("forward", nil, { sort = sort_recent }) end,
-      { desc = "Go to next visited path" }
-    )
+          return MiniStatusline.combine_groups({
+            { hl = mode_hl, strings = { mode } },
+            { hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+            "%<", -- Mark general truncate point
+            { hl = "MiniStatuslineFilename", strings = { filename } },
+            "%=", -- End left alignment
+            { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+            { hl = mode_hl, strings = { grapple, search } },
+          })
+        end,
+      },
+    })
   end,
 }

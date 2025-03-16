@@ -4,4 +4,4 @@ root: .
 windows:
   - dotfiles:
       panes:
-        - vim .
+        - vim
