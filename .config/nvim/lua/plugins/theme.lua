@@ -84,5 +84,19 @@ return {
     "sample-usr/rakis.nvim",
     priority = 1000,
     opts = {},
+    config = function()
+      require("rakis").setup({
+        theme = {
+          variant = "default",
+          extensions = { mini = true },
+          overrides = function(colors)
+            return {
+              MiniStatuslineModeNormal = { fg = colors.bg_solid, bg = colors.orange02, bold = true },
+            }
+          end,
+        },
+      })
+      vim.cmd([[colorscheme rakis]])
+    end,
   },
 }
