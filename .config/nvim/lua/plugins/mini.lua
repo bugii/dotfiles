@@ -5,7 +5,7 @@ return {
   config = function()
     require("mini.icons").setup()
     local MiniBasics = require("mini.basics")
-    require("mini.bracketed").setup()
+    local MiniBracketed = require("mini.bracketed")
     require("mini.pairs").setup()
     require("mini.surround").setup()
     require("mini.indentscope").setup()
@@ -20,6 +20,11 @@ return {
     local MiniStatusline = require("mini.statusline")
     require("mini.jump").setup()
     local MiniBufremove = require("mini.bufremove")
+
+    MiniBracketed.setup()
+    vim.keymap.set("n", "[t", ":tabprevious<CR>", { silent = true, desc = "Previous tab" })
+    vim.keymap.set("n", "]t", ":tabnext<CR>", { silent = true, desc = "Next tab" })
+
     MiniFiles.setup({
       mappings = {
         close = "<ESC>",

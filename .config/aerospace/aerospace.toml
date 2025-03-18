@@ -206,7 +206,7 @@ if.app-id = 'company.thebrowser.Browser'
 run = ['move-node-to-workspace b']
 
 [[on-window-detected]]
-if.app-id = 'org.mozilla.com.zen.browser'
+if.app-id = 'app.zen-browser.zen'
 run = ['move-node-to-workspace b']
 
 [[on-window-detected]]

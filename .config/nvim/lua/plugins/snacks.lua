@@ -14,7 +14,16 @@ return {
     { "<leader>sf", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     { "<C-p>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<C-_>", function() Snacks.picker.grep() end, desc = "Grep" },
-    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.files({
+          hidden = true,
+          ignored = true,
+        })
+      end,
+      desc = "Find Files",
+    },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
