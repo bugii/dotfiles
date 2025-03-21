@@ -18,7 +18,6 @@ return {
     require("mini.git").setup()
     require("mini.tabline").setup()
     local MiniStatusline = require("mini.statusline")
-    require("mini.jump").setup()
     local MiniBufremove = require("mini.bufremove")
 
     MiniBracketed.setup()
