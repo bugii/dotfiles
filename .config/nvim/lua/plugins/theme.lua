@@ -96,7 +96,7 @@ return {
           end,
         },
       })
-      vim.cmd([[colorscheme rakis]])
+      -- vim.cmd([[colorscheme rakis]])
     end,
   },
 }
