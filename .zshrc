@@ -44,6 +44,8 @@ zinit snippet OMZP::asdf
 # Load completions
 autoload -Uz compinit && compinit
 
+bindkey '^y' autosuggest-accept
+
 zinit cdreplay -q
 
 # History
