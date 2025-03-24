@@ -4,8 +4,6 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then
 fi
 
 [ -f "/home/dario/.ghcup/env" ] && source "/home/dario/.ghcup/env" # ghcup-env
-# The next line updates PATH for Netlify's Git Credential Helper.
-test -f '/home/dario/.config/netlify/helper/path.zsh.inc' && source '/home/dario/.config/netlify/helper/path.zsh.inc'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -26,10 +24,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-export NVM_LAZY_LOAD=true
-zinit light lukechilds/zsh-nvm
-zinit ice depth=1
-zinit light jeffreytse/zsh-vi-mode
 zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
 
@@ -41,10 +35,12 @@ zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::asdf
 
+bindkey '^y' autosuggest-accept
+bindkey '^P' up-line-or-history
+bindkey '^N' down-line-or-history
+
 # Load completions
 autoload -Uz compinit && compinit
-
-bindkey '^y' autosuggest-accept
 
 zinit cdreplay -q
 
@@ -60,11 +56,6 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
-
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
 
 # Aliases
 alias ls='eza'
@@ -86,4 +77,3 @@ export PATH=$PATH:/Users/dabu/.spicetify
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
