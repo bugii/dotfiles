@@ -35,9 +35,21 @@ zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::asdf
 
-bindkey '^y' autosuggest-accept
+bindkey '^Y' autosuggest-accept
 bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
+
+# zsh by default does not pass i/o capabilities to widgets, thus we have to do that manually
+mingle_connect() {
+    (
+        exec </dev/tty
+        exec <&1
+        ~/Projects/mingle/mingle connect $(~/Projects/mingle/mingle list | fzf --border --margin=20%,20%)
+    )
+}
+zle -N mingle_connect
+
+bindkey '^F' mingle_connect
 
 # Load completions
 autoload -Uz compinit && compinit
