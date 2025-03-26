@@ -16,8 +16,6 @@ return {
 
     -- Global mappings.
     vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Diagnostic: open float" })
-    vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "[D]iagnostic: goto [p]rev" })
-    vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "[D]iagnostic: goto [n]ext" })
 
     -- Use LspAttach autocommand to only map the following keys
     -- after the language server attaches to the current buffer
@@ -49,12 +47,7 @@ return {
       end,
     })
 
-    -- To work with folding, we have to manually enable the capabilities
     local capabilities = require("blink.cmp").get_lsp_capabilities()
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
 
     mason_lspconfig.setup_handlers({
       -- default handler for installed servers
