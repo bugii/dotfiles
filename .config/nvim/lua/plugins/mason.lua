@@ -1,49 +1,50 @@
--- Find all lsps supported by mason
+-- Find all LSPs supported by mason
 -- https://github.com/williamboman/mason-lspconfig.nvim
 return {
-	"williamboman/mason.nvim",
-	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
-		"jay-babu/mason-nvim-dap.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-	},
-	config = function()
-		require("mason").setup()
+  "williamboman/mason.nvim",
+  dependencies = {
+    "williamboman/mason-lspconfig.nvim",
+    "jay-babu/mason-nvim-dap.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+  },
+  config = function()
+    require("mason").setup()
 
-		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"lua_ls",
-				"ts_ls",
-				"csharp_ls",
-				"pyright",
-				"bashls",
-				"cssls",
-				"emmet_ls",
-				"html",
-				"jsonls",
-				"vuels",
-				"tailwindcss",
-				"elixirls",
-				"rust_analyzer",
-			},
-		})
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "lua_ls",
+        "ts_ls",
+        "csharp_ls",
+        "pyright",
+        "bashls",
+        "cssls",
+        "emmet_ls",
+        "html",
+        "jsonls",
+        "vuels",
+        "tailwindcss",
+        "elixirls",
+        "rust_analyzer",
+        "harper-ls",
+      },
+    })
 
-		require("mason-nvim-dap").setup({
-			automatic_installation = true,
-			ensure_installed = { "js-debug-adapter", "netcoredbg" },
-		})
+    require("mason-nvim-dap").setup({
+      automatic_installation = true,
+      ensure_installed = { "js-debug-adapter", "netcoredbg" },
+    })
 
-		require("mason-tool-installer").setup({
-			ensure_installed = {
-				-- formatters
-				"prettierd",
-				"stylua",
-				"autopep8",
-				"csharpier",
-				-- linters
-				"eslint_d",
-				"pylint",
-			},
-		})
-	end,
+    require("mason-tool-installer").setup({
+      ensure_installed = {
+        -- formatters
+        "prettierd",
+        "stylua",
+        "autopep8",
+        "csharpier",
+        -- linters
+        "eslint_d",
+        "pylint",
+      },
+    })
+  end,
 }
