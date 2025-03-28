@@ -7,6 +7,10 @@ return {
     "williamboman/mason.nvim",
   },
   config = function()
+    vim.diagnostic.config({
+      virtual_lines = true,
+    })
+
     require("neodev").setup({
       library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
     })
@@ -47,19 +51,12 @@ return {
       end,
     })
 
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-
     mason_lspconfig.setup_handlers({
       -- default handler for installed servers
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
+      function(server_name) lspconfig[server_name].setup({}) end,
 
       ["lua_ls"] = function()
         lspconfig.lua_ls.setup({
-          capabilities = capabilities,
           settings = {
             Lua = {
               completion = {
@@ -75,7 +72,6 @@ return {
 
       ["elixirls"] = function()
         lspconfig.elixirls.setup({
-          capabilities = capabilities,
           cmd = {
             require("mason-registry").get_package("elixir-ls"):get_install_path() .. "/language_server.sh",
           },
