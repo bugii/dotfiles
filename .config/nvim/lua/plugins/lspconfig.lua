@@ -3,14 +3,9 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "saghen/blink.cmp",
-    "folke/neodev.nvim",
     "williamboman/mason.nvim",
   },
   config = function()
-    require("neodev").setup({
-      library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
-    })
-
     local lspconfig = require("lspconfig")
     local mason_lspconfig = require("mason-lspconfig")
 

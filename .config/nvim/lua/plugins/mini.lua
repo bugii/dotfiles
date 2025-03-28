@@ -15,9 +15,6 @@ return {
     local MiniAi = require("mini.ai")
     local MiniFiles = require("mini.files")
     local MiniExtra = require("mini.extra")
-    -- require("mini.git").setup()
-    -- require("mini.tabline").setup()
-    -- local MiniStatusline = require("mini.statusline")
     local MiniBufremove = require("mini.bufremove")
 
     MiniBracketed.setup()
@@ -64,9 +61,6 @@ return {
         hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
         todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
         note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-
-        -- Highlight hex color strings (`#rrggbb`) using that color
-        hex_color = MiniHipatterns.gen_highlighter.hex_color(),
       },
     })
 
