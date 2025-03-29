@@ -2,7 +2,7 @@ return {
   "saghen/blink.cmp",
   Event = "InsertEnter",
   dependencies = {
-    -- optional: provides snippets for the snippet source
+    -- Optional: provides snippets for the snippet source
     "rafamadriz/friendly-snippets",
     "xzbdmw/colorful-menu.nvim",
     "fang2hou/blink-copilot",
@@ -11,7 +11,7 @@ return {
     "folke/lazydev.nvim",
     "brenoprata10/nvim-highlight-colors",
   },
-  -- use a release tag to download pre-built binaries
+  -- Use a release tag to download pre-built binaries
   version = "v1.*",
 
   ---@module 'blink.cmp'
@@ -57,7 +57,6 @@ return {
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
-          -- make lazydev completions top priority (see `:h blink.cmp`)
           score_offset = 100,
         },
       },
@@ -81,9 +80,7 @@ return {
             },
             kind_icon = {
               text = function(ctx)
-                -- default kind icon
                 local icon = ctx.kind_icon
-                -- if LSP source, check for color derived from documentation
                 if ctx.item.source_name == "LSP" then
                   local item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
                   if item.abbr ~= "" then icon = item.abbr end
@@ -91,9 +88,7 @@ return {
                 return icon .. ctx.icon_gap
               end,
               highlight = function(ctx)
-                -- default highlight group
                 local highlight = "BlinkCmpKind" .. ctx.kind
-                -- if LSP source, check for color derived from documentation
                 if ctx.item.source_name == "LSP" then
                   local item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
                   if item.abbr ~= "" then highlight = item.abbr_hl_group end
@@ -114,7 +109,7 @@ return {
     },
   },
 
-  -- allows extending the providers array elsewhere in your config
+  -- Allows extending the providers array elsewhere in your config
   -- without having to redefine it
   opts_extend = { "sources.default" },
 }
