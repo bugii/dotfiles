@@ -9,6 +9,7 @@ return {
     picker = {},
     statuscolumn = {},
     rename = {},
+    input = {},
   },
   keys = {
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },

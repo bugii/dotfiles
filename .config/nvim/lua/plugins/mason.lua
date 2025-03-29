@@ -25,7 +25,7 @@ return {
         "tailwindcss",
         "elixirls",
         "rust_analyzer",
-        "harper-ls",
+        "harper_ls",
       },
     })
 

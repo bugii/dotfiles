@@ -52,7 +52,7 @@ return {
             -- 3: Absolute path, with tilde as the home directory
             -- 4: Filename and parent dir, with tilde as the home directory
 
-            shorting_target = 200, -- Shortens path to leave 40 spaces in the window
+            shorting_target = 50, -- Shortens path to leave 50 spaces in the window
             -- for other components. (terrible name, any suggestions?)
             symbols = {
               modified = "[+]", -- Text to show when the file is modified.
