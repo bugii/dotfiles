@@ -1,6 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic" },
+  dependencies = { "nvim-tree/nvim-web-devicons", { "SmiteshP/nvim-navic", lazy = true } },
   config = function()
     local navic = require("nvim-navic")
     require("lualine").setup({

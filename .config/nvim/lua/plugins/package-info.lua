@@ -1,5 +1,6 @@
 return {
   "vuki656/package-info.nvim",
+  ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
   config = function()
     require("package-info").setup()
 

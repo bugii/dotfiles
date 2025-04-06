@@ -1,23 +1,22 @@
 return {
   "echasnovski/mini.nvim",
   version = "*",
+  lazy = false,
   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
     require("mini.icons").setup()
     local MiniBasics = require("mini.basics")
-    local MiniBracketed = require("mini.bracketed")
-    require("mini.pairs").setup()
+    require("mini.bracketed").setup()
     require("mini.surround").setup()
     require("mini.indentscope").setup()
     require("mini.diff").setup()
-    local MiniSessions = require("mini.sessions")
+    require("mini.sessions").setup()
     local MiniHipatterns = require("mini.hipatterns")
     local MiniAi = require("mini.ai")
     local MiniFiles = require("mini.files")
-    local MiniExtra = require("mini.extra")
+    require("mini.extra").setup()
     local MiniBufremove = require("mini.bufremove")
 
-    MiniBracketed.setup()
     vim.keymap.set("n", "[t", ":tabprevious<CR>", { silent = true, desc = "Previous tab" })
     vim.keymap.set("n", "]t", ":tabnext<CR>", { silent = true, desc = "Next tab" })
 
@@ -32,14 +31,9 @@ return {
       callback = function(event) Snacks.rename.on_rename_file(event.data.from, event.data.to) end,
     })
 
-    MiniExtra.setup()
-    MiniSessions.setup({
-      autoread = true,
-    })
-
     MiniBasics.setup({
       autocommands = {
-        -- highlight on yank is done by glimmer plugin (and i dont really care about the terminal one that's part of the same config option 'basic')
+        -- highlight on yank is done by glimmer plugin (and I dont really care about the terminal one that's part of the same config option 'basic')
         basic = false,
       },
     })

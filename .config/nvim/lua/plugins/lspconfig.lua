@@ -7,7 +7,7 @@ return {
   },
   config = function()
     vim.diagnostic.config({
-      virtual_lines = true,
+      virtual_lines = { current_line = true },
     })
 
     local lspconfig = require("lspconfig")
@@ -69,6 +69,19 @@ return {
         lspconfig.elixirls.setup({
           cmd = {
             require("mason-registry").get_package("elixir-ls"):get_install_path() .. "/language_server.sh",
+          },
+        })
+      end,
+
+      ["harper_ls"] = function()
+        lspconfig.harper_ls.setup({
+          settings = {
+            ["harper-ls"] = {
+              linters = {
+                SentenceCapitalization = false,
+                SpellCheck = false,
+              },
+            },
           },
         })
       end,

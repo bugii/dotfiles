@@ -1,6 +1,6 @@
 return {
   "SmiteshP/nvim-navic",
-  dependencies = { "neovim/nvim-lspconfig" },
+  lazy = true,
   config = function()
     local navic = require("nvim-navic")
     local on_attach = function(client, bufnr)
