@@ -122,4 +122,12 @@ return {
     lazy = true,
     opts = {},
   },
+  {
+    "wtfox/jellybeans.nvim",
+    lazy = true,
+    opts = {},
+  },
+  { "tiagovla/tokyodark.nvim", lazy = true, opts = {} },
+  { "scottmckendry/cyberdream.nvim", lazy = true, opts = {} },
+  { "S-Spektrum-M/odyssey.nvim", lazy = true, opts = {} },
 }

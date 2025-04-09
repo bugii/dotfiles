@@ -37,9 +37,9 @@ return {
   keys = {
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     { "<leader>sf", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-    { "<C-_>", function() Snacks.picker.grep({ hidden = true, ignored = true }) end, desc = "Grep" },
+    { "<leader>fg", function() Snacks.picker.grep({ hidden = true, ignored = true }) end, desc = "Find Grep" },
     {
-      "<C-p>",
+      "<leader>ff",
       function()
         Snacks.picker.files({
           hidden = true,
@@ -49,7 +49,6 @@ return {
       desc = "Find Files",
     },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
     { "<leader>fR", function() Snacks.picker.resume() end, desc = "Resume" },
