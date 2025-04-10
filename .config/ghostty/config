@@ -6,6 +6,7 @@ font-family = CommitMono Nerd Font Mono
 font-size = 16
 
 # theme = dark:rakis, light:3024 day
-theme = dark:tokyonight_night, light:tokyonight-day
+# theme = dark:tokyonight_night, light:tokyonight-day
+theme = dark:Builtin Tango Dark, light:tokyonight-day
 
 macos-titlebar-style = hidden

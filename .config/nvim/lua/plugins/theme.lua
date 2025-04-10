@@ -2,7 +2,7 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    opts = {},
+    -- opts = {},
   },
   {
     "catppuccin/nvim",
@@ -55,12 +55,12 @@ return {
   {
     "rebelot/kanagawa.nvim",
     lazy = true,
-    opts = {},
+    -- opts = {},
   },
   {
     "thesimonho/kanagawa-paper.nvim",
     lazy = true,
-    opts = {},
+    -- opts = {},
   },
   {
     "rose-pine/neovim",
@@ -71,7 +71,7 @@ return {
   {
     "sample-usr/rakis.nvim",
     lazy = true,
-    opts = {},
+    -- opts = {},
     config = function()
       require("rakis").setup({
         theme = {
@@ -89,7 +89,7 @@ return {
   {
     "embark-theme/vim",
     lazy = true,
-    opts = {},
+    -- opts = {},
   },
   {
     "Everblush/nvim",
@@ -105,29 +105,51 @@ return {
   {
     "uloco/bluloco.nvim",
     lazy = true,
+    -- priority = 1000,
     dependencies = { "rktjmp/lush.nvim" },
+    -- config = function() vim.cmd("colorscheme bluloco-dark") end,
   },
   {
     "yorumicolors/yorumi.nvim",
-    lazy = true,
+    -- lazy = true,
+    priority = 1000,
     opts = {},
+    config = function() vim.cmd("colorscheme yorumi") end,
   },
   {
     "dasupradyumna/midnight.nvim",
-    priority = 1000,
-    config = function() vim.cmd("colorscheme midnight") end,
+    lazy = true,
+    -- priority = 1000,
+    -- opts = {},
+    -- config = function() vim.cmd("colorscheme midnight") end,
   },
   {
     "nyoom-engineering/oxocarbon.nvim",
     lazy = true,
-    opts = {},
+    -- opts = {},
   },
   {
     "wtfox/jellybeans.nvim",
+    -- priority = 1000,
     lazy = true,
-    opts = {},
+    -- opts = {},
+    -- config = function() vim.cmd([[colorscheme jellybeans]]) end,
   },
-  { "tiagovla/tokyodark.nvim", lazy = true, opts = {} },
-  { "scottmckendry/cyberdream.nvim", lazy = true, opts = {} },
-  { "S-Spektrum-M/odyssey.nvim", lazy = true, opts = {} },
+  {
+    "tiagovla/tokyodark.nvim",
+    lazy = true,
+    -- priority = 1000,
+    -- opts = {},
+    -- config = function() vim.cmd("colorscheme tokyodark") end,
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = true,
+    -- opts = {}
+  },
+  {
+    "S-Spektrum-M/odyssey.nvim",
+    lazy = true,
+    -- opts = {}
+  },
 }
