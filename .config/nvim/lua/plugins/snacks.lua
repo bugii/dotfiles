@@ -37,13 +37,22 @@ return {
   keys = {
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     { "<leader>sf", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-    { "<leader>fg", function() Snacks.picker.grep({ hidden = true, ignored = true }) end, desc = "Find Grep" },
+    {
+      "<leader>fg",
+      function()
+        Snacks.picker.grep({
+          hidden = true,
+          -- ignored = true
+        })
+      end,
+      desc = "Find Grep",
+    },
     {
       "<leader>ff",
       function()
         Snacks.picker.files({
           hidden = true,
-          ignored = true,
+          -- ignored = true,
         })
       end,
       desc = "Find Files",
