@@ -81,21 +81,17 @@ end
 
 -- Get all session options
 local function get_all_choices()
-  local all = {}
-  local seen = {}
+  local all_items = {}
   local function add(items)
     for _, item in ipairs(items) do
-      if not seen[item.id] then
-        seen[item.id] = true
-        table.insert(all, item)
-      end
+      if not all_items[item.id] then table.insert(all_items, item) end
     end
   end
 
   add(get_existing_workspaces())
   add(get_git_worktrees())
   add(get_zoxide_sessions())
-  return all
+  return all_items
 end
 
 -- Switch/create workspace
