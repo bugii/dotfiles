@@ -52,7 +52,7 @@ end
 
 local config = {
   adjust_window_size_when_changing_font_size = false,
-  debug_key_events = false,
+  -- debug_key_events = false,
   -- enable_tab_bar = false,
   window_decorations = "RESIZE",
   tab_bar_at_bottom = true,
@@ -62,7 +62,7 @@ local config = {
   font_size = 16,
   color_scheme = scheme_for_appearance(get_appearance()),
   colors = {
-    background = "#000000",
+    background = get_appearance() == "Dark" and "#000000" or nil,
   },
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
@@ -108,6 +108,109 @@ local config = {
     split_nav("resize", "l"),
   },
 }
+
+-- wswitch.setup({
+--   {
+--     path = "~/dotfiles",
+--     layout = {
+--       { name = "editor", panes = { { name = "editor" } } },
+--     },
+--   },
+--   {
+--     path = "~/Notes",
+--     layout = {
+--       {
+--         name = "editor",
+--         panes = {
+--           {
+--             name = "editor",
+--             command = "vim",
+--           },
+--           {
+--             name = "editor2",
+--           },
+--           {
+--             command = "ls",
+--             name = "editor3",
+--           },
+--         },
+--       },
+--       {
+--         name = "terminal",
+--         panes = {
+--           { name = "client" },
+--           { name = "server" },
+--         },
+--       },
+--       {
+--         name = "third",
+--         panes = {
+--           { name = "blaaa" },
+--         },
+--       },
+--     },
+--   },
+--   {
+--     path = "~/Projects/social-gwt",
+--     type = "worktreeroot",
+--     layout = {
+--       { name = "editor", panes = { { name = "editor" }, { name = "terminal" } } },
+--     },
+--   },
+-- })
+
+wswitch.setup({
+  {
+    path = "~/Notes",
+    layout = {
+      {
+        name = "root",
+        direction = "Right", -- Split horizontally
+        panes = {
+          {
+            name = "editor",
+            command = "vim",
+          },
+          {
+            direction = "Bottom", -- Split vertically within the right pane
+            panes = {
+              {
+                name = "editor2",
+              },
+              {
+                name = "editor3",
+                command = "ls",
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    path = "~/Projects/social-gwt",
+    type = "worktreeroot",
+    layout = {
+      {
+        name = "root",
+        direction = "Bottom", -- Split vertically
+        panes = {
+          {
+            name = "editor",
+            command = "vim",
+          },
+          {
+            direction = "Right",
+            panes = {
+              { name = "terminal" },
+              { name = "term2" },
+            },
+          },
+        },
+      },
+    },
+  },
+})
 
 wswitch.apply_to_config(config)
 
