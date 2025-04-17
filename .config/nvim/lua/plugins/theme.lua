@@ -51,17 +51,18 @@ return {
         },
       },
     },
-    priority = 1000,
-    config = function(_, opts)
-      require("nightfox").setup(opts)
-      vim.api.nvim_create_autocmd("OptionSet", {
-        pattern = "background",
-        callback = function()
-          if vim.o.background == "light" then vim.cmd.colorscheme("dayfox") end
-          if vim.o.background == "dark" then vim.cmd.colorscheme("carbonfox") end
-        end,
-      })
-    end,
+    lazy = true,
+    -- priority = 1000,
+    -- config = function(_, opts)
+    --   require("nightfox").setup(opts)
+    --   vim.api.nvim_create_autocmd("OptionSet", {
+    --     pattern = "background",
+    --     callback = function()
+    --       if vim.o.background == "light" then vim.cmd.colorscheme("dayfox") end
+    --       if vim.o.background == "dark" then vim.cmd.colorscheme("carbonfox") end
+    --     end,
+    --   })
+    -- end,
     -- lazy = true,
   },
   {
@@ -96,8 +97,8 @@ return {
   },
   {
     "wtfox/jellybeans.nvim",
-    -- priority = 1000,
-    lazy = true,
+    priority = 1000,
+    -- lazy = true,
     opts = {
       transparent = false,
       italics = true,
@@ -109,10 +110,19 @@ return {
       end,
       on_highlights = function(hl, c) hl.NormalFloat = { bg = c.background } end,
     },
-    -- config = function(_, opts)
-    --   require("jellybeans").setup(opts)
-    --   vim.cmd("colorscheme jellybeans")
-    -- end,
+    config = function(_, opts)
+      require("jellybeans").setup(opts)
+      vim.api.nvim_create_autocmd("OptionSet", {
+        pattern = "background",
+        callback = function()
+          if vim.o.background == "light" then
+            vim.cmd.colorscheme("jellybeans-muted-light")
+          else
+            vim.cmd.colorscheme("jellybeans-muted")
+          end
+        end,
+      })
+    end,
   },
   {
     "scottmckendry/cyberdream.nvim",

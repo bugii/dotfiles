@@ -1,8 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons", { "SmiteshP/nvim-navic", lazy = true } },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
-    local navic = require("nvim-navic")
     require("lualine").setup({
       options = {
         icons_enabled = true,
@@ -25,23 +24,12 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch" },
-        lualine_c = { "diff", "diagnostics" },
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
-      },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = { "location" },
-        lualine_y = {},
-        lualine_z = {},
-      },
-      tabline = {},
-      winbar = {
-        lualine_a = {
+        lualine_b = {
+          "branch",
+          "diff",
+          "diagnostics",
+        },
+        lualine_c = {
           {
             "filename",
             file_status = true, -- Displays file status (readonly status, modified status)
@@ -62,17 +50,20 @@ return {
             },
           },
         },
-        lualine_b = {
-          {
-            function() return navic.get_location() end,
-            cond = function() return navic.is_available() end,
-          },
-        },
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = { "grapple" },
+        lualine_x = { "grapple", "encoding", "fileformat", "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
       },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+      },
+      tabline = {},
+      winbar = {},
       inactive_winbar = {},
       extensions = {},
     })

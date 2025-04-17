@@ -1,5 +1,6 @@
 return {
   "SmiteshP/nvim-navic",
+  enabled = false,
   lazy = true,
   config = function()
     local navic = require("nvim-navic")

@@ -1,14 +1,15 @@
 local wezterm = require("wezterm")
 local wswitch = require("workspace-picker")
+local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
-function get_appearance()
+local function get_appearance()
   if wezterm.gui then return wezterm.gui.get_appearance() end
   return "Dark"
 end
 
-function scheme_for_appearance(appearance)
+local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
     return "carbonfox"
   else
@@ -51,18 +52,16 @@ local function split_nav(resize_or_move, key)
 end
 
 local config = {
+  front_end = "WebGpu",
   adjust_window_size_when_changing_font_size = false,
-  -- debug_key_events = false,
-  -- enable_tab_bar = false,
   window_decorations = "RESIZE",
-  tab_bar_at_bottom = true,
   font = wezterm.font_with_fallback({
     "CommitMono Nerd Font Mono",
   }),
   font_size = 16,
   color_scheme = scheme_for_appearance(get_appearance()),
   colors = {
-    background = get_appearance() == "Dark" and "#000000" or nil,
+    background = get_appearance() == "Dark" and "#000000" or "#FFFFFF",
   },
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
@@ -109,78 +108,22 @@ local config = {
   },
 }
 
--- wswitch.setup({
---   {
---     path = "~/dotfiles",
---     layout = {
---       { name = "editor", panes = { { name = "editor" } } },
---     },
---   },
---   {
---     path = "~/Notes",
---     layout = {
---       {
---         name = "editor",
---         panes = {
---           {
---             name = "editor",
---             command = "vim",
---           },
---           {
---             name = "editor2",
---           },
---           {
---             command = "ls",
---             name = "editor3",
---           },
---         },
---       },
---       {
---         name = "terminal",
---         panes = {
---           { name = "client" },
---           { name = "server" },
---         },
---       },
---       {
---         name = "third",
---         panes = {
---           { name = "blaaa" },
---         },
---       },
---     },
---   },
---   {
---     path = "~/Projects/social-gwt",
---     type = "worktreeroot",
---     layout = {
---       { name = "editor", panes = { { name = "editor" }, { name = "terminal" } } },
---     },
---   },
--- })
-
 wswitch.setup({
   {
-    path = "~/Notes",
-    layout = {
+    path = "~/Projects/aop.git",
+    type = "worktreeroot",
+    tabs = {
+      { name = "editor" },
       {
-        name = "root",
-        direction = "Right", -- Split horizontally
+        name = "terminals",
+        direction = "Bottom",
         panes = {
+          { name = "app", command = "cd ./src/app && nvm use && pnpm i" },
           {
-            name = "editor",
-            command = "vim",
-          },
-          {
-            direction = "Bottom", -- Split vertically within the right pane
+            direction = "Right",
             panes = {
-              {
-                name = "editor2",
-              },
-              {
-                name = "editor3",
-                command = "ls",
-              },
+              { name = "Api", command = "cd ./src/backend/Aop.Api && dotnet build" },
+              { name = "Importer", command = "cd ./src/backend/Aop.DataImport" },
             },
           },
         },
@@ -188,9 +131,20 @@ wswitch.setup({
     },
   },
   {
+    path = "~/Notes",
+    tabs = {
+      {
+        name = "root",
+        panes = {
+          { name = "editor" },
+        },
+      },
+    },
+  },
+  {
     path = "~/Projects/social-gwt",
     type = "worktreeroot",
-    layout = {
+    tabs = {
       {
         name = "root",
         direction = "Bottom", -- Split vertically
@@ -211,7 +165,38 @@ wswitch.setup({
     },
   },
 })
-
 wswitch.apply_to_config(config)
+
+tabline.setup({
+  options = {
+    theme = get_appearance() == "Light" and "dayfox" or "carbonfox",
+    theme_overrides = {
+      normal_mode = {
+        b = { bg = config.colors.background },
+        c = { bg = config.colors.background },
+        x = { bg = config.colors.background },
+        y = { bg = config.colors.background },
+      },
+      tab = {
+        active = { fg = nil, bg = config.colors.background },
+        inactive = { fg = nil, bg = config.colors.background },
+        inactive_hover = { fg = nil, bg = config.colors.background },
+      },
+    },
+    section_separators = {
+      left = wezterm.nerdfonts.ple_right_half_circle_thick,
+      right = wezterm.nerdfonts.ple_left_half_circle_thick,
+    },
+    component_separators = {
+      left = "",
+      right = "",
+    },
+    tab_separators = {
+      left = wezterm.nerdfonts.ple_right_half_circle_thick,
+      right = wezterm.nerdfonts.ple_left_half_circle_thick,
+    },
+  },
+})
+tabline.apply_to_config(config)
 
 return config
