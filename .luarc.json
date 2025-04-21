@@ -1,0 +1,8 @@
+{
+    "diagnostics.globals": [
+        "vim",
+        "get_appearance",
+        "scheme_for_appearance"
+    ],
+    "workspace.maxPreload": 10000
+}
