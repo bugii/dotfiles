@@ -9,4 +9,30 @@ font-size = 16
 # theme = dark:tokyonight_night, light:tokyonight-day
 theme = dark:Builtin Tango Dark, light:tokyonight-day
 
-macos-titlebar-style = hidden
+macos-titlebar-style = tabs
+macos-option-as-alt = true
+
+shell-integration = zsh
+
+mouse-hide-while-typing = true
+scrollback-limit = 1000000
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+keybind = ctrl+a>h=new_split:left
+keybind = ctrl+a>j=new_split:down
+keybind = ctrl+a>k=new_split:up
+keybind = ctrl+a>l=new_split:right
+keybind = ctrl+a>f=toggle_split_zoom
+
+keybind = super+n=new_tab
+keybind = ctrl+a>n=next_tab
+keybind = ctrl+a>p=previous_tab
+keybind = ctrl+f=toggle_tab_overview
+
+keybind = ctrl+a>r=reload_config
+
+window-save-state = always

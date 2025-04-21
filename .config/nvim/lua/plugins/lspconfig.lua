@@ -50,6 +50,9 @@ return {
       -- default handler for installed servers
       function(server_name) lspconfig[server_name].setup({}) end,
 
+      -- typescript language server is setup by typescript-tools plugin
+      ["ts_ls"] = function() return end,
+
       ["lua_ls"] = function()
         lspconfig.lua_ls.setup({
           settings = {
