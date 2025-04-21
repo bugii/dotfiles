@@ -27,6 +27,7 @@ end
 
 -- Get static and worktree-based paths
 local function get_config_entries()
+  -- print(user_config)
   local entries = {}
   for _, entry in ipairs(user_config) do
     if entry.type == "worktreeroot" then
@@ -38,7 +39,7 @@ local function get_config_entries()
             table.insert(entries, {
               id = path,
               label = wezterm.format({ { Text = "󰊢  " .. path:gsub(wezterm.home_dir, "~") } }),
-              type = "worktreeroot",
+              type = entry.type,
               tabs = entry.tabs,
             })
           end
@@ -48,7 +49,7 @@ local function get_config_entries()
       table.insert(entries, {
         id = entry.path:gsub(wezterm.home_dir, "~"),
         label = wezterm.format({ { Text = "  " .. entry.path:gsub(wezterm.home_dir, "~") } }),
-        type = nil,
+        type = entry.type,
         tabs = entry.tabs,
       })
     end
@@ -101,8 +102,16 @@ local function get_all_choices()
 
   add(get_existing_workspaces())
   add(get_config_entries())
-  add(get_zoxide_sessions())
+  -- add(get_zoxide_sessions())
   return all_items
+end
+
+local function generate_fractions(n)
+  local fractions = {}
+  for i = 2, n do
+    table.insert(fractions, 1, (i - 1) / i) -- Insert at the beginning
+  end
+  return fractions
 end
 
 local function create_splits(mux_pane, node)
@@ -112,11 +121,11 @@ local function create_splits(mux_pane, node)
     return
   end
 
+  local fractions = generate_fractions(#node.panes)
+  local current_pane = mux_pane
   for i, pane in ipairs(node.panes) do
-    local current_pane = mux_pane
     if i > 1 then
-      local direction = node.direction or "Right"
-      current_pane = mux_pane:split({ direction = direction })
+      current_pane = current_pane:split({ direction = node.direction or "Right", size = fractions[i - 1] })
     end
 
     -- Recursively process the child node before moving to the next sibling
@@ -135,8 +144,7 @@ end
 
 local function create_or_switch_to_workspace(item, win, pane)
   if item.type ~= "workspace" then
-    local initial_tab, initial_pane, window = mux.spawn_window({ workspace = item.id, cwd = expandHomePath(item.id) })
-
+    local _, _, window = mux.spawn_window({ workspace = item.id, cwd = expandHomePath(item.id) })
     if item.tabs ~= nil then create_tabs(window, item.tabs) end
   end
 
@@ -165,7 +173,7 @@ function M.switch_workspace()
         title = "Mingle",
         choices = choices_for_input_selector,
         fuzzy = true,
-        action = wezterm.action_callback(function(win, p, id, label)
+        action = wezterm.action_callback(function(win, p, id)
           if not id then return end
 
           local selected_item = nil
@@ -185,7 +193,27 @@ function M.switch_workspace()
 end
 
 -- Setup function to accept user configuration
-function M.setup(config) user_config = config or {} end
+function M.setup(config)
+  local default_config = {
+    tabs = {},
+  }
+
+  local function merge_with_defaults(entry)
+    for k, v in pairs(default_config) do
+      if entry[k] == nil then entry[k] = v end
+    end
+    return entry
+  end
+
+  user_config = {}
+  for _, entry in ipairs(config or {}) do
+    if entry.path == nil then
+      wezterm.log_error("Invalid configuration: 'path' is required for each entry.")
+    else
+      table.insert(user_config, merge_with_defaults(entry))
+    end
+  end
+end
 
 -- Keybinding helper
 function M.apply_to_config(config)

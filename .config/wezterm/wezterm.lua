@@ -109,6 +109,23 @@ local config = {
 }
 
 wswitch.setup({
+  { path = "~/dotfiles" },
+  {
+    path = "~/Notes",
+  },
+  {
+    path = "/Users/dabu/Projects/mingle",
+    tabs = {
+      {
+        direction = "Right",
+        panes = {
+          { name = "bla", command = "echo 1" },
+          { name = "bla", command = "echo 2" },
+          { name = "bla", command = "echo 3" },
+        },
+      },
+    },
+  },
   {
     path = "~/Projects/aop.git",
     type = "worktreeroot",
@@ -126,17 +143,6 @@ wswitch.setup({
               { name = "Importer", command = "cd ./src/backend/Aop.DataImport" },
             },
           },
-        },
-      },
-    },
-  },
-  {
-    path = "~/Notes",
-    tabs = {
-      {
-        name = "root",
-        panes = {
-          { name = "editor" },
         },
       },
     },
