@@ -148,8 +148,7 @@ wswitch.setup({
     },
   },
   {
-    path = "~/Projects/social-gwt",
-    type = "worktreeroot",
+    path = "~/Projects/social",
     tabs = {
       {
         name = "root",
