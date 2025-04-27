@@ -6,9 +6,9 @@ return {
     "williamboman/mason.nvim",
   },
   config = function()
-    vim.diagnostic.config({
-      virtual_lines = { current_line = true },
-    })
+    -- vim.diagnostic.config({
+    --   virtual_lines = { current_line = true },
+    -- })
 
     local lspconfig = require("lspconfig")
     local mason_lspconfig = require("mason-lspconfig")
