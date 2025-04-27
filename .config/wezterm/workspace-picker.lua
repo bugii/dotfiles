@@ -102,7 +102,7 @@ local function get_all_choices()
 
   add(get_existing_workspaces())
   add(get_config_entries())
-  -- add(get_zoxide_sessions())
+  add(get_zoxide_sessions())
   return all_items
 end
 
