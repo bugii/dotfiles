@@ -33,7 +33,7 @@ return {
         },
         csharpier = {
           command = "dotnet",
-          args = { "csharpier", "--write-stdout" },
+          args = { "csharpier", "format", "--write-stdout" },
           stdin = true,
           -- in order to respect the locally intalled installation (using dotnet tools)
           cwd = require("conform.util").root_file(".config"),
