@@ -52,12 +52,7 @@ local function split_nav(resize_or_move, key)
 end
 
 local config = {
-  front_end = "WebGpu",
-  webgpu_power_preference = "HighPerformance",
   max_fps = 120,
-  animation_fps = 60,
-  adjust_window_size_when_changing_font_size = false,
-  window_decorations = "RESIZE",
   font = wezterm.font_with_fallback({
     "CommitMono Nerd Font Mono",
   }),

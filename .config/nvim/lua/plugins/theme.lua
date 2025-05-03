@@ -116,9 +116,11 @@ return {
         pattern = "background",
         callback = function()
           if vim.o.background == "light" then
-            vim.cmd.colorscheme("jellybeans-muted-light")
+            -- vim.cmd.colorscheme("jellybeans-muted-light")
+            vim.cmd.colorscheme("jellybeans-light")
           else
-            vim.cmd.colorscheme("jellybeans-muted")
+            -- vim.cmd.colorscheme("jellybeans-muted")
+            vim.cmd.colorscheme("jellybeans")
           end
         end,
       })
