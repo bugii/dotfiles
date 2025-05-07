@@ -220,7 +220,7 @@ function M.apply_to_config(config)
   config.keys = config.keys or {}
   table.insert(config.keys, {
     key = "f",
-    mods = "CTRL",
+    mods = "LEADER",
     action = M.switch_workspace(),
   })
 end

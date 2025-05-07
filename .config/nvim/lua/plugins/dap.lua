@@ -4,12 +4,10 @@ return {
   dependencies = {
     "mfussenegger/nvim-dap",
     "theHamsta/nvim-dap-virtual-text",
-    "williamboman/mason.nvim",
     "nvim-neotest/nvim-nio",
   },
   config = function()
-    local dap, dapui, mason_registry, virtual_text =
-      require("dap"), require("dapui"), require("mason-registry"), require("nvim-dap-virtual-text")
+    local dap, dapui, virtual_text = require("dap"), require("dapui"), require("nvim-dap-virtual-text")
 
     dapui.setup()
     virtual_text.setup()
@@ -23,9 +21,8 @@ return {
       host = "localhost",
       port = "${port}",
       executable = {
-        command = "node",
+        command = "js-debug-adapter",
         args = {
-          mason_registry.get_package("js-debug-adapter"):get_install_path() .. "/js-debug/src/dapDebugServer.js",
           "${port}",
         },
       },
@@ -39,6 +36,7 @@ return {
           name = "Launch file",
           program = "${file}",
           cwd = "${workspaceFolder}",
+          skipFiles = { "<node_internals>/**", "**/node_modules/**" },
         },
         {
           type = "pwa-node",
@@ -46,13 +44,14 @@ return {
           name = "Attach",
           processId = require("dap.utils").pick_process,
           cwd = "${workspaceFolder}",
+          skipFiles = { "<node_internals>/**", "**/node_modules/**" },
         },
       }
     end
 
     dap.adapters.netcoredbg = {
       type = "executable",
-      command = mason_registry.get_package("netcoredbg"):get_install_path() .. "/netcoredbg",
+      command = "netcoredbg",
       args = { "--interpreter=vscode" },
     }
 

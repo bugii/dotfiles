@@ -103,6 +103,16 @@ local config = {
         },
       }),
     },
+    {
+      mods = "LEADER",
+      key = "d",
+      action = wezterm.action.SwitchToWorkspace({
+        name = "~/dotfiles",
+        spawn = {
+          cwd = wswitch.expandHomePath("~/dotfiles"),
+        },
+      }),
+    },
     -- activate copy mode or vim mode
     {
       key = "Enter",

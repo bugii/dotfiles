@@ -4,7 +4,6 @@ return {
   "williamboman/mason.nvim",
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
-    "jay-babu/mason-nvim-dap.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   event = "VeryLazy",
@@ -12,6 +11,11 @@ return {
     require("mason").setup()
 
     require("mason-lspconfig").setup({
+      automatic_enable = {
+        exclude = {
+          "ts_ls",
+        },
+      },
       ensure_installed = {
         "lua_ls",
         "ts_ls",
@@ -26,13 +30,7 @@ return {
         "tailwindcss",
         "elixirls",
         "rust_analyzer",
-        "harper_ls",
       },
-    })
-
-    require("mason-nvim-dap").setup({
-      automatic_installation = true,
-      ensure_installed = { "js-debug-adapter", "netcoredbg" },
     })
 
     require("mason-tool-installer").setup({
