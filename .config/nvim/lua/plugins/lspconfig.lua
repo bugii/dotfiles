@@ -76,18 +76,18 @@ return {
         })
       end,
 
-      ["harper_ls"] = function()
-        lspconfig.harper_ls.setup({
-          settings = {
-            ["harper-ls"] = {
-              linters = {
-                SentenceCapitalization = false,
-                SpellCheck = false,
-              },
-            },
-          },
-        })
-      end,
+      -- ["harper_ls"] = function()
+      --   lspconfig.harper_ls.setup({
+      --     settings = {
+      --       ["harper-ls"] = {
+      --         linters = {
+      --           SentenceCapitalization = false,
+      --           SpellCheck = false,
+      --         },
+      --       },
+      --     },
+      --   })
+      -- end,
     })
   end,
 }

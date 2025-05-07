@@ -225,4 +225,6 @@ function M.apply_to_config(config)
   })
 end
 
+M.expandHomePath = expandHomePath
+
 return M
