@@ -28,6 +28,7 @@ zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim')
 zinit light "lukechilds/zsh-nvm"
 
 # Add in snippets
