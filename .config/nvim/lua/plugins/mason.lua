@@ -38,7 +38,7 @@ return {
         -- formatters
         "prettierd",
         "stylua",
-        "autopep8",
+        "black",
         "csharpier",
         -- linters
         "eslint_d",
