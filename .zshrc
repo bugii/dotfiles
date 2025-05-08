@@ -3,9 +3,9 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-[ -f "/home/dario/.ghcup/env" ] && source "/home/dario/.ghcup/env" # ghcup-env
+# [ -f "/home/dario/.ghcup/env" ] && source "/home/dario/.ghcup/env" # ghcup-env
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -26,6 +26,10 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim')
+zinit light "lukechilds/zsh-nvm"
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -40,16 +44,16 @@ bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
 
 # zsh by default does not pass i/o capabilities to widgets, thus we have to do that manually
-mingle_connect() {
-    (
-        exec </dev/tty
-        exec <&1
-        ~/Projects/mingle/mingle connect $(~/Projects/mingle/mingle list | fzf --border --margin=20%,20%)
-    )
-}
-zle -N mingle_connect
-
-bindkey '^F' mingle_connect
+# mingle_connect() {
+#     (
+#         exec </dev/tty
+#         exec <&1
+#         ~/Projects/mingle/mingle connect $(~/Projects/mingle/mingle list | fzf --border --margin=20%,20%)
+#     )
+# }
+# zle -N mingle_connect
+#
+# bindkey '^F' mingle_connect
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -84,8 +88,3 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
 source <(fzf --zsh)
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
-export PATH=$PATH:/Users/dabu/.spicetify
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

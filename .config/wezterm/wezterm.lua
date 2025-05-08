@@ -2,6 +2,11 @@ local wezterm = require("wezterm")
 local wswitch = require("workspace-picker")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
+local light_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-light.toml")
+light_theme.background = "#FFFFFF"
+local dark_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans.toml")
+dark_theme.background = "#000000"
+
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
 local function get_appearance()
@@ -9,11 +14,11 @@ local function get_appearance()
   return "Dark"
 end
 
-local function scheme_for_appearance(appearance)
+local function colors_for_appearance(appearance)
   if appearance:find("Dark") then
-    return "carbonfox"
+    return dark_theme
   else
-    return "dayfox"
+    return light_theme
   end
 end
 
@@ -54,13 +59,15 @@ end
 local config = {
   max_fps = 120,
   font = wezterm.font_with_fallback({
-    "CommitMono Nerd Font Mono",
+    "JetBrainsMono Nerd Font",
+    -- "CommitMono Nerd Font Mono",
+    -- "FiraCode Nerd Font Mono",
+    -- "FiraMono Nerd Font Mono",
+    -- "Monaspace Neon",
+    -- "Agave Nerd Font",
   }),
   font_size = 16,
-  color_scheme = scheme_for_appearance(get_appearance()),
-  colors = {
-    background = get_appearance() == "Dark" and "#000000" or "#FFFFFF",
-  },
+  colors = colors_for_appearance(get_appearance()),
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
     -- splitting
@@ -84,6 +91,26 @@ local config = {
       key = "0",
       action = wezterm.action.PaneSelect({
         mode = "SwapWithActive",
+      }),
+    },
+    {
+      mods = "LEADER",
+      key = "n",
+      action = wezterm.action.SwitchToWorkspace({
+        name = "~/Notes",
+        spawn = {
+          cwd = wswitch.expandHomePath("~/Notes"),
+        },
+      }),
+    },
+    {
+      mods = "LEADER",
+      key = "d",
+      action = wezterm.action.SwitchToWorkspace({
+        name = "~/dotfiles",
+        spawn = {
+          cwd = wswitch.expandHomePath("~/dotfiles"),
+        },
       }),
     },
     -- activate copy mode or vim mode
@@ -173,7 +200,7 @@ wswitch.apply_to_config(config)
 
 tabline.setup({
   options = {
-    theme = get_appearance() == "Light" and "dayfox" or "carbonfox",
+    theme = config.colors,
     theme_overrides = {
       normal_mode = {
         b = { bg = config.colors.background },
@@ -181,10 +208,26 @@ tabline.setup({
         x = { bg = config.colors.background },
         y = { bg = config.colors.background },
       },
+      copy_mode = {
+        b = { bg = config.colors.background },
+        c = { bg = config.colors.background },
+        x = { bg = config.colors.background },
+        y = { bg = config.colors.background },
+      },
+      search_mode = {
+        b = { bg = config.colors.background },
+        c = { bg = config.colors.background },
+        x = { bg = config.colors.background },
+        y = { bg = config.colors.background },
+      },
+      window_mode = {
+        b = { bg = config.colors.background },
+        c = { bg = config.colors.background },
+        x = { bg = config.colors.background },
+        y = { bg = config.colors.background },
+      },
       tab = {
-        active = { fg = nil, bg = config.colors.background },
-        inactive = { fg = nil, bg = config.colors.background },
-        inactive_hover = { fg = nil, bg = config.colors.background },
+        inactive = { bg = config.colors.background },
       },
     },
     section_separators = {

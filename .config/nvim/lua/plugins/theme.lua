@@ -98,7 +98,7 @@ return {
   {
     "wtfox/jellybeans.nvim",
     priority = 1000,
-    -- lazy = true,
+    lazy = false,
     opts = {
       transparent = false,
       italics = true,
@@ -135,5 +135,26 @@ return {
     "S-Spektrum-M/odyssey.nvim",
     lazy = true,
     opts = {},
+  },
+  {
+    "webhooked/kanso.nvim",
+    lazy = true,
+    -- priority = 1000,
+    opts = {
+      background = { -- map the value of 'background' option to a theme
+        dark = "zen",
+        light = "pearl",
+      },
+      colors = {
+        palette = {
+          zen0 = "#000000",
+          fujiWhite = "#FFFFFF",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("kanso").setup(opts)
+      vim.cmd("colorscheme kanso")
+    end,
   },
 }

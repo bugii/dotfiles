@@ -10,7 +10,7 @@ return {
         typescript = { "prettierd" },
         javascriptreact = { "prettierd" },
         typescriptreact = { "prettierd" },
-        python = { "autopep8" },
+        python = { "black" },
         css = { "prettierd" },
         html = { "prettierd" },
         json = { "prettierd" },
@@ -37,6 +37,19 @@ return {
           stdin = true,
           -- in order to respect the locally intalled installation (using dotnet tools)
           cwd = require("conform.util").root_file(".config"),
+        },
+        black = {
+          command = require("conform.util").find_executable({ ".venv/bin/black" }, "black"),
+          args = {
+            "--stdin-filename",
+            "$FILENAME",
+            "--quiet",
+            "-",
+          },
+          cwd = require("conform.util").root_file({
+            -- https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
+            "pyproject.toml",
+          }),
         },
       },
 
