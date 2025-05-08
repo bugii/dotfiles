@@ -15,7 +15,7 @@ return {
     neotest.setup({
       adapters = {
         require("neotest-vitest")({
-          cwd = vim.fs.root(0, "node_modules"),
+          cwd = function(testFilePath) return vim.fs.root(testFilePath, "node_modules") end,
           filter_dir = function(name, rel_path, root) return name ~= "node_modules" end,
         }),
         require("neotest-dotnet")({
