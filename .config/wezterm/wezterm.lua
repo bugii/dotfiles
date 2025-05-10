@@ -173,7 +173,8 @@ wswitch.setup({
     },
   },
   {
-    path = "~/Projects/social",
+    path = "~/Projects/vellu",
+    type = "worktreeroot",
     tabs = {
       {
         name = "root",
