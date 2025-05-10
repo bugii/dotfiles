@@ -8,18 +8,24 @@ return {
   },
   event = "VeryLazy",
   config = function()
-    require("mason").setup()
+    require("mason").setup({
+      registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+      },
+    })
 
     require("mason-lspconfig").setup({
       automatic_enable = {
         exclude = {
           "ts_ls",
+          "roslyn",
         },
       },
       ensure_installed = {
         "lua_ls",
         "ts_ls",
-        "csharp_ls",
+        "roslyn",
         "pyright",
         "bashls",
         "cssls",
