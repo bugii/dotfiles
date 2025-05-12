@@ -4,7 +4,7 @@ return {
   lazy = false,
   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
-    require("mini.icons").setup()
+    local MiniIcons = require("mini.icons")
     local MiniBasics = require("mini.basics")
     require("mini.bracketed").setup()
     require("mini.surround").setup()
@@ -19,6 +19,9 @@ return {
 
     vim.keymap.set("n", "[t", ":tabprevious<CR>", { silent = true, desc = "Previous tab" })
     vim.keymap.set("n", "]t", ":tabnext<CR>", { silent = true, desc = "Next tab" })
+
+    MiniIcons.setup()
+    MiniIcons.mock_nvim_web_devicons()
 
     MiniFiles.setup({
       mappings = {

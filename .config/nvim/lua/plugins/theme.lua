@@ -120,7 +120,7 @@ return {
             vim.cmd.colorscheme("jellybeans-light")
           else
             -- vim.cmd.colorscheme("jellybeans-muted")
-            vim.cmd.colorscheme("jellybeans")
+            vim.cmd.colorscheme("jellybeans-mono")
           end
         end,
       })

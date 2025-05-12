@@ -1,8 +1,8 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons", "bwpge/lualine-pretty-path" },
+  -- mini.icons for the icons
+  dependencies = { "echasnovski/mini.nvim", "bwpge/lualine-pretty-path" },
   opts = {
-
     options = {
       icons_enabled = true,
       theme = "auto",
@@ -29,9 +29,21 @@ return {
         "diff",
         "diagnostics",
       },
-      lualine_c = { "pretty_path" },
-      lualine_x = { "grapple", "encoding", "fileformat", "filetype" },
-      lualine_y = { "progress" },
+      lualine_c = {
+        "pretty_path",
+      },
+      lualine_x = {
+        {
+          function() return require("nvim-navic").get_location() end,
+          cond = function() return require("nvim-navic").is_available() end,
+        },
+        "encoding",
+        "fileformat",
+        "filetype",
+      },
+      lualine_y = {
+        "grapple",
+      },
       lualine_z = { "location" },
     },
     inactive_sections = {

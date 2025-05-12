@@ -2,7 +2,8 @@
     "diagnostics.globals": [
         "vim",
         "get_appearance",
-        "scheme_for_appearance"
+        "scheme_for_appearance",
+        "Snacks"
     ],
     "workspace.maxPreload": 10000
 }

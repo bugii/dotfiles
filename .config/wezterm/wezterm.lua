@@ -4,7 +4,7 @@ local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabl
 
 local light_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-light.toml")
 light_theme.background = "#FFFFFF"
-local dark_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans.toml")
+local dark_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-mono.toml")
 dark_theme.background = "#000000"
 
 -- wezterm.gui is not available to the mux server, so take care to

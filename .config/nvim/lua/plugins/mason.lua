@@ -30,6 +30,7 @@ return {
         "tailwindcss",
         "elixirls",
         "rust_analyzer",
+        "nil_ls",
       },
     })
 
