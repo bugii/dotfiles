@@ -25,7 +25,7 @@ return {
       ensure_installed = {
         "lua_ls",
         "ts_ls",
-        "roslyn",
+        -- "roslyn",
         "pyright",
         "bashls",
         "cssls",
@@ -36,7 +36,7 @@ return {
         "tailwindcss",
         "elixirls",
         "rust_analyzer",
-        "nil_ls",
+        -- "nil_ls",
       },
     })
 
