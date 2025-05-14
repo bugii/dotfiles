@@ -1,8 +1,32 @@
 {
+  "nativeMCPServers": [
+    
+  ],
   "mcpServers": {
+    "github.com/github/github-mcp-server": {
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "cmd:op read 'op://personal/Codecompanion Github MCP/credential' --no-newline"
+      },
+      "disabled": false,
+      "command": "docker"
+    },
     "github.com/modelcontextprotocol/servers/tree/main/src/git": {
-      "command": "uvx",
-      "args": ["mcp-server-git"]
+      "args": [
+        "mcp-server-git"
+      ],
+      "disabled_tools": [
+        
+      ],
+      "disabled": false,
+      "command": "uvx"
     }
   }
 }

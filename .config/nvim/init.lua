@@ -19,3 +19,4 @@ vim.opt.wrap = true
 
 require("keymaps")
 require("lazy_config")
+require("codecompanion-spinner")

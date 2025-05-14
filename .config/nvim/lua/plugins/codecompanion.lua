@@ -1,5 +1,11 @@
 return {
   "olimorris/codecompanion.nvim",
+  dependencies = {
+    "zbirenbaum/copilot.lua",
+    "ravitemer/mcphub.nvim",
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
+  },
   event = "VeryLazy",
   opts = {
     extensions = {
@@ -12,10 +18,17 @@ return {
         },
       },
     },
+    display = {
+      action_palette = {
+        provider = "snacks",
+      },
+    },
   },
-  dependencies = {
-    "zbirenbaum/copilot.lua",
-    "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
+  keys = {
+    {
+      "<leader>ai",
+      function() vim.cmd("CodeCompanionChat Toggle") end,
+      desc = "Toggle CodeCompanionChat",
+    },
   },
 }
