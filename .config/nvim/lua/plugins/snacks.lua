@@ -42,7 +42,6 @@ return {
       function()
         Snacks.picker.grep({
           hidden = true,
-          -- ignored = true
         })
       end,
       desc = "Find Grep",
@@ -52,7 +51,6 @@ return {
       function()
         Snacks.picker.files({
           hidden = true,
-          -- ignored = true,
         })
       end,
       desc = "Find Files",
@@ -64,12 +62,25 @@ return {
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+    {
+      "<leader>fw",
+      function()
+        Snacks.picker.grep_word({
+          opts = {
+            hidden = true,
+          },
+        })
+      end,
+      desc = "Find Word",
+      mode = { "n", "x" },
+    },
     { "<leader>fib", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>fh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>fc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { "<leader>fm", function() Snacks.picker.marks() end, desc = "Marks" },
     { "<leader>fd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>fn", function() Snacks.picker.notifications() end, desc = "Notifications" },
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
