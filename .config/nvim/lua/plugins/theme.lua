@@ -1,7 +1,8 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {
       transparent = true,
     },
@@ -9,7 +10,8 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {
       flavour = "mocha",
       transparent_background = true,
@@ -17,14 +19,16 @@ return {
   },
   {
     "rebelot/kanagawa.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {
       transparent = true,
     },
   },
   {
     "rose-pine/neovim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     name = "rose-pine",
     opts = {
       styles = {
@@ -36,6 +40,8 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
     opts = {
       options = {
         -- transparent = true,
@@ -51,8 +57,6 @@ return {
         },
       },
     },
-    lazy = true,
-    -- priority = 1000,
     -- config = function(_, opts)
     --   require("nightfox").setup(opts)
     --   vim.api.nvim_create_autocmd("OptionSet", {
@@ -63,11 +67,11 @@ return {
     --     end,
     --   })
     -- end,
-    -- lazy = true,
   },
   {
     "sample-usr/rakis.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {
       transparent = true,
       italic_comments = true,
@@ -76,14 +80,16 @@ return {
   {
     "Everblush/nvim",
     name = "everblush",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {
       transparent_background = true,
     },
   },
   {
     "uloco/bluloco.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     dependencies = { "rktjmp/lush.nvim" },
     opts = {
       transparent = true,
@@ -92,54 +98,66 @@ return {
   },
   {
     "dasupradyumna/midnight.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {},
   },
   {
     "wtfox/jellybeans.nvim",
-    priority = 1000,
     lazy = false,
+    priority = 1000,
     opts = {
-      transparent = false,
+      transparent = true,
       italics = true,
       flat_ui = false,
-      on_colors = function(c)
-        local light_bg = "#ffffff"
-        local dark_bg = "#000000"
-        c.background = vim.o.background == "light" and light_bg or dark_bg
-      end,
-      on_highlights = function(hl, c) hl.NormalFloat = { bg = c.background } end,
+      -- on_colors = function(c)
+      --   local light_bg = "#ffffff"
+      --   local dark_bg = "#000000"
+      --   c.background = vim.o.background == "light" and light_bg or dark_bg
+      -- end,
+      -- on_highlights = function(hl, c) hl.NormalFloat = { bg = c.background } end,
     },
     config = function(_, opts)
       require("jellybeans").setup(opts)
-      vim.api.nvim_create_autocmd("OptionSet", {
-        pattern = "background",
-        callback = function()
-          if vim.o.background == "light" then
-            -- vim.cmd.colorscheme("jellybeans-muted-light")
-            vim.cmd.colorscheme("jellybeans-light")
-          else
-            -- vim.cmd.colorscheme("jellybeans-muted")
-            vim.cmd.colorscheme("jellybeans-mono")
-          end
-        end,
-      })
+      if vim.o.background == "light" then
+        -- vim.cmd.colorscheme("jellybeans-muted-light")
+        vim.cmd.colorscheme("jellybeans-mono-light")
+      else
+        -- vim.cmd.colorscheme("jellybeans-muted")
+        vim.cmd.colorscheme("jellybeans-mono")
+      end
+      -- require("jellybeans").setup(opts)
+      -- vim.api.nvim_create_autocmd("OptionSet", {
+      --   pattern = "background",
+      --   callback = function()
+      --     if vim.o.background == "light" then
+      --       -- vim.cmd.colorscheme("jellybeans-muted-light")
+      --       vim.cmd.colorscheme("jellybeans-light")
+      --     else
+      --       -- vim.cmd.colorscheme("jellybeans-muted")
+      --       vim.cmd.colorscheme("jellybeans-mono")
+      --     end
+      --   end,
+      -- })
     end,
   },
   {
     "scottmckendry/cyberdream.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {},
   },
   {
     "S-Spektrum-M/odyssey.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {},
   },
   {
     "webhooked/kanso.nvim",
-    lazy = true,
-    -- priority = 1000,
+    lazy = false,
+    priority = 1000,
+    enabled = false,
     opts = {
       background = { -- map the value of 'background' option to a theme
         dark = "zen",
@@ -152,9 +170,9 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("kanso").setup(opts)
-      vim.cmd("colorscheme kanso")
-    end,
+    -- config = function(_, opts)
+    --   require("kanso").setup(opts)
+    --   vim.cmd("colorscheme kanso")
+    -- end,
   },
 }
