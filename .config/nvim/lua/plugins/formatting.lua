@@ -54,7 +54,7 @@ return {
       },
 
       format_after_save = {
-        lsp_fallback = true,
+        lsp_fallback = false,
       },
     })
 
@@ -63,8 +63,8 @@ return {
       "<leader>f",
       function()
         conform.format({
-          lsp_fallback = true,
-          timeout_ms = 500,
+          lsp_fallback = false,
+          timeout_ms = 1000,
         })
       end,
       { desc = "Format file or range (in visual mode)" }

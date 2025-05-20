@@ -1,5 +1,8 @@
 return {
   "fabridamicelli/cronex.nvim",
-  event = "VeryLazy",
+  cmd = {
+    "CronExplainedEnable",
+    "CronExplainedDisable",
+  },
   opts = {},
 }

@@ -3,6 +3,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
   },
+  lazy = true,
   build = "bundled_build.lua",
   config = function()
     local mcphub = require("mcphub")
