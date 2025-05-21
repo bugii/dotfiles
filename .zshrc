@@ -3,10 +3,6 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# [ -f "/home/dario/.ghcup/env" ] && source "/home/dario/.ghcup/env" # ghcup-env
-
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -82,11 +78,8 @@ export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="$HOME/.local/bin/:$HOME/nvim/bin:$PATH"
 export EDITOR='nvim'
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
 
 # Shell integrations
 source <(fzf --zsh)
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
-. "$HOME/.local/bin/env"

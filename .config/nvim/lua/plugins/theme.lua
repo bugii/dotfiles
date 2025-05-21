@@ -3,6 +3,7 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {
       transparent = true,
     },
@@ -12,6 +13,7 @@ return {
     name = "catppuccin",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {
       flavour = "mocha",
       transparent_background = true,
@@ -21,6 +23,7 @@ return {
     "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {
       transparent = true,
     },
@@ -29,6 +32,7 @@ return {
     "rose-pine/neovim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     name = "rose-pine",
     opts = {
       styles = {
@@ -42,6 +46,7 @@ return {
     "EdenEast/nightfox.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {
       options = {
         -- transparent = true,
@@ -57,21 +62,22 @@ return {
         },
       },
     },
-    -- config = function(_, opts)
-    --   require("nightfox").setup(opts)
-    --   vim.api.nvim_create_autocmd("OptionSet", {
-    --     pattern = "background",
-    --     callback = function()
-    --       if vim.o.background == "light" then vim.cmd.colorscheme("dayfox") end
-    --       if vim.o.background == "dark" then vim.cmd.colorscheme("carbonfox") end
-    --     end,
-    --   })
-    -- end,
+    config = function(_, opts)
+      require("nightfox").setup(opts)
+      vim.api.nvim_create_autocmd("OptionSet", {
+        pattern = "background",
+        callback = function()
+          if vim.o.background == "light" then vim.cmd.colorscheme("dayfox") end
+          if vim.o.background == "dark" then vim.cmd.colorscheme("carbonfox") end
+        end,
+      })
+    end,
   },
   {
     "sample-usr/rakis.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {
       transparent = true,
       italic_comments = true,
@@ -82,6 +88,7 @@ return {
     name = "everblush",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {
       transparent_background = true,
     },
@@ -90,6 +97,7 @@ return {
     "uloco/bluloco.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     dependencies = { "rktjmp/lush.nvim" },
     opts = {
       transparent = true,
@@ -100,6 +108,7 @@ return {
     "dasupradyumna/midnight.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {},
   },
   {
@@ -145,12 +154,14 @@ return {
     "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {},
   },
   {
     "S-Spektrum-M/odyssey.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     opts = {},
   },
   {
@@ -170,9 +181,9 @@ return {
         },
       },
     },
-    -- config = function(_, opts)
-    --   require("kanso").setup(opts)
-    --   vim.cmd("colorscheme kanso")
-    -- end,
+    config = function(_, opts)
+      require("kanso").setup(opts)
+      vim.cmd("colorscheme kanso")
+    end,
   },
 }
