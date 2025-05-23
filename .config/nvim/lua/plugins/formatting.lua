@@ -18,19 +18,9 @@ return {
         markdown = { "prettierd" },
         graphql = { "prettierd" },
         cs = { "csharpier" },
-        sql = { "sqlfluff" },
         rust = { "rustfmt" },
       },
       formatters = {
-        sqlfluff = {
-          command = "sqlfluff",
-          args = { "fix", "-" },
-          stdin = true,
-          cwd = require("conform.util").root_file({
-            ".sqlfluff",
-          }),
-          require_cwd = false,
-        },
         csharpier = {
           command = "dotnet",
           args = { "csharpier", "format", "--write-stdout" },

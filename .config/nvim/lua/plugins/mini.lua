@@ -5,7 +5,7 @@ return {
   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
     local MiniIcons = require("mini.icons")
-    local MiniBasics = require("mini.basics")
+    require("mini.basics").setup()
     require("mini.bracketed").setup()
     require("mini.surround").setup()
     require("mini.indentscope").setup()
@@ -34,20 +34,14 @@ return {
       callback = function(event) Snacks.rename.on_rename_file(event.data.from, event.data.to) end,
     })
 
-    MiniBasics.setup({
-      autocommands = {
-        -- highlight on yank is done by glimmer plugin (and I dont really care about the terminal one that's part of the same config option 'basic')
-        basic = false,
-      },
-    })
-
     MiniAi.setup({
       search_method = "cover_or_next",
       -- with a smaller value (default is 50...) many times it wont work (even if "cover" would be enough) properly
-      n_lines = 500,
+      -- n_lines = 500,
       custom_textobjects = {
         -- Function definition (needs treesitter queries with these captures)
         m = MiniAi.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+        c = MiniAi.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
       },
     })
 
