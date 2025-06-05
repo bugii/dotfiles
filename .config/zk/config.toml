@@ -77,6 +77,14 @@ paths = [
 filename = "{{format-date now}}"
 template = "journal.md"
 
+[group.todo]
+paths = [
+    "todo",
+]
+
+[group.todo.note]
+filename = "{{format-date now}}"
+template = "todo.md"
 
 # MARKDOWN SETTINGS
 [format.markdown]
@@ -169,6 +177,7 @@ dead-link = "error"
 [alias]
 
 daily = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
+todo = 'zk new --no-input "$ZK_NOTEBOOK_DIR/todo"'
 
 # Edit the notes selected interactively among the notes created the last two weeks.
 recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"

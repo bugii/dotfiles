@@ -2,10 +2,16 @@ local wezterm = require("wezterm")
 local wswitch = require("workspace-picker")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
-local light_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-light.toml")
-light_theme.background = "#FFFFFF"
-local dark_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-mono.toml")
-dark_theme.background = "#000000"
+-- local light_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-light.toml")
+-- light_theme.background = "#FFFFFF"
+-- local dark_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-mono.toml")
+-- dark_theme.background = "#000000"
+-- local light_theme = "Tokyo Night Day"
+-- local dark_theme = "Tokyo Night"
+-- local light_theme = "Tokyo Night Day"
+-- local dark_theme = "Tokyo Night"
+local light_theme = require("colors/kanagawa-lotus")
+local dark_theme = require("colors/kanagawa-wave")
 
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
@@ -15,6 +21,14 @@ local function get_appearance()
 end
 
 local function colors_for_appearance(appearance)
+  if appearance:find("Dark") then
+    return dark_theme
+  else
+    return light_theme
+  end
+end
+
+local function theme_for_appearance(appearance)
   if appearance:find("Dark") then
     return dark_theme
   else
@@ -68,6 +82,7 @@ local config = {
   }),
   font_size = 16,
   colors = colors_for_appearance(get_appearance()),
+  -- color_scheme = theme_for_appearance(get_appearance()),
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
     -- splitting
