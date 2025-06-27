@@ -31,7 +31,6 @@ return {
         "emmet_ls",
         "html",
         "jsonls",
-        "vuels",
         "tailwindcss",
         "rust_analyzer",
         -- "nil_ls",

@@ -11,7 +11,7 @@ local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabl
 -- local light_theme = "Tokyo Night Day"
 -- local dark_theme = "Tokyo Night"
 local light_theme = require("colors/kanagawa-lotus")
-local dark_theme = require("colors/kanagawa-wave")
+local dark_theme = require("colors/kanagawa-dragon")
 
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
@@ -188,7 +188,7 @@ wswitch.setup({
     },
   },
   {
-    path = "~/Projects/vellu",
+    path = "~/Projects/vellu.git",
     type = "worktreeroot",
     tabs = {
       {

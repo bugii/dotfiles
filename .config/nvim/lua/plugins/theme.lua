@@ -16,7 +16,7 @@ return {
     opts = {
       compile = true,
       background = {
-        dark = "wave",
+        dark = "dragon",
         light = "lotus",
       },
       colors = {

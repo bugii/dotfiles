@@ -117,54 +117,54 @@ return {
     }
 
     --FIXME: something is not quite working
-    dap.adapters.debugpy = function(cb, config)
-      if config.request == "attach" then
-        ---@diagnostic disable-next-line: undefined-field
-        local port = (config.connect or config).port
-        ---@diagnostic disable-next-line: undefined-field
-        local host = (config.connect or config).host or "127.0.0.1"
-        cb({
-          type = "server",
-          port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-          host = host,
-          options = {
-            source_filetype = "python",
-          },
-        })
-      else
-        cb({
-          type = "executable",
-          command = os.getenv("VIRTUAL_ENV") .. "/bin/python",
-          args = { "-m", "debugpy.adapter" },
-          options = {
-            source_filetype = "python",
-          },
-        })
-      end
-    end
+    -- dap.adapters.debugpy = function(cb, config)
+    --   if config.request == "attach" then
+    --     ---@diagnostic disable-next-line: undefined-field
+    --     local port = (config.connect or config).port
+    --     ---@diagnostic disable-next-line: undefined-field
+    --     local host = (config.connect or config).host or "127.0.0.1"
+    --     cb({
+    --       type = "server",
+    --       port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+    --       host = host,
+    --       options = {
+    --         source_filetype = "python",
+    --       },
+    --     })
+    --   else
+    --     cb({
+    --       type = "executable",
+    --       command = os.getenv("VIRTUAL_ENV") .. "/bin/python",
+    --       args = { "-m", "debugpy.adapter" },
+    --       options = {
+    --         source_filetype = "python",
+    --       },
+    --     })
+    --   end
+    -- end
 
-    dap.configurations.debugpy = {
-      {
-        -- The first three options are required by nvim-dap
-        type = "debugpy", -- the type here established the link to the adapter definition: `dap.adapters.python`
-        request = "launch",
-        name = "Launch file",
-
-        -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
-        program = "${file}", -- This configuration will launch the current file if used.
-        pythonPath = function()
-          -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-          -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-          -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-          if vim.fn.executable(os.getenv("VIRTUAL_ENV") .. "/bin/python") == 1 then
-            return os.getenv("VIRTUAL_ENV") .. "/bin/python"
-          else
-            return "/usr/bin/python"
-          end
-        end,
-      },
-    }
+    -- dap.configurations.debugpy = {
+    --   {
+    --     -- The first three options are required by nvim-dap
+    --     type = "debugpy", -- the type here established the link to the adapter definition: `dap.adapters.python`
+    --     request = "launch",
+    --     name = "Launch file",
+    --
+    --     -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+    --
+    --     program = "${file}", -- This configuration will launch the current file if used.
+    --     pythonPath = function()
+    --       -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+    --       -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+    --       -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+    --       if vim.fn.executable(os.getenv("VIRTUAL_ENV") .. "/bin/python") == 1 then
+    --         return os.getenv("VIRTUAL_ENV") .. "/bin/python"
+    --       else
+    --         return "/usr/bin/python"
+    --       end
+    --     end,
+    --   },
+    -- }
 
     vim.keymap.set("n", "<F1>", function() dap.continue() end, { desc = "Continue" })
     vim.keymap.set("n", "<F2>", function() dap.step_over() end, { desc = "Step Over" })
