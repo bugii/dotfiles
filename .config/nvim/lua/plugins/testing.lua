@@ -1,6 +1,8 @@
 return {
   "nvim-neotest/neotest",
   event = { "BufReadPre", "BufNewFile" },
+  -- TODO: remove once merged
+  branch = "fix/subprocess/load-adapters",
   dependencies = {
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
@@ -19,7 +21,7 @@ return {
           filter_dir = function(name, rel_path, root) return name ~= "node_modules" end,
         }),
         require("neotest-dotnet")({
-          discovery_root = "project",
+          discovery_root = "solution",
         }),
       },
     })

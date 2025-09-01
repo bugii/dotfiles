@@ -15,6 +15,9 @@ return {
       hover = {
         silent = true,
       },
+      progress = {
+        enabled = false,
+      },
     },
     presets = {
       bottom_search = true, -- use a classic bottom cmdline for search

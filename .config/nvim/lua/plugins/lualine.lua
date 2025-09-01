@@ -51,9 +51,9 @@ return {
         "fileformat",
         "filetype",
       },
-      lualine_y = {
-        "grapple",
-      },
+      -- lualine_y = {
+      --   "grapple",
+      -- },
       lualine_z = { "location" },
     },
     inactive_sections = {

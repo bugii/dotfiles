@@ -29,10 +29,10 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("kanagawa").setup(opts)
-      vim.cmd.colorscheme("kanagawa")
-    end,
+    -- config = function(_, opts)
+    --   require("kanagawa").setup(opts)
+    --   vim.cmd.colorscheme("kanagawa")
+    -- end,
   },
   {
     "rose-pine/neovim",
@@ -45,6 +45,10 @@ return {
         italic = true,
       },
     },
+    config = function(_, opts)
+      require("rose-pine").setup(opts)
+      vim.cmd.colorscheme("rose-pine")
+    end,
   },
   {
     "EdenEast/nightfox.nvim",
@@ -80,6 +84,10 @@ return {
       italics = true,
       flat_ui = false,
     },
+    -- config = function(_, opts)
+    --   require("jellybeans").setup(opts)
+    --   vim.cmd.colorscheme("jellybeans")
+    -- end,
   },
   {
     "webhooked/kanso.nvim",

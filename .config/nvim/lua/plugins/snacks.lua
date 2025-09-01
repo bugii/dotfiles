@@ -46,15 +46,15 @@ return {
       end,
       desc = "Find Grep",
     },
-    {
-      "<leader>ff",
-      function()
-        Snacks.picker.files({
-          hidden = true,
-        })
-      end,
-      desc = "Find Files",
-    },
+    -- {
+    --   "<leader>ff",
+    --   function()
+    --     Snacks.picker.files({
+    --       hidden = true,
+    --     })
+    --   end,
+    --   desc = "Find Files",
+    -- },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },

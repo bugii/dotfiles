@@ -1,22 +1,25 @@
 return {
-  "rcarriga/nvim-dap-ui",
-  enabled = false,
+  "miroshQa/debugmaster.nvim",
+  -- osv is needed if you want to debug neovim lua code. Also can be used
+  -- as a way to quickly test-drive the plugin without configuring debug adapters
+  dependencies = { "mfussenegger/nvim-dap", "jbyuki/one-small-step-for-vimkind" },
   event = "VeryLazy",
-  dependencies = {
-    "mfussenegger/nvim-dap",
-    "theHamsta/nvim-dap-virtual-text",
-    "nvim-neotest/nvim-nio",
-  },
+  enable = true,
   config = function()
-    local dap, dapui, virtual_text = require("dap"), require("dapui"), require("nvim-dap-virtual-text")
+    local dm = require("debugmaster")
+    -- make sure you don't have any other keymaps that starts with "<leader>d" to avoid delay
+    -- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
+    vim.keymap.set({ "n", "v" }, "<leader>d", dm.mode.toggle, { nowait = true })
+    -- If you want to disable debug mode in addition to leader+d using the Escape key:
+    -- vim.keymap.set("n", "<Esc>", dm.mode.disable)
+    -- This might be unwanted if you already use Esc for ":noh"
+    vim.keymap.set("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-    dapui.setup()
-    virtual_text.setup()
+    dm.plugins.osv_integration.enabled = true -- needed if you want to debug neovim lua code
+    local dap = require("dap")
 
-    dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-    dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-    dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
+    -- Configure your debug adapters here
+    -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
     dap.adapters["pwa-node"] = {
       type = "server",
       host = "localhost",
@@ -59,16 +62,16 @@ return {
     dap.configurations.cs = {
       {
         type = "netcoredbg",
+        name = "Run",
+        request = "launch",
+        program = function() return require("../nvim-dap-dotnet").build_dll_path() end,
+      },
+      {
+        type = "netcoredbg",
         name = "Attach",
         request = "attach",
         processId = require("dap.utils").pick_process,
       },
     }
-
-    vim.keymap.set("n", "<F1>", function() dap.continue() end, { desc = "Continue" })
-    vim.keymap.set("n", "<F2>", function() dap.step_over() end, { desc = "Step Over" })
-    vim.keymap.set("n", "<F3>", function() dap.step_into() end, { desc = "Step Into" })
-    vim.keymap.set("n", "<F4>", function() dap.step_out() end, { desc = "Step Out" })
-    vim.keymap.set("n", "<leader>b", function() dap.toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
   end,
 }
