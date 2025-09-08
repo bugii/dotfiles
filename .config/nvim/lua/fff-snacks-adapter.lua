@@ -1,3 +1,6 @@
+-- NOTE: Taken from:
+-- In case it should be shipped as an option for fff.nvim, use that built-in ofc
+-- https://github.com/madmaxieee/nvim-config/blob/c773485d76cf1fff4be3eca888a6ed4525cc9065/lua/plugins/fuzzy-finder/snacks-picker/fff.lua
 local M = {}
 
 local staged_status = {

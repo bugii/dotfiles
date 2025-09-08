@@ -1,4 +1,3 @@
-
 local M = {}
 
 -- Find the root directory of a .NET project by searching for .csproj files
@@ -8,14 +7,10 @@ function M.find_project_root_by_csproj(start_path)
 
   while true do
     local csproj_files = vim.fn.glob(path:absolute() .. "/*.csproj", false, true)
-    if #csproj_files > 0 then
-      return path:absolute()
-    end
+    if #csproj_files > 0 then return path:absolute() end
 
     local parent = path:parent()
-    if parent:absolute() == path:absolute() then
-      return nil
-    end
+    if parent:absolute() == path:absolute() then return nil end
 
     path = parent
   end
@@ -25,9 +20,7 @@ end
 function M.get_highest_net_folder(bin_debug_path)
   local dirs = vim.fn.glob(bin_debug_path .. "/net*", false, true) -- Get all folders starting with 'net' in bin_debug_path
 
-  if dirs == 0 then
-    error("No netX.Y folders found in " .. bin_debug_path)
-  end
+  if dirs == 0 then error("No netX.Y folders found in " .. bin_debug_path) end
 
   table.sort(dirs, function(a, b) -- Sort the directories based on their version numbers
     local ver_a = tonumber(a:match("net(%d+)%.%d+"))
@@ -44,14 +37,10 @@ function M.build_dll_path()
   local current_dir = vim.fn.fnamemodify(current_file, ":p:h")
 
   local project_root = M.find_project_root_by_csproj(current_dir)
-  if not project_root then
-    error("Could not find project root (no .csproj found)")
-  end
+  if not project_root then error("Could not find project root (no .csproj found)") end
 
   local csproj_files = vim.fn.glob(project_root .. "/*.csproj", false, true)
-  if #csproj_files == 0 then
-    error("No .csproj file found in project root")
-  end
+  if #csproj_files == 0 then error("No .csproj file found in project root") end
 
   local project_name = vim.fn.fnamemodify(csproj_files[1], ":t:r")
   local bin_debug_path = project_root .. "/bin/Debug"

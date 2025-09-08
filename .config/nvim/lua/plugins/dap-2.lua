@@ -53,21 +53,24 @@ return {
       }
     end
 
-    dap.adapters.netcoredbg = {
+    local netcoredbg_adapter = {
       type = "executable",
-      command = "netcoredbg",
+      -- NOTE: on apple silicon you have to build it yourself, thus the path to the binary. Check their github for build instructions
+      command = "/usr/local/netcoredbg",
       args = { "--interpreter=vscode" },
     }
+    dap.adapters.netcoredbg = netcoredbg_adapter -- needed for normal debugging
+    dap.adapters.coreclr = netcoredbg_adapter -- needed for unit test debugging
 
     dap.configurations.cs = {
       {
-        type = "netcoredbg",
+        type = "coreclr",
         name = "Run",
         request = "launch",
         program = function() return require("../nvim-dap-dotnet").build_dll_path() end,
       },
       {
-        type = "netcoredbg",
+        type = "coreclr",
         name = "Attach",
         request = "attach",
         processId = require("dap.utils").pick_process,

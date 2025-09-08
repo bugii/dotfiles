@@ -44,7 +44,7 @@ return {
       },
 
       format_after_save = {
-        lsp_fallback = false,
+        lsp_fallback = true,
       },
     })
 
@@ -53,7 +53,7 @@ return {
       "<leader>f",
       function()
         conform.format({
-          lsp_fallback = false,
+          lsp_fallback = true,
           timeout_ms = 1000,
         })
       end,
