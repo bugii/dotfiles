@@ -123,6 +123,8 @@ alt-p = 'workspace p'
 alt-m = 'workspace m'
 # n: Notes
 alt-n = 'workspace n'
+# y: Youtube
+alt-y = 'workspace y'
 
 # alt-1 = 'workspace 1'
 # alt-2 = 'workspace 2'
@@ -140,6 +142,7 @@ alt-shift-t = 'move-node-to-workspace t'
 alt-shift-p = 'move-node-to-workspace p'
 alt-shift-m = 'move-node-to-workspace m'
 alt-shift-n = 'move-node-to-workspace n'
+alt-shift-y = 'move-node-to-workspace y'
 
 # alt-shift-1 = 'move-node-to-workspace 1'
 # alt-shift-2 = 'move-node-to-workspace 2'
@@ -240,3 +243,9 @@ run = ['move-node-to-workspace p']
 [[on-window-detected]]
 if.app-id = 'com.apple.Notes'
 run = ['move-node-to-workspace n']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = ['move-node-to-workspace y']
+
+

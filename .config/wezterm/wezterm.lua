@@ -73,6 +73,8 @@ local function split_nav(resize_or_move, key)
 end
 
 local config = {
+  send_composed_key_when_left_alt_is_pressed = true,
+  send_composed_key_when_right_alt_is_pressed = true,
   max_fps = 120,
   font = wezterm.font_with_fallback({
     "JetBrainsMono Nerd Font",
