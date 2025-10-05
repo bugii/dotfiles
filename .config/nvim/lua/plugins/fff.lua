@@ -1,6 +1,5 @@
 return {
   "dmtrKovalenko/fff.nvim",
-  build = "cargo build --release",
   -- No need to lazy-load with lazy.nvim.
   -- This plugin initializes itself lazily.
   opts = {},

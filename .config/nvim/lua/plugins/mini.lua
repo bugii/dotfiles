@@ -29,11 +29,6 @@ return {
       },
     })
 
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "MiniFilesActionRename",
-      callback = function(event) Snacks.rename.on_rename_file(event.data.from, event.data.to) end,
-    })
-
     MiniAi.setup({
       search_method = "cover_or_next",
       -- with a smaller value (default is 50...) many times it wont work (even if "cover" would be enough) properly
