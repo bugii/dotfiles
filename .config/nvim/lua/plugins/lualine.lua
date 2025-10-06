@@ -1,6 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   -- mini.icons for the icons
+  enabled = false,
   dependencies = { "echasnovski/mini.nvim", "bwpge/lualine-pretty-path" },
   opts = {
     options = {

@@ -63,8 +63,7 @@ return {
     },
 
     -- experimental signature help support
-    -- I don't need that since it is already supported by noice
-    signature = { enabled = false },
+    signature = { enabled = true },
 
     completion = {
       keyword = { range = "full" },

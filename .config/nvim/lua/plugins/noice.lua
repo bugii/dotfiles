@@ -1,6 +1,7 @@
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
+  enabled = true,
   dependencies = {
     "MunifTanjim/nui.nvim",
     --   `nvim-notify` is only needed, if you want to use the notification view.
@@ -10,18 +11,23 @@ return {
   opts = {
     lsp = {
       signature = {
-        enabled = true,
+        enabled = false,
       },
       hover = {
         silent = true,
       },
       progress = {
-        enabled = false,
+        enabled = true,
       },
+    },
+    cmdline = {
+      enabled = false,
+    },
+    messages = {
+      enabled = false,
     },
     presets = {
       bottom_search = true, -- use a classic bottom cmdline for search
-      command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
       lsp_doc_border = true, -- add a border to hover docs and signature help
     },
