@@ -21,7 +21,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit ice lucid wait'0'
-zinit light joshskidmore/zsh-fzf-history-search
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim', 'zk')
@@ -87,3 +86,4 @@ eval "$(zoxide init --cmd cd zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(atuin init zsh --disable-up-arrow)"
