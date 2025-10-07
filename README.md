@@ -23,9 +23,8 @@ Keep in mind that the structure of this repository has to match the structure th
 
 For all the tools to work properly you may need to install the following:
 
-1. Terminal: Kitty
+1. Terminal: wezterm
 2. Shell: zsh
-3. Tmux, and tpm (tmux plugin manager).
-4. Neovim
-5. Utilities: Fzf, zoxide, git, ripgrep (for telescope)
-6. Package managers: npm (i would recommend installing nvm), dotnet (via dotnet-sdk)
+3. Neovim
+4. Utilities: Fzf, zoxide, git, ripgrep (for file picker)
+5. Package managers: npm (i would recommend installing nvm), dotnet (via dotnet-sdk)

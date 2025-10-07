@@ -17,7 +17,8 @@ return {
         silent = true,
       },
       progress = {
-        enabled = true,
+        -- NOTE: does not work with roslyn for some reason
+        enabled = false,
       },
     },
     cmdline = {
