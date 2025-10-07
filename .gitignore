@@ -2,4 +2,4 @@
 .Rproj.user
 raycast
 .local/*
-github-copilot/*
+.config/github-copilot/*
