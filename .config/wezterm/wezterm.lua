@@ -2,19 +2,6 @@ local wezterm = require("wezterm")
 local wswitch = require("workspace-picker")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
--- local light_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans-light.toml")
--- light_theme.background = "#FFFFFF"
--- local dark_theme = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/colors/jellybeans.toml")
--- dark_theme.background = "#000000"
--- local light_theme = "Tokyo Night Day"
--- local dark_theme = "Tokyo Night"
--- local light_theme = "Tokyo Night Day"
--- local dark_theme = "Tokyo Night"
--- local light_theme = require("colors/kanagawa-lotus")
--- local dark_theme = require("colors/kanagawa-dragon")
-local dark_theme = "rose-pine"
-local light_theme = "rose-pine-dawn"
-
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
 local function get_appearance()
@@ -22,21 +9,11 @@ local function get_appearance()
   return "Dark"
 end
 
--- local function colors_for_appearance(appearance)
---   if appearance:find("Dark") then
---     return dark_theme
---   else
---     return light_theme
---   end
--- end
+local theme = get_appearance() == "Dark" and "rose-pine" or "rose-pine-dawn"
+local background_color = get_appearance() == "Dark" and "#000000" or "#FFFFFF"
 
-local function theme_for_appearance(appearance)
-  if appearance:find("Dark") then
-    return dark_theme
-  else
-    return light_theme
-  end
-end
+local colors = wezterm.color.get_builtin_schemes()[theme]
+colors.background = background_color
 
 -- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
 local function is_vim(pane)
@@ -85,8 +62,7 @@ local config = {
     -- "Agave Nerd Font",
   }),
   font_size = 16,
-  -- colors = colors_for_appearance(get_appearance()),
-  color_scheme = theme_for_appearance(get_appearance()),
+  colors = colors,
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
     -- splitting
@@ -219,37 +195,7 @@ wswitch.apply_to_config(config)
 
 tabline.setup({
   options = {
-    theme = theme_for_appearance(get_appearance()),
-    -- theme = config.colors,
-    -- theme_overrides = {
-    --   normal_mode = {
-    --     b = { bg = config.colors.background },
-    --     c = { bg = config.colors.background },
-    --     x = { bg = config.colors.background },
-    --     y = { bg = config.colors.background },
-    --   },
-    --   copy_mode = {
-    --     b = { bg = config.colors.background },
-    --     c = { bg = config.colors.background },
-    --     x = { bg = config.colors.background },
-    --     y = { bg = config.colors.background },
-    --   },
-    --   search_mode = {
-    --     b = { bg = config.colors.background },
-    --     c = { bg = config.colors.background },
-    --     x = { bg = config.colors.background },
-    --     y = { bg = config.colors.background },
-    --   },
-    --   window_mode = {
-    --     b = { bg = config.colors.background },
-    --     c = { bg = config.colors.background },
-    --     x = { bg = config.colors.background },
-    --     y = { bg = config.colors.background },
-    --   },
-    --   tab = {
-    --     inactive = { bg = config.colors.background },
-    --   },
-    -- },
+    theme = config.colors,
     section_separators = {
       left = wezterm.nerdfonts.ple_right_half_circle_thick,
       right = wezterm.nerdfonts.ple_left_half_circle_thick,

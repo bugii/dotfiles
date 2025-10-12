@@ -7,6 +7,10 @@ return {
       style = "night",
       light_style = "day",
     },
+    -- config = function(_, opts)
+    --   require("tokyonight").setup(opts)
+    --   vim.cmd.colorscheme("tokyonight")
+    -- end,
   },
   {
     -- NOTE: since i have compile=true, run KanagawaCompile after a change to the config below!
@@ -43,6 +47,28 @@ return {
       styles = {
         bold = true,
         italic = true,
+        -- transparency = true,
+      },
+      -- highlight_groups = {
+      --   Normal = { bg = "black" },
+      --   StatusLine = { bg = "black" },
+      -- },
+      palette = {
+        main = {
+          base = "#000000",
+          overlay = "#000000",
+          surface = "#000000",
+        },
+        moon = {
+          base = "#000000",
+          overlay = "#000000",
+          surface = "#000000",
+        },
+        dawn = {
+          base = "#FFFFFF",
+          overlay = "#FFFFFF",
+          surface = "#FFFFFF",
+        },
       },
     },
     config = function(_, opts)
