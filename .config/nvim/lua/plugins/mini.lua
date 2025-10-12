@@ -2,7 +2,6 @@ return {
   "echasnovski/mini.nvim",
   version = "*",
   lazy = false,
-  dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
     local MiniIcons = require("mini.icons")
     require("mini.basics").setup()
@@ -12,7 +11,6 @@ return {
     require("mini.diff").setup()
     require("mini.sessions").setup()
     local MiniHipatterns = require("mini.hipatterns")
-    local MiniAi = require("mini.ai")
     local MiniFiles = require("mini.files")
     require("mini.extra").setup()
     local MiniBufremove = require("mini.bufremove")
@@ -27,17 +25,6 @@ return {
     MiniFiles.setup({
       mappings = {
         close = "<ESC>",
-      },
-    })
-
-    MiniAi.setup({
-      search_method = "cover_or_next",
-      -- with a smaller value (default is 50...) many times it wont work (even if "cover" would be enough) properly
-      -- n_lines = 500,
-      custom_textobjects = {
-        -- Function definition (needs treesitter queries with these captures)
-        m = MiniAi.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
-        c = MiniAi.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
       },
     })
 
