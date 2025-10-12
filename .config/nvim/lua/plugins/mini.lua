@@ -10,6 +10,7 @@ return {
     require("mini.indentscope").setup()
     require("mini.diff").setup()
     require("mini.sessions").setup()
+    require("mini.git").setup()
     local MiniHipatterns = require("mini.hipatterns")
     local MiniFiles = require("mini.files")
     require("mini.extra").setup()

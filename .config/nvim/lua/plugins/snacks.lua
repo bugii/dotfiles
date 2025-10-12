@@ -5,11 +5,9 @@ return {
   opts = {
     scratch = {},
     image = {},
-    git = {},
     gitbrowse = {},
     picker = {},
     statuscolumn = {},
-    rename = {},
     input = {},
     quickfile = {},
     dashboard = {
@@ -36,7 +34,7 @@ return {
   },
   keys = {
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    { "<leader>sf", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+    { "<leader>f.", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     {
       "<leader>fg",
       function()
@@ -46,15 +44,6 @@ return {
       end,
       desc = "Find Grep",
     },
-    -- {
-    --   "<leader>ff",
-    --   function()
-    --     Snacks.picker.files({
-    --       hidden = true,
-    --     })
-    --   end,
-    --   desc = "Find Files",
-    -- },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
