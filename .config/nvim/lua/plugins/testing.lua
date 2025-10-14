@@ -1,8 +1,6 @@
 return {
   "nvim-neotest/neotest",
   event = { "BufReadPre", "BufNewFile" },
-  -- TODO: remove once merged
-  branch = "fix/subprocess/load-adapters",
   dependencies = {
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
