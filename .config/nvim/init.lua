@@ -40,6 +40,13 @@ vim.o.virtualedit = "block" -- Allow going past end of line in blockwise mode
 
 vim.o.cursorlineopt = "screenline,number" -- Show cursor line per screen line
 
+-- Folding ====================================================================
+-- Folds (see `:h fold-commands`, `:h zM`, `:h zR`, `:h zA`, `:h zj`)
+vim.o.foldlevel = 10 -- Fold nothing by default; set to 0 or 1 to fold
+vim.o.foldmethod = "indent" -- Fold based on indent level
+vim.o.foldnestmax = 10 -- Limit number of fold levels
+vim.o.foldtext = "" -- Show text under fold with its highlighting
+
 require("keymaps")
 require("lazy_config")
 require("codecompanion-spinner")
