@@ -49,10 +49,6 @@ return {
         italic = true,
         -- transparency = true,
       },
-      -- highlight_groups = {
-      --   Normal = { bg = "black" },
-      --   StatusLine = { bg = "black" },
-      -- },
       palette = {
         main = {
           base = "#000000",
@@ -69,6 +65,12 @@ return {
           overlay = "#FFFFFF",
           surface = "#FFFFFF",
         },
+      },
+      highlight_groups = {
+        NormalFloat = { bg = "overlay" },
+        Pmenu = { bg = "overlay" },
+        SnacksNormal = { bg = "base" },
+        SnacksPicker = { bg = "base" },
       },
     },
     config = function(_, opts)

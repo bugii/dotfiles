@@ -2,7 +2,6 @@ return {
   "olimorris/codecompanion.nvim",
   dependencies = {
     "zbirenbaum/copilot.lua",
-    "ravitemer/mcphub.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
