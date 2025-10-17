@@ -56,5 +56,9 @@ return {
     { "gt", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto [T]ype Definition" },
     { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "[F]ind [S]ymbols" },
     { "<leader>fH", function() Snacks.picker.highlights() end, desc = "[F]ind [H]ighlights" },
+    { "<leader>fp", function() Snacks.picker.lazy() end, desc = "[F]ind [P]lugin" },
+
+    -- git browse, like gx (open url under cursor, but prefixed with leader)
+    { "<leader>gx", function() Snacks.gitbrowse.open() end, desc = "Open gitbrowse for current file" },
   },
 }

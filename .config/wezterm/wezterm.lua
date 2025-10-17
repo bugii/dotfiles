@@ -196,18 +196,9 @@ wswitch.apply_to_config(config)
 tabline.setup({
   options = {
     theme = config.colors,
-    section_separators = {
-      left = wezterm.nerdfonts.ple_right_half_circle_thick,
-      right = wezterm.nerdfonts.ple_left_half_circle_thick,
-    },
-    component_separators = {
-      left = "",
-      right = "",
-    },
-    tab_separators = {
-      left = wezterm.nerdfonts.ple_right_half_circle_thick,
-      right = wezterm.nerdfonts.ple_left_half_circle_thick,
-    },
+    section_separators = "",
+    component_separators = "",
+    tab_separators = "",
   },
   sections = {
     tabline_a = { "mode" },
