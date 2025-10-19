@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local wswitch = require("workspace-picker")
+local workspace_switcher = wezterm.plugin.require("https://github.com/bugii/workspace-picker-plugin")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -91,12 +91,12 @@ local config = {
     {
       mods = "LEADER",
       key = "n",
-      action = wswitch.switch_to_workspace("~/Notes"),
+      action = workspace_switcher.switch_to_workspace("~/Notes"),
     },
     {
       mods = "LEADER",
       key = "d",
-      action = wswitch.switch_to_workspace("~/dotfiles"),
+      action = workspace_switcher.switch_to_workspace("~/dotfiles"),
     },
     -- activate copy mode or vim mode
     {
@@ -118,7 +118,7 @@ local config = {
   },
 }
 
-wswitch.setup({
+workspace_switcher.setup({
   {
     path = "~/dotfiles",
     tabs = {
@@ -206,8 +206,11 @@ wswitch.setup({
       },
     },
   },
+  {
+    path = "~/Projects/workspace-picker-plugin/",
+  },
 })
-wswitch.apply_to_config(config)
+workspace_switcher.apply_to_config(config)
 
 tabline.setup({
   options = {
