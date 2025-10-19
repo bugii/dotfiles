@@ -11,9 +11,13 @@ end
 
 local theme = get_appearance() == "Dark" and "rose-pine" or "rose-pine-dawn"
 local background_color = get_appearance() == "Dark" and "#000000" or "#FFFFFF"
+local foreground_color = get_appearance() == "Dark" and "#F8F8F2" or "#1C1C1C"
+local surface_color = get_appearance() == "Dark" and "#1E1E1E" or "#F4F4F4"
 
 local colors = wezterm.color.get_builtin_schemes()[theme]
 colors.background = background_color
+colors.foreground = foreground_color
+colors.surface = surface_color
 
 -- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
 local function is_vim(pane)
@@ -189,6 +193,29 @@ tabline.setup({
     section_separators = "",
     component_separators = "",
     tab_separators = "",
+    theme_overrides = {
+      normal_mode = {
+        a = { fg = config.colors.foreground, bg = config.colors.background },
+        b = { fg = config.colors.foreground, bg = config.colors.background },
+      },
+      copy_mode = {
+        a = { fg = config.colors.foreground, bg = config.colors.background },
+        b = { fg = config.colors.foreground, bg = config.colors.background },
+      },
+      search_mode = {
+        a = { fg = config.colors.foreground, bg = config.colors.background },
+        b = { fg = config.colors.foreground, bg = config.colors.background },
+      },
+      window_mode = {
+        a = { fg = config.colors.foreground, bg = config.colors.background },
+        b = { fg = config.colors.foreground, bg = config.colors.background },
+      },
+      tab = {
+        active = { fg = config.colors.foreground, bg = config.colors.surface },
+        inactive = { fg = config.colors.foreground, bg = config.colors.background },
+        inactive_hover = { fg = config.colors.foreground, bg = config.colors.background },
+      },
+    },
   },
   sections = {
     tabline_a = { "mode" },
@@ -196,17 +223,21 @@ tabline.setup({
     tabline_c = { " " },
     tab_active = {
       "index",
-      { "parent", padding = 0 },
-      "/",
-      { "cwd", padding = { left = 0, right = 1 } },
+      { "process", padding = { left = 0, right = 1 } },
       { "zoomed", padding = 0 },
     },
-    tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
-    tabline_x = { "ram", "cpu" },
+    tab_inactive = {
+      "index",
+      { "process", padding = { left = 0, right = 1 } },
+      { "zoomed", padding = 0 },
+    },
+    tabline_x = {},
     tabline_y = {},
     tabline_z = { "domain" },
   },
 })
 tabline.apply_to_config(config)
+
+print(tabline.get_theme())
 
 return config
