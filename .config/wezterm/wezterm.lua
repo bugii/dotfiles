@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local workspace_switcher = wezterm.plugin.require("file:///Users/dario/Projects/workspace-picker-plugin/")
+local workspace_switcher = wezterm.plugin.require("https://github.com/bugii/workspace-picker-plugin/")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -62,7 +62,7 @@ local config = {
     "0xProto Nerd Font",
     "FiraCode Nerd Font Mono",
   }),
-  font_size = 14,
+  font_size = 16,
   colors = colors,
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
@@ -228,7 +228,5 @@ tabline.setup({
   },
 })
 tabline.apply_to_config(config)
-
-print(tabline.get_theme())
 
 return config

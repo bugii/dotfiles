@@ -3,6 +3,7 @@
   "theme": "system",
   "autoupdate": true,
   "tools": {
-    "bash": false
+    "bash": false,
+    "dotnet": true
   }
 }
