@@ -94,7 +94,7 @@ local config = {
       action = wezterm.action.SwitchToWorkspace({
         name = "~/Notes",
         spawn = {
-          cwd = wswitch.expandHomePath("~/Notes"),
+          cwd = wswitch.expand_home_path("~/Notes"),
         },
       }),
     },
@@ -104,7 +104,8 @@ local config = {
       action = wezterm.action.SwitchToWorkspace({
         name = "~/dotfiles",
         spawn = {
-          cwd = wswitch.expandHomePath("~/dotfiles"),
+          -- TODO: can we expose a method to switch to this workspace using my tool?
+          cwd = wswitch.expand_home_path("~/dotfiles"),
         },
       }),
     },
@@ -129,23 +130,14 @@ local config = {
 }
 
 wswitch.setup({
-  { path = "~/dotfiles" },
   {
-    path = "~/Notes",
-  },
-  {
-    path = "/Users/dabu/Projects/mingle",
+    path = "~/dotfiles",
     tabs = {
-      {
-        direction = "Right",
-        panes = {
-          { name = "bla", command = "echo 1" },
-          { name = "bla", command = "echo 2" },
-          { name = "bla", command = "echo 3" },
-        },
-      },
+      { name = "editor", panes = { { name = "vim", command = "vim" } } },
+      { name = "ai", panes = { { name = "opencode", command = "opencode" } } },
     },
   },
+  { path = "~/Notes" },
   {
     path = "~/Projects/aop.git",
     type = "worktreeroot",
@@ -168,7 +160,7 @@ wswitch.setup({
     },
   },
   {
-    path = "~/Projects/vellu.git",
+    path = "~/Projects/vellu",
     type = "worktreeroot",
     tabs = {
       {
@@ -184,6 +176,41 @@ wswitch.setup({
             panes = {
               { name = "terminal" },
               { name = "term2" },
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    path = "~/",
+    tabs = {
+      {
+        name = "tab1",
+        direction = "Right",
+        panes = {
+          { name = "pane1" },
+          { name = "pane2" },
+          {
+            direction = "Bottom",
+            panes = {
+              { name = "pane3" },
+              { name = "pane4" },
+            },
+          },
+        },
+      },
+      {
+        name = "tab1",
+        direction = "Right",
+        panes = {
+          { name = "pane1" },
+          {
+            direction = "Bottom",
+            panes = {
+              { name = "pane2" },
+              { name = "pane3" },
+              { name = "pane4" },
             },
           },
         },
