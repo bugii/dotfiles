@@ -47,6 +47,7 @@ vim.opt.foldmethod = "indent" -- Fold based on indent level
 vim.opt.foldnestmax = 10 -- Limit number of fold levels
 vim.opt.foldtext = "" -- Show text under fold with its highlighting
 
+require("theme")
 require("keymaps")
 require("lazy_config")
 require("codecompanion-spinner")

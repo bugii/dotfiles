@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local workspace_switcher = wezterm.plugin.require("https://github.com/bugii/workspace-picker-plugin")
+local workspace_switcher = wezterm.plugin.require("file:///Users/dario/Projects/workspace-picker-plugin/")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -172,42 +172,13 @@ workspace_switcher.setup({
     },
   },
   {
-    path = "~/",
-    tabs = {
-      {
-        name = "tab1",
-        direction = "Right",
-        panes = {
-          { name = "pane1" },
-          { name = "pane2" },
-          {
-            direction = "Bottom",
-            panes = {
-              { name = "pane3" },
-              { name = "pane4" },
-            },
-          },
-        },
-      },
-      {
-        name = "tab1",
-        direction = "Right",
-        panes = {
-          { name = "pane1" },
-          {
-            direction = "Bottom",
-            panes = {
-              { name = "pane2" },
-              { name = "pane3" },
-              { name = "pane4" },
-            },
-          },
-        },
-      },
-    },
+    path = "~/Projects/workspace-picker-plugin/",
   },
   {
-    path = "~/Projects/workspace-picker-plugin/",
+    path = "~/Projects/doppio/",
+    tabs = {
+      { name = "editor", command = "vim" },
+    },
   },
 })
 workspace_switcher.apply_to_config(config)
