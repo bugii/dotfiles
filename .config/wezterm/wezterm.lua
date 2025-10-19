@@ -17,7 +17,6 @@ local surface_color = get_appearance() == "Dark" and "#1E1E1E" or "#F4F4F4"
 local colors = wezterm.color.get_builtin_schemes()[theme]
 colors.background = background_color
 colors.foreground = foreground_color
-colors.surface = surface_color
 
 -- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
 local function is_vim(pane)
@@ -58,14 +57,12 @@ local config = {
   send_composed_key_when_right_alt_is_pressed = true,
   max_fps = 120,
   font = wezterm.font_with_fallback({
+    "CommitMono Nerd Font",
     "JetBrainsMono Nerd Font",
-    -- "CommitMono Nerd Font Mono",
-    -- "FiraCode Nerd Font Mono",
-    -- "FiraMono Nerd Font Mono",
-    -- "Monaspace Neon",
-    -- "Agave Nerd Font",
+    "0xProto Nerd Font",
+    "FiraCode Nerd Font Mono",
   }),
-  font_size = 16,
+  font_size = 14,
   colors = colors,
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
@@ -178,12 +175,6 @@ workspace_switcher.setup({
   {
     path = "~/Projects/workspace-picker-plugin/",
   },
-  {
-    path = "~/Projects/doppio/",
-    tabs = {
-      { name = "editor", command = "vim" },
-    },
-  },
 })
 workspace_switcher.apply_to_config(config)
 
@@ -211,7 +202,7 @@ tabline.setup({
         b = { fg = config.colors.foreground, bg = config.colors.background },
       },
       tab = {
-        active = { fg = config.colors.foreground, bg = config.colors.surface },
+        active = { fg = config.colors.foreground, bg = surface_color },
         inactive = { fg = config.colors.foreground, bg = config.colors.background },
         inactive_hover = { fg = config.colors.foreground, bg = config.colors.background },
       },
