@@ -319,8 +319,16 @@ end
 --- @param window table: WezTerm window object
 --- @param pane table: WezTerm pane object
 local function create_or_switch_workspace(item, window, pane)
-  -- For new workspaces (not existing ones), create the window first
-  if item.type ~= "workspace" then
+  if item.type == "workspace" then
+    -- just switch in case already existing workspace
+    window:perform_action(
+      act.SwitchToWorkspace({
+        name = item.id,
+      }),
+      pane
+    )
+  else
+    -- For new workspaces (not existing ones), create the window first
     local cwd, err = expand_home_path(item.id)
     if err then
       wezterm.log_error("Failed to expand workspace path '" .. item.id .. "': " .. err)
@@ -354,16 +362,31 @@ local function create_or_switch_workspace(item, window, pane)
   end
 end
 
+--- Switch to or create a workspace by name or path
+--- @param path string: Workspace name or path to switch to
+--- @return table: WezTerm action callback
+function M.switch_to_workspace(path)
+  return wezterm.action_callback(function(window, pane)
+    print("here")
+    local expanded_path = expand_home_path(path)
+
+    -- Look for configured workspace
+    local all_choices = get_all_workspace_choices()
+    print(all_choices)
+    for _, choice in ipairs(all_choices) do
+      if choice.id == expanded_path then
+        create_or_switch_workspace(choice, window, pane)
+        return
+      end
+    end
+  end)
+end
+
 --- Create the workspace switcher action
 --- @return table: WezTerm action callback
-function M.switch_workspace()
+local function switch_workspace_action()
   return wezterm.action_callback(function(window, pane)
     local choices = get_all_workspace_choices()
-
-    if #choices == 0 then
-      wezterm.log_warn("No workspace choices available")
-      return
-    end
 
     -- Convert to input selector format
     local selector_choices = {}
@@ -471,7 +494,7 @@ function M.apply_to_config(config, key, mods)
   table.insert(config.keys, {
     key = key or "f",
     mods = mods or "LEADER",
-    action = M.switch_workspace(),
+    action = switch_workspace_action(),
   })
 end
 

@@ -91,23 +91,12 @@ local config = {
     {
       mods = "LEADER",
       key = "n",
-      action = wezterm.action.SwitchToWorkspace({
-        name = "~/Notes",
-        spawn = {
-          cwd = wswitch.expand_home_path("~/Notes"),
-        },
-      }),
+      action = wswitch.switch_to_workspace("~/Notes"),
     },
     {
       mods = "LEADER",
       key = "d",
-      action = wezterm.action.SwitchToWorkspace({
-        name = "~/dotfiles",
-        spawn = {
-          -- TODO: can we expose a method to switch to this workspace using my tool?
-          cwd = wswitch.expand_home_path("~/dotfiles"),
-        },
-      }),
+      action = wswitch.switch_to_workspace("~/dotfiles"),
     },
     -- activate copy mode or vim mode
     {
