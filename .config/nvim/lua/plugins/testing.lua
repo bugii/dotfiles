@@ -7,7 +7,7 @@ return {
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
     "marilari88/neotest-vitest",
-    "Issafalcon/neotest-dotnet",
+    "nsidorenco/neotest-vstest",
   },
   config = function()
     local neotest = require("neotest")
@@ -18,9 +18,7 @@ return {
           cwd = function(testFilePath) return vim.fs.root(testFilePath, "node_modules") end,
           filter_dir = function(name, rel_path, root) return name ~= "node_modules" end,
         }),
-        require("neotest-dotnet")({
-          discovery_root = "solution",
-        }),
+        require("neotest-vstest"),
       },
     })
 

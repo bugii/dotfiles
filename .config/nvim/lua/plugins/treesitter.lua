@@ -17,6 +17,7 @@ return {
       "json",
       "json5",
       "markdown",
+      "markdown_inline",
       "c_sharp",
       "python",
       "regex",

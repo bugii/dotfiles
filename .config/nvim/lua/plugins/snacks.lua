@@ -13,7 +13,22 @@ return {
   },
   keys = {
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    { "<leader>f.", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+    {
+      "<leader>f.",
+      function()
+        Snacks.picker.scratch({
+          win = {
+            input = {
+              keys = {
+                ["<c-x>"] = { "scratch_delete", mode = { "n", "i" } },
+                ["<c-n>"] = { "list_down", mode = { "n", "i" } },
+              },
+            },
+          },
+        })
+      end,
+      desc = "Select Scratch Buffer",
+    },
     {
       "<leader>fg",
       function()
@@ -22,6 +37,11 @@ return {
         })
       end,
       desc = "Find Grep",
+    },
+    {
+      "<leader>ff",
+      function() Snacks.picker.files({ hidden = true, ignored = true, exclude = { "node_modules", ".local" } }) end,
+      desc = "Files",
     },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },

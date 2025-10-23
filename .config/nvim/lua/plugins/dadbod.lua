@@ -16,7 +16,7 @@ return {
   end,
   keys = {
     {
-      "<leader>db",
+      "<leader>b",
       function() vim.cmd("DBUIToggle") end,
       desc = "Toggle DBUI",
     },

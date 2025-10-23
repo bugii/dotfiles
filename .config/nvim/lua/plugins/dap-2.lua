@@ -10,7 +10,7 @@ return {
       local dm = require("debugmaster")
       -- make sure you don't have any other keymaps that starts with "<leader>d" to avoid delay
       -- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
-      vim.keymap.set({ "n", "v" }, "<leader>d", dm.mode.toggle, { nowait = false })
+      vim.keymap.set({ "n", "v" }, "<leader>d", dm.mode.toggle, { nowait = true })
       -- If you want to disable debug mode in addition to leader+d using the Escape key:
       -- vim.keymap.set("n", "<Esc>", dm.mode.disable)
       -- This might be unwanted if you already use Esc for ":noh"
@@ -61,20 +61,14 @@ return {
         args = { "--interpreter=vscode" },
       }
 
-      dap.configurations.cs = {
-        {
-          type = "netcoredbg",
-          name = "Run",
-          request = "launch",
-          program = function() return require("../nvim-dap-dotnet").build_dll_path() end,
-        },
-        {
-          type = "netcoredbg",
-          name = "Attach",
-          request = "attach",
-          processId = require("dap.utils").pick_process,
-        },
-      }
+      dap.configurations.cs = dap.configurations.cs or {}
+
+      table.insert(dap.configurations.cs, {
+        type = "netcoredbg",
+        name = "Attach",
+        request = "attach",
+        processId = require("dap.utils").pick_process,
+      })
     end,
   },
   {
