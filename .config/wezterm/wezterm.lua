@@ -10,8 +10,8 @@ local function get_appearance()
 end
 
 local theme = get_appearance() == "Dark" and "rose-pine" or "rose-pine-dawn"
-local background_color = get_appearance() == "Dark" and "#000000" or "#FFFFFF"
-local foreground_color = get_appearance() == "Dark" and "#F8F8F2" or "#1C1C1C"
+local background_color = get_appearance() == "Dark" and "#0D0D0D" or "#FFFFFF"
+local foreground_color = get_appearance() == "Dark" and "#E0E0E0" or "#1C1C1C"
 local surface_color = get_appearance() == "Dark" and "#1E1E1E" or "#F4F4F4"
 
 local colors = wezterm.color.get_builtin_schemes()[theme]
@@ -123,7 +123,11 @@ workspace_picker.setup({
   {
     path = "~/dotfiles",
     tabs = {
-      { name = "editor", panes = { { name = "vim", command = "vim" } } },
+      {
+        name = "editor",
+        direction = "Bottom",
+        panes = { { name = "vim", command = "vim" } },
+      },
       { name = "ai", panes = { { name = "opencode", command = "opencode" } } },
     },
   },
@@ -217,11 +221,13 @@ tabline.setup({
     tab_active = {
       "index",
       { "process", padding = { left = 0, right = 1 } },
+      -- "tab",
       { "zoomed", padding = 0 },
     },
     tab_inactive = {
       "index",
       { "process", padding = { left = 0, right = 1 } },
+      -- "tab",
       { "zoomed", padding = 0 },
     },
     tabline_x = {},
