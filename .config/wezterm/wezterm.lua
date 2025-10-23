@@ -9,15 +9,46 @@ local function get_appearance()
   return "Dark"
 end
 
-local theme = get_appearance() == "Dark" and "rose-pine" or "rose-pine-dawn"
-local background_color = get_appearance() == "Dark" and "#0D0D0D" or "#FFFFFF"
-local foreground_color = get_appearance() == "Dark" and "#E0E0E0" or "#1C1C1C"
-local surface_color = get_appearance() == "Dark" and "#1E1E1E" or "#F4F4F4"
-
-local colors = wezterm.color.get_builtin_schemes()[theme]
-colors.background = background_color
-colors.foreground = foreground_color
-
+local appearance_mode = get_appearance() == "Dark" and "dark" or "light"
+local palette_module = dofile(os.getenv("HOME") .. "/.config/palette.lua")
+local palette = palette_module.get(appearance_mode)
+local surface_color = palette.surface
+local colors = {
+  foreground = palette.fg,
+  background = palette.bg,
+  cursor_bg = palette.fg,
+  cursor_fg = palette.bg,
+  cursor_border = palette.fg,
+  selection_fg = palette.fg,
+  selection_bg = palette.visual,
+  scrollbar_thumb = palette.surface,
+  split = palette.surface,
+  ansi = {
+    palette.primary,
+    palette.secondary,
+    palette.fg,
+    palette.info,
+    palette.warning,
+    palette.secondary,
+    palette.error,
+    palette.warning,
+  },
+  brights = {
+    -- autocomplete
+    palette.muted,
+    -- git changes
+    palette.fg,
+    palette.secondary,
+    -- command runtime
+    palette.fg,
+    palette.info,
+    -- branch
+    palette.secondary,
+    -- file path?
+    palette.fg,
+    palette.primary,
+  },
+}
 -- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
 local function is_vim(pane)
   -- this is set by the plugin, and unset on ExitPre in Neovim
