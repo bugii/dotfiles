@@ -1,74 +1,89 @@
 return {
-  "rcarriga/nvim-dap-ui",
-  enabled = false,
-  event = "VeryLazy",
-  dependencies = {
-    "mfussenegger/nvim-dap",
-    "theHamsta/nvim-dap-virtual-text",
-    "nvim-neotest/nvim-nio",
-  },
-  config = function()
-    local dap, dapui, virtual_text = require("dap"), require("dapui"), require("nvim-dap-virtual-text")
+  {
+    "miroshQa/debugmaster.nvim",
+    -- osv is needed if you want to debug neovim lua code. Also can be used
+    -- as a way to quickly test-drive the plugin without configuring debug adapters
+    dependencies = { "mfussenegger/nvim-dap", "jbyuki/one-small-step-for-vimkind" },
+    event = "VeryLazy",
+    enable = true,
+    config = function()
+      local dm = require("debugmaster")
+      -- make sure you don't have any other keymaps that starts with "<leader>d" to avoid delay
+      -- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
+      vim.keymap.set({ "n", "v" }, "<leader>d", dm.mode.toggle, { nowait = true })
+      -- If you want to disable debug mode in addition to leader+d using the Escape key:
+      -- vim.keymap.set("n", "<Esc>", dm.mode.disable)
+      -- This might be unwanted if you already use Esc for ":noh"
+      vim.keymap.set("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-    dapui.setup()
-    virtual_text.setup()
+      dm.plugins.osv_integration.enabled = true -- needed if you want to debug neovim lua code
+      local dap = require("dap")
 
-    dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-    dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-    dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
-    dap.adapters["pwa-node"] = {
-      type = "server",
-      host = "localhost",
-      port = "${port}",
-      executable = {
-        command = "js-debug-adapter",
-        args = {
-          "${port}",
-        },
-      },
-    }
-
-    for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
-      dap.configurations[language] = {
-        {
-          type = "pwa-node",
-          request = "launch",
-          name = "Launch file",
-          program = "${file}",
-          cwd = "${workspaceFolder}",
-          skipFiles = { "<node_internals>/**", "**/node_modules/**" },
-        },
-        {
-          type = "pwa-node",
-          request = "attach",
-          name = "Attach",
-          processId = require("dap.utils").pick_process,
-          cwd = "${workspaceFolder}",
-          skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+      -- Configure your debug adapters here
+      -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+      dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "js-debug-adapter",
+          args = {
+            "${port}",
+          },
         },
       }
-    end
 
-    dap.adapters.netcoredbg = {
-      type = "executable",
-      command = "netcoredbg",
-      args = { "--interpreter=vscode" },
-    }
+      for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+        dap.configurations[language] = {
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+            skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+            skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+          },
+        }
+      end
 
-    dap.configurations.cs = {
-      {
+      dap.adapters.netcoredbg = {
+        type = "executable",
+        -- NOTE: on apple silicon you have to build it yourself, thus the path to the binary. Check their github for build instructions
+        command = "/usr/local/netcoredbg",
+        args = { "--interpreter=vscode" },
+      }
+
+      dap.configurations.cs = dap.configurations.cs or {}
+
+      table.insert(dap.configurations.cs, {
         type = "netcoredbg",
         name = "Attach",
         request = "attach",
         processId = require("dap.utils").pick_process,
-      },
-    }
+      })
+    end,
+  },
+  {
+    "lucaSartore/nvim-dap-exception-breakpoints",
+    dependencies = { "mfussenegger/nvim-dap" },
 
-    vim.keymap.set("n", "<F1>", function() dap.continue() end, { desc = "Continue" })
-    vim.keymap.set("n", "<F2>", function() dap.step_over() end, { desc = "Step Over" })
-    vim.keymap.set("n", "<F3>", function() dap.step_into() end, { desc = "Step Into" })
-    vim.keymap.set("n", "<F4>", function() dap.step_out() end, { desc = "Step Out" })
-    vim.keymap.set("n", "<leader>b", function() dap.toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
-  end,
+    config = function()
+      local set_exception_breakpoints = require("nvim-dap-exception-breakpoints")
+
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>dc",
+        "",
+        { desc = "[D]ebug [C]ondition breakpoints", callback = set_exception_breakpoints }
+      )
+    end,
+  },
 }

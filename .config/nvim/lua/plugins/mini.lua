@@ -13,12 +13,9 @@ return {
     require("mini.git").setup()
     local MiniHipatterns = require("mini.hipatterns")
     local MiniFiles = require("mini.files")
-    -- require("mini.extra").setup()
     local MiniBufremove = require("mini.bufremove")
     local MiniStatusline = require("mini.statusline")
     require("mini.notify").setup()
-    -- NOTE: is not needed when using autoread session
-    -- require("mini.starter").setup()
 
     vim.keymap.set("n", "[t", ":tabprevious<CR>", { silent = true, desc = "Previous tab" })
     vim.keymap.set("n", "]t", ":tabnext<CR>", { silent = true, desc = "Next tab" })

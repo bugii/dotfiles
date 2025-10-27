@@ -1,20 +1,19 @@
 local function apply_theme()
-  vim.cmd("hi clear")
-  if vim.fn.exists("syntax_on") then vim.cmd("syntax reset") end
-
   local palette = dofile(vim.env.HOME .. "/.config/palette.lua").get(vim.o.background)
   vim.g.colors_name = "dedo"
 
   -- UI Elements
   vim.api.nvim_set_hl(0, "Normal", { fg = palette.fg, bg = palette.bg })
   vim.api.nvim_set_hl(0, "NormalNC", { fg = palette.fg, bg = palette.bg })
+  vim.api.nvim_set_hl(0, "WinBar", { fg = palette.fg, bg = palette.bg, bold = true })
+  vim.api.nvim_set_hl(0, "WinBarNC", { fg = palette.fg, bg = palette.bg })
   vim.api.nvim_set_hl(0, "Special", { fg = palette.primary })
   vim.api.nvim_set_hl(0, "NormalFloat", { fg = palette.fg, bg = palette.bg })
   vim.api.nvim_set_hl(0, "FloatBorder", { fg = palette.muted, bg = palette.bg })
   vim.api.nvim_set_hl(0, "CursorLine", { bg = palette.surface })
   vim.api.nvim_set_hl(0, "LineNr", { fg = palette.comment })
   vim.api.nvim_set_hl(0, "Visual", { bg = palette.visual })
-  vim.api.nvim_set_hl(0, "Search", { fg = palette.bg, bg = palette.info })
+  vim.api.nvim_set_hl(0, "Search", { fg = palette.bg, bg = palette.tertiary })
   vim.api.nvim_set_hl(0, "IncSearch", { fg = palette.bg, bg = palette.primary })
   vim.api.nvim_set_hl(0, "StatusLine", { fg = palette.fg, bg = palette.bg })
   vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.comment, bg = palette.bg })
@@ -31,9 +30,9 @@ local function apply_theme()
   -- Syntax
   vim.api.nvim_set_hl(0, "Identifier", { fg = palette.fg })
   vim.api.nvim_set_hl(0, "Comment", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "String", { fg = palette.primary })
-  vim.api.nvim_set_hl(0, "Number", { fg = palette.primary })
-  vim.api.nvim_set_hl(0, "Function", { fg = palette.secondary, bold = true })
+  vim.api.nvim_set_hl(0, "String", { fg = palette.tertiary })
+  vim.api.nvim_set_hl(0, "Number", { fg = palette.tertiary })
+  vim.api.nvim_set_hl(0, "Function", { fg = palette.primary, bold = true })
   vim.api.nvim_set_hl(0, "Statement", { fg = palette.muted })
   vim.api.nvim_set_hl(0, "Keyword", { fg = palette.muted, italic = true })
   vim.api.nvim_set_hl(0, "@variable", { fg = palette.fg })
@@ -44,7 +43,7 @@ local function apply_theme()
   vim.api.nvim_set_hl(0, "@tag.builtin.tsx", { fg = palette.fg })
   vim.api.nvim_set_hl(0, "@tag.tsx", { fg = palette.fg })
   vim.api.nvim_set_hl(0, "@tag.delimiter", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "@constant.builtin.tsx", { fg = palette.secondary })
+  vim.api.nvim_set_hl(0, "@constant.builtin.tsx", { link = "Constant" })
 
   -- Diagnostics
   vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error })
@@ -65,6 +64,12 @@ local function apply_theme()
   vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { link = "RenderMarkdownH5" })
   vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { link = "RenderMarkdownH6" })
   vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = palette.bg })
+
+  -- Mini
+  vim.api.nvim_set_hl(0, "MiniHipatternsFixme", { fg = palette.error, bold = true, reverse = true })
+  vim.api.nvim_set_hl(0, "MiniHipatternsHack", { fg = palette.secondary, bold = true, reverse = true })
+  vim.api.nvim_set_hl(0, "MiniHipatternsTodo", { fg = palette.primary, bold = true, reverse = true })
+  vim.api.nvim_set_hl(0, "MiniHipatternsNote", { fg = palette.tertiary, bold = true, reverse = true })
 end
 
 apply_theme()

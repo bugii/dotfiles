@@ -33,7 +33,8 @@ return {
         "jsonls",
         "tailwindcss",
         "rust_analyzer",
-        -- "nil_ls",
+        "typos_lsp",
+        "yamlls",
       },
     })
 

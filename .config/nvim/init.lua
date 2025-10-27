@@ -21,7 +21,7 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.opt.undofile = true
--- vim.opt.inccommand = "split"
+vim.opt.inccommand = "split"
 vim.opt.wrap = true
 
 -- Editing ====================================================================
@@ -37,7 +37,6 @@ vim.opt.smartindent = true -- Make indenting smart
 vim.opt.spelloptions = "camel" -- Treat camelCase word parts as separate words
 vim.opt.tabstop = 2 -- Show tab as this number of spaces
 vim.opt.virtualedit = "block" -- Allow going past end of line in blockwise mode
-
 vim.opt.cursorlineopt = "screenline,number" -- Show cursor line per screen line
 
 -- Folding ====================================================================
@@ -49,5 +48,5 @@ vim.opt.foldtext = "" -- Show text under fold with its highlighting
 
 require("theme")
 require("keymaps")
+require("diagnostics")
 require("lazy_config")
-require("codecompanion-spinner")

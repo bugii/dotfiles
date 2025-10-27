@@ -25,7 +25,7 @@ return {
           command = "dotnet",
           args = { "csharpier", "format", "--write-stdout" },
           stdin = true,
-          -- in order to respect the locally intalled installation (using dotnet tools)
+          -- in order to respect the locally installed installation (using dotnet tools)
           cwd = require("conform.util").root_file(".config"),
         },
         black = {

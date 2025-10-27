@@ -11,49 +11,24 @@ return {
       typescriptreact = { "eslint_d" },
     }
 
-    lint.linters.eslint_d = {
-      name = "eslint",
-      cmd = function()
-        local project_root = vim.fs.root(0, "node_modules")
-        vim.env.ESLINT_D_MISS = "fail"
-        vim.env.ESLINT_D_ROOT = project_root
-        return "eslint_d"
-      end,
-      args = {
-        "--format",
-        "json",
-        "--config",
-        function()
-          -- TODO: make it work for all valid config names
-          local config = vim.fs.find(
-            { "eslint.config.mjs", "eslint.config.js", "eslint.config.ts" },
-            { upward = true, path = vim.api.nvim_buf_get_name(0), limit = 1 }
-          )
-          if config and #config > 0 then return config[1] end
-        end,
-        "--stdin",
-        "--stdin-filename",
-        function() return vim.api.nvim_buf_get_name(0) end,
-      },
-      stdin = true,
-      stream = "both",
-      ignore_exitcode = true,
-      parser = function(output, bufnr)
-        local result = require("lint.linters.eslint").parser(output, bufnr)
-        for _, d in ipairs(result) do
-          d.source = "eslint_d"
-        end
-        return result
-      end,
-    }
-
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+    -- NOTE: this is actually a very nice solution taken from https://github.com/mfussenegger/nvim-lint/issues/482#issuecomment-1999185606 to make linting work when project root is not opened in nvim
+    local function lint_with_lsp_root_as_cwd()
+      local client = vim.lsp.get_clients({ bufnr = 0 })[1] or {}
+      lint.try_lint(nil, { cwd = client.root_dir })
+    end
 
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
-      callback = function() lint.try_lint() end,
+      callback = function() lint_with_lsp_root_as_cwd() end,
     })
 
-    vim.keymap.set("n", "<leader>l", function() lint.try_lint() end, { desc = "Trigger linting for current file" })
+    vim.keymap.set(
+      "n",
+      "<leader>l",
+      function() lint_with_lsp_root_as_cwd() end,
+      { desc = "Trigger linting for current file" }
+    )
   end,
 }

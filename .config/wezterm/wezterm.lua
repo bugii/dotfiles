@@ -26,11 +26,11 @@ local colors = {
   ansi = {
     palette.primary,
     palette.secondary,
-    palette.fg,
+    palette.tertiary,
     palette.info,
     palette.warning,
     palette.secondary,
-    palette.error,
+    palette.primary,
     palette.warning,
   },
   brights = {
@@ -38,15 +38,15 @@ local colors = {
     palette.muted,
     -- git changes
     palette.fg,
-    palette.secondary,
+    palette.primary,
     -- command runtime
     palette.fg,
     palette.info,
     -- branch
-    palette.secondary,
-    -- file path?
-    palette.fg,
     palette.primary,
+    -- file path?
+    palette.tertiary,
+    palette.secondary,
   },
 }
 -- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
@@ -211,6 +211,12 @@ workspace_picker.setup({
   },
   {
     path = "~/Projects/workspace-picker-plugin/",
+    tabs = {
+      {
+        { name = "editor", panes = { { name = "editor", command = "vim" } } },
+        { name = "ai", panes = { { name = "opencode", command = "opencode" } } },
+      },
+    },
   },
 })
 workspace_picker.apply_to_config(config)

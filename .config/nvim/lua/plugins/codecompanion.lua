@@ -1,10 +1,8 @@
 return {
   "olimorris/codecompanion.nvim",
-  enabled = false,
   dependencies = {
     "zbirenbaum/copilot.lua",
     "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
   },
   event = "VeryLazy",
   opts = {
