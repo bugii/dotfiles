@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   "pmizio/typescript-tools.nvim",
   events = { "VeryLazy" },
   ft = {

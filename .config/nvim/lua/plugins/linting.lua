@@ -13,9 +13,12 @@ return {
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-    -- NOTE: this is actually a very nice solution taken from https://github.com/mfussenegger/nvim-lint/issues/482#issuecomment-1999185606 to make linting work when project root is not opened in nvim
     local function lint_with_lsp_root_as_cwd()
-      local client = vim.lsp.get_clients({ bufnr = 0 })[1] or {}
+      --NOTE: vtsls / roslyn are the only two lsps i currently need to figure out the root path to lint at. could be made nicer for sure.
+      local vtsls = vim.lsp.get_clients({ bufnr = 0, name = "vtsls" })[1]
+      local roslyn = vim.lsp.get_clients({ bufnr = 0, name = "roslyn" })[1]
+      local client = vtsls or roslyn or {}
+      -- NOTE: this is actually a very nice solution taken from https://github.com/mfussenegger/nvim-lint/issues/482#issuecomment-1999185606 to make linting work when project root is not opened in nvim
       lint.try_lint(nil, { cwd = client.root_dir })
     end
 

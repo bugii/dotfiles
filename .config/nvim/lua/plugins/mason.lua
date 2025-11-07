@@ -16,15 +16,10 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      automatic_enable = {
-        exclude = {
-          "ts_ls",
-          "roslyn",
-        },
-      },
+      automatic_enable = true,
       ensure_installed = {
         "lua_ls",
-        "ts_ls",
+        "vtsls",
         "pyright",
         "bashls",
         "cssls",
@@ -35,6 +30,8 @@ return {
         "rust_analyzer",
         "typos_lsp",
         "yamlls",
+        -- NOTE: Does not work for now, install manually
+        -- "roslyn",
       },
     })
 
@@ -48,6 +45,8 @@ return {
         -- linters
         "eslint_d",
         "pylint",
+        -- lsps
+        "roslyn",
       },
     })
   end,

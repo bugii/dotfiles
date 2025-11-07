@@ -7,7 +7,6 @@ return {
     require("mini.basics").setup()
     require("mini.bracketed").setup()
     require("mini.surround").setup()
-    require("mini.indentscope").setup()
     require("mini.diff").setup()
     require("mini.sessions").setup({ autoread = true })
     require("mini.git").setup()

@@ -4,12 +4,8 @@ return {
   dependencies = {
     -- Optional: provides snippets for the snippet source
     "rafamadriz/friendly-snippets",
-    "xzbdmw/colorful-menu.nvim",
     "fang2hou/blink-copilot",
-    "moyiz/blink-emoji.nvim",
-    "MahanRahmati/blink-nerdfont.nvim",
     "folke/lazydev.nvim",
-    "brenoprata10/nvim-highlight-colors",
   },
   -- Use a release tag to download pre-built binaries
   version = "v1.*",
@@ -30,7 +26,7 @@ return {
     },
 
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "copilot", "emoji", "nerdfont", "lazydev" },
+      default = { "lsp", "path", "snippets", "buffer", "copilot", "lazydev" },
       per_filetype = {
         sql = { "snippets", "dadbod", "buffer" },
       },
@@ -43,16 +39,6 @@ return {
           opts = {
             max_completions = 3,
           },
-        },
-        emoji = {
-          module = "blink-emoji",
-          name = "Emoji",
-          score_offset = 15,
-        },
-        nerdfont = {
-          module = "blink-nerdfont",
-          name = "Nerd Fonts",
-          score_offset = 15,
         },
         lazydev = {
           name = "LazyDev",
@@ -68,37 +54,6 @@ return {
     completion = {
       keyword = { range = "full" },
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
-      menu = {
-        draw = {
-          -- We don't need label_description now because label and label_description are already
-          -- combined together in label by colorful-menu.nvim.
-          columns = { { "kind_icon" }, { "label", gap = 1 } },
-          components = {
-            label = {
-              text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
-              highlight = function(ctx) return require("colorful-menu").blink_components_highlight(ctx) end,
-            },
-            kind_icon = {
-              text = function(ctx)
-                local icon = ctx.kind_icon
-                if ctx.item.source_name == "LSP" then
-                  local item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
-                  if item.abbr ~= "" then icon = item.abbr end
-                end
-                return icon .. ctx.icon_gap
-              end,
-              highlight = function(ctx)
-                local highlight = "BlinkCmpKind" .. ctx.kind
-                if ctx.item.source_name == "LSP" then
-                  local item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
-                  if item.abbr ~= "" then highlight = item.abbr_hl_group end
-                end
-                return highlight
-              end,
-            },
-          },
-        },
-      },
     },
     cmdline = {
       keymap = {

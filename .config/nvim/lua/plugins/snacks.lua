@@ -7,7 +7,6 @@ return {
     image = {},
     gitbrowse = {},
     picker = {},
-    statuscolumn = {},
     input = {},
     quickfile = {},
   },
