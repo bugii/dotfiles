@@ -30,8 +30,6 @@ return {
         "rust_analyzer",
         "typos_lsp",
         "yamlls",
-        -- NOTE: Does not work for now, install manually
-        -- "roslyn",
       },
     })
 

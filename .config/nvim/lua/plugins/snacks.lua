@@ -33,6 +33,7 @@ return {
       function()
         Snacks.picker.grep({
           hidden = true,
+          exclude = { "node_modules" },
         })
       end,
       desc = "Find Grep",
