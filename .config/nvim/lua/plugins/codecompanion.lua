@@ -6,6 +6,7 @@ return {
   },
   event = "VeryLazy",
   opts = {
+    ignore_warnings = true,
     display = {
       action_palette = {
         provider = "snacks",

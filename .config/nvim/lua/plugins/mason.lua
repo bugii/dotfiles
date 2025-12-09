@@ -19,7 +19,8 @@ return {
       automatic_enable = true,
       ensure_installed = {
         "lua_ls",
-        "vtsls",
+        -- "vtsls",
+        "tsgo",
         "pyright",
         "bashls",
         "cssls",
@@ -44,7 +45,8 @@ return {
         "eslint_d",
         "pylint",
         -- lsps
-        "roslyn",
+        -- find all versions here: https://github.com/Crashdummyy/roslynLanguageServer
+        { "roslyn", version = "5.3.0-2.25571.4" },
       },
     })
   end,

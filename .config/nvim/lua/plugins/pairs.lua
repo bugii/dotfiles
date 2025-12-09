@@ -2,7 +2,7 @@ return {
   "saghen/blink.pairs",
   version = "*", -- (recommended) only required with prebuilt binaries
   events = { "VeryLazy" },
-
+  enabled = false,
   -- download prebuilt binaries from github releases
   dependencies = "saghen/blink.download",
   -- OR build from source, requires nightly:
