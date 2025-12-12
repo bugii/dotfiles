@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.nvim",
-  version = "*",
+  version = false,
   lazy = false,
   config = function()
     local MiniIcons = require("mini.icons")
