@@ -10,6 +10,7 @@ return {
     require("mini.diff").setup()
     require("mini.sessions").setup({ autoread = true })
     require("mini.git").setup()
+    require("mini.tabline").setup()
     local MiniVisits = require("mini.visits")
     local MiniHipatterns = require("mini.hipatterns")
     local MiniFiles = require("mini.files")
