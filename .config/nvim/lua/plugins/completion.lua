@@ -49,12 +49,14 @@ return {
     },
 
     -- experimental signature help support
-    signature = { enabled = true },
+    -- i use noice for that
+    signature = { enabled = false },
 
     completion = {
       keyword = { range = "full" },
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
     },
+
     cmdline = {
       keymap = {
         ["<C-l>"] = { "show", "hide" },

@@ -16,7 +16,12 @@ return {
     local MiniFiles = require("mini.files")
     local MiniBufremove = require("mini.bufremove")
     local MiniStatusline = require("mini.statusline")
-    require("mini.notify").setup()
+    require("mini.notify").setup({
+      lsp_progress = {
+        -- I use noice for that
+        enable = false,
+      },
+    })
 
     vim.keymap.set("n", "[t", ":tabprevious<CR>", { silent = true, desc = "Previous tab" })
     vim.keymap.set("n", "]t", ":tabnext<CR>", { silent = true, desc = "Next tab" })
