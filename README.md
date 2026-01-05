@@ -8,7 +8,7 @@ To use those dotfiles on a new machine install GNU Stow first. On mac this can b
 brew install stow
 ```
 
-After that, clone this repo into ~/.dotfiles
+After that, clone this repo into the home dir
 
 Last but not least, run
 

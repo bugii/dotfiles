@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local workspace_picker = wezterm.plugin.require("file:///Users/dabu/Projects/workspace-picker-plugin/")
+local workspace_picker = wezterm.plugin.require("https://github.com/bugii/workspace-picker-plugin")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -176,13 +176,13 @@ workspace_picker.setup({
           {
             direction = "Right",
             panes = {
-              { name = "Api", command = "cd ./src/backend/Aop.Api && dotnet build" },
+              { name = "Api",      command = "cd ./src/backend/Aop.Api && dotnet build" },
               { name = "Importer", command = "cd ./src/backend/Aop.DataImport" },
             },
           },
         },
       },
-      { name = "ai", command = "opencode" },
+      { name = "ai",    command = "opencode" },
     },
   },
   {
@@ -214,7 +214,7 @@ workspace_picker.setup({
     tabs = {
       {
         { name = "editor", panes = { { name = "editor", command = "vim" } } },
-        { name = "ai", panes = { { name = "opencode", command = "opencode" } } },
+        { name = "ai",     panes = { { name = "opencode", command = "opencode" } } },
       },
     },
   },
@@ -259,13 +259,13 @@ tabline.setup({
       "index",
       { "process", padding = { left = 0, right = 1 } },
       -- "tab",
-      { "zoomed", padding = 0 },
+      { "zoomed",  padding = 0 },
     },
     tab_inactive = {
       "index",
       { "process", padding = { left = 0, right = 1 } },
       -- "tab",
-      { "zoomed", padding = 0 },
+      { "zoomed",  padding = 0 },
     },
     tabline_x = {},
     tabline_y = {},
