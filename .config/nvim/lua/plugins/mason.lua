@@ -46,7 +46,8 @@ return {
         "pylint",
         -- lsps
         -- find all versions here: https://github.com/Crashdummyy/roslynLanguageServer
-        { "roslyn", version = "5.3.0-2.25571.4" },
+        -- { "roslyn", version = "5.3.0-2.25571.4" },
+        "roslyn",
       },
     })
   end,
