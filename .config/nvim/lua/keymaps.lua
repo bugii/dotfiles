@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "Remove highlight after search" })
 
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Diagnostic: open float" })
+-- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Diagnostic: open float" })
 
 -- NOTE: helpful when debugging treesitter captures, calling this on a treesitter node will print out all the metadata etc.
 vim.keymap.set("n", "<leader><leader>tsn", function()

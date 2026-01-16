@@ -6,6 +6,7 @@ return {
   config = function()
     require("nvim-treesitter").setup()
     local languages = {
+      "bash",
       "lua",
       "vim",
       "javascript",
@@ -19,14 +20,19 @@ return {
       "markdown",
       "markdown_inline",
       "c_sharp",
+      "razor",
       "python",
       "regex",
       "sql",
       "yaml",
+      "graphql",
     }
     require("nvim-treesitter").install(languages):wait(300000) -- wait max. 5 minutes
 
-    local filetypes = {}
+    local filetypes = {
+      -- NOTE: no parser exists, but the mdx plugin has captures etc and uses the markdown parser as a default for this filetype
+      "mdx",
+    }
     for _, lang in ipairs(languages) do
       for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
         table.insert(filetypes, ft)

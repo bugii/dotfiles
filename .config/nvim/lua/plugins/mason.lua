@@ -16,7 +16,9 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      automatic_enable = true,
+      automatic_enable = {
+        exclude = { "mdx_analyzer" },
+      },
       ensure_installed = {
         "lua_ls",
         -- "vtsls",
@@ -31,6 +33,8 @@ return {
         "rust_analyzer",
         "typos_lsp",
         "yamlls",
+        "mdx_analyzer",
+        "graphql",
       },
     })
 
@@ -50,5 +54,15 @@ return {
         "roslyn",
       },
     })
+
+    vim.lsp.config("mdx_analyzer", {
+      init_options = {
+        typescript = {
+          enabled = true,
+        },
+      },
+    })
+
+    vim.lsp.enable("mdx_analyzer")
   end,
 }

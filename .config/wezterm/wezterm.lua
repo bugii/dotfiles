@@ -163,28 +163,28 @@ workspace_picker.setup({
     },
   },
   { path = "~/Notes" },
-  {
-    path = "~/Projects/aop.git",
-    type = "worktreeroot",
-    tabs = {
-      { name = "editor" },
-      {
-        name = "terminals",
-        direction = "Bottom",
-        panes = {
-          { name = "app", command = "cd ./src/app && nvm use && pnpm i" },
-          {
-            direction = "Right",
-            panes = {
-              { name = "Api",      command = "cd ./src/backend/Aop.Api && dotnet build" },
-              { name = "Importer", command = "cd ./src/backend/Aop.DataImport" },
-            },
-          },
-        },
-      },
-      { name = "ai",    command = "opencode" },
-    },
-  },
+  -- {
+  --   path = "~/Projects/aop.git",
+  --   type = "worktreeroot",
+  --   tabs = {
+  --     { name = "editor" },
+  --     {
+  --       name = "terminals",
+  --       direction = "Bottom",
+  --       panes = {
+  --         { name = "app", command = "cd ./src/app && nvm use && pnpm i" },
+  --         {
+  --           direction = "Right",
+  --           panes = {
+  --             { name = "Api",      command = "cd ./src/backend/Aop.Api && dotnet build" },
+  --             { name = "Importer", command = "cd ./src/backend/Aop.DataImport" },
+  --           },
+  --         },
+  --       },
+  --     },
+  --     { name = "ai",    command = "opencode" },
+  --   },
+  -- },
   {
     path = "~/Projects/vellu",
     type = "worktreeroot",
@@ -214,8 +214,56 @@ workspace_picker.setup({
     tabs = {
       {
         { name = "editor", panes = { { name = "editor", command = "vim" } } },
-        { name = "ai",     panes = { { name = "opencode", command = "opencode" } } },
+        { name = "ai", panes = { { name = "opencode", command = "opencode" } } },
       },
+    },
+  },
+  {
+    path = "~/Projects/DG/isomorph.git/",
+    type = "worktreeroot",
+    tabs = {
+      { name = "editor" },
+      {
+        name = "terminals",
+        direction = "Right",
+        panes = {
+          { name = "app", command = "yarn && yarn dev" },
+          { name = "other" },
+        },
+      },
+      { name = "ai", command = "opencode" },
+    },
+  },
+  {
+    path = "~/Projects/DG/devinite.git/",
+    type = "worktreeroot",
+    tabs = {
+      { name = "editor" },
+      {
+        name = "terminals",
+        direction = "Right",
+        panes = {
+          { name = "app" },
+          { name = "other" },
+        },
+      },
+      { name = "ai", command = "opencode" },
+    },
+  },
+  {
+    path = "~/Projects/DG/Dg.Community.git/",
+    type = "worktreeroot",
+    tabs = {
+      { name = "editor" },
+      {
+        name = "terminals",
+        direction = "Right",
+        panes = {
+          { name = "app" },
+          { name = "other" },
+        },
+      },
+      { name = "ai", command = "opencode" },
     },
   },
 })
@@ -259,13 +307,13 @@ tabline.setup({
       "index",
       { "process", padding = { left = 0, right = 1 } },
       -- "tab",
-      { "zoomed",  padding = 0 },
+      { "zoomed", padding = 0 },
     },
     tab_inactive = {
       "index",
       { "process", padding = { left = 0, right = 1 } },
       -- "tab",
-      { "zoomed",  padding = 0 },
+      { "zoomed", padding = 0 },
     },
     tabline_x = {},
     tabline_y = {},
