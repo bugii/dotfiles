@@ -9,6 +9,7 @@ return {
     picker = {},
     input = {},
     quickfile = {},
+    gh = {},
   },
   keys = {
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
@@ -80,5 +81,10 @@ return {
 
     -- git browse, like gx (open url under cursor, but prefixed with leader)
     { "<leader>gx", function() Snacks.gitbrowse.open() end, desc = "Open gitbrowse for current file" },
+
+    { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+    { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+    { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+    { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
   },
 }
