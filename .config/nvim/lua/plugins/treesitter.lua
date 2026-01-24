@@ -26,6 +26,7 @@ return {
       "sql",
       "yaml",
       "graphql",
+      "styled",
     }
     require("nvim-treesitter").install(languages):wait(300000) -- wait max. 5 minutes
 

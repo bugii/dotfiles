@@ -125,6 +125,8 @@ alt-m = 'workspace m'
 alt-n = 'workspace n'
 # y: Youtube
 alt-y = 'workspace y'
+# r: rider
+alt-r = 'workspace r'
 
 # alt-1 = 'workspace 1'
 # alt-2 = 'workspace 2'
@@ -143,6 +145,7 @@ alt-shift-p = 'move-node-to-workspace p'
 alt-shift-m = 'move-node-to-workspace m'
 alt-shift-n = 'move-node-to-workspace n'
 alt-shift-y = 'move-node-to-workspace y'
+alt-shift-r = 'move-node-to-workspace r'
 
 # alt-shift-1 = 'move-node-to-workspace 1'
 # alt-shift-2 = 'move-node-to-workspace 2'

@@ -20,9 +20,8 @@ return {
         exclude = { "mdx_analyzer" },
       },
       ensure_installed = {
+        -- "tsgo",
         "lua_ls",
-        -- "vtsls",
-        "tsgo",
         "pyright",
         "bashls",
         "cssls",
@@ -35,6 +34,7 @@ return {
         "yamlls",
         "mdx_analyzer",
         "graphql",
+        "eslint",
       },
     })
 
@@ -43,11 +43,11 @@ return {
         -- formatters
         "prettierd",
         "stylua",
-        "black",
+        -- "black",
         "csharpier",
         -- linters
-        "eslint_d",
-        "pylint",
+        -- "eslint_d",
+        -- "pylint",
         -- lsps
         -- find all versions here: https://github.com/Crashdummyy/roslynLanguageServer
         -- { "roslyn", version = "5.3.0-2.25571.4" },

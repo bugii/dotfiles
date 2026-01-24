@@ -1,3 +1,4 @@
+-- NOTE: this is just DG specific because they use the vscode extension which sets this info in the .vscode settings file
 local function get_optional_relay_config_path(root_dir)
   -- Search for .vscode/settings.json upward from root_dir
   local settings_path = vim.fs.find(".vscode/settings.json", {
@@ -15,6 +16,12 @@ local function get_optional_relay_config_path(root_dir)
   return json["relay.pathToConfig"] or nil
 end
 
+local function get_relay_binary_path(root_dir)
+  -- hard coded because mac is best anyways ;D
+  local platform = "macos-arm64"
+  return root_dir .. "/node_modules/relay-compiler/" .. platform .. "/relay"
+end
+
 local function build_relay_args(relay_binary, root_dir)
   local args = { relay_binary, "lsp", "--output=quiet-with-errors" }
 
@@ -24,28 +31,26 @@ local function build_relay_args(relay_binary, root_dir)
   return args
 end
 
-local function build_relay_command(root_dir)
-  local platform = "macos-arm64"
-  local local_relay = root_dir .. "/node_modules/relay-compiler/" .. platform .. "/relay"
-
-  return build_relay_args(local_relay, root_dir)
-end
+local function build_relay_command(relay_binary, root_dir) return build_relay_args(relay_binary, root_dir) end
 
 vim.lsp.config.relay_lsp = {
   cmd = function(dispatchers, config)
-    local root_dir = config.root_dir or vim.fn.getcwd()
-
-    return vim.lsp.rpc.start(build_relay_command(root_dir), dispatchers)
+    local root_dir = config.root_dir
+    local relay_binary = get_relay_binary_path(root_dir)
+    return vim.lsp.rpc.start(build_relay_command(relay_binary, root_dir), dispatchers)
   end,
   filetypes = { "typescript", "typescriptreact" },
   root_dir = function(bufnr, on_dir)
     -- we can't use package.json because it would chose a submodule
     local root = vim.fs.root(bufnr, { "node_modules", ".git" })
-    if root then
-      on_dir(root)
-    else
-      on_dir(vim.fn.getcwd())
+    if not root then root = vim.fn.getcwd() end
+
+    local relay_binary = get_relay_binary_path(root)
+    if vim.fn.executable(relay_binary) ~= 1 then
+      return -- Prevent LSP from starting
     end
+
+    on_dir(root)
   end,
   settings = {},
 }

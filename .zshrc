@@ -72,6 +72,7 @@ setopt hist_find_no_dups
 alias ls='eza'
 alias vim='nvim'
 alias c='clear'
+alias lg='lazygit'
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
