@@ -8,7 +8,6 @@ return {
     require("mini.bracketed").setup()
     require("mini.surround").setup()
     require("mini.diff").setup()
-    require("mini.sessions").setup({ autoread = true })
     require("mini.git").setup()
     local MiniVisits = require("mini.visits")
     local MiniHipatterns = require("mini.hipatterns")
