@@ -227,7 +227,7 @@ workspace_picker.setup({
         name = "terminals",
         direction = "Right",
         panes = {
-          { name = "app", command = "yarn && yarn dev" },
+          { name = "app", command = "yarn" },
           { name = "other" },
         },
       },
