@@ -159,7 +159,7 @@ workspace_picker.setup({
         direction = "Bottom",
         panes = { { name = "vim", command = "vim" } },
       },
-      { name = "ai", panes = { { name = "opencode", command = "opencode" } } },
+      { name = "ai", panes = { { name = "opencode" } } },
     },
   },
   { path = "~/Notes" },
@@ -206,7 +206,7 @@ workspace_picker.setup({
           },
         },
       },
-      { name = "ai", command = "opencode" },
+      { name = "ai" },
     },
   },
   {
@@ -214,7 +214,7 @@ workspace_picker.setup({
     tabs = {
       {
         { name = "editor", panes = { { name = "editor", command = "vim" } } },
-        { name = "ai", panes = { { name = "opencode", command = "opencode" } } },
+        { name = "ai", panes = { { name = "opencode" } } },
       },
     },
   },
@@ -231,7 +231,7 @@ workspace_picker.setup({
           { name = "other" },
         },
       },
-      { name = "ai", command = "opencode" },
+      { name = "ai" },
     },
   },
   {
@@ -247,7 +247,7 @@ workspace_picker.setup({
           { name = "other" },
         },
       },
-      { name = "ai", command = "opencode" },
+      { name = "ai" },
     },
   },
   {
@@ -263,7 +263,7 @@ workspace_picker.setup({
           { name = "other" },
         },
       },
-      { name = "ai", command = "opencode" },
+      { name = "ai" },
     },
   },
 })

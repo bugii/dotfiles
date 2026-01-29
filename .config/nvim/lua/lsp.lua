@@ -1,3 +1,19 @@
+local function load_json_with_comments(filepath)
+  local file = assert(io.open(filepath, "r"))
+  local content = file:read("*a")
+  file:close()
+
+  -- Remove /* ... */ block comments
+  content = content:gsub("/%*.-%*/", "")
+  -- Remove // line comments
+  content = content:gsub("//[^\n]*", "")
+
+  -- Parse as JSON
+  local ok, result = pcall(vim.json.decode, content)
+  if not ok then error("Failed to parse JSON: " .. tostring(result)) end
+  return result
+end
+
 -- NOTE: this is just DG specific because they use the vscode extension which sets this info in the .vscode settings file
 local function get_optional_relay_config_path(root_dir)
   -- Search for .vscode/settings.json upward from root_dir
@@ -8,10 +24,7 @@ local function get_optional_relay_config_path(root_dir)
 
   if not settings_path then return nil end
 
-  local ok, content = pcall(vim.fn.readfile, settings_path)
-  if not ok then return nil end
-
-  local json = vim.json.decode(table.concat(content))
+  local json = load_json_with_comments(settings_path)
 
   return json["relay.pathToConfig"] or nil
 end
