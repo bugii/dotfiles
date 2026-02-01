@@ -1,9 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
-  "autoupdate": true,
-  "tools": {
-    "bash": false,
-    "dotnet": true
-  }
+  "autoupdate": true
 }
