@@ -4,6 +4,11 @@ return {
   "pmizio/typescript-tools.nvim",
   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   opts = {
+    root_dir = function(bufnr, on_dir)
+      local root = vim.fs.root(bufnr, { "node_modules", ".git" })
+      if not root then root = vim.fn.getcwd() end
+      on_dir(root)
+    end,
     settings = {
       tsserver_plugins = {
         -- for TypeScript v4.9+
