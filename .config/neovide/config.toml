@@ -1,0 +1,13 @@
+chdir = "~/Projects/"
+no-multigrid = true
+
+[font]
+normal = ["CommitMono Nerd Font"] 
+size = 14.0
+
+# [box-drawing]
+# "font-glyph", "native" or "selected-native"
+# mode = "font-glyph"
+
+# [box-drawing.sizes]
+# default = [2, 4]  # Thin and thick values respectively, for all sizes
