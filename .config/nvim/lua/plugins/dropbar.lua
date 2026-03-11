@@ -1,5 +1,6 @@
 return {
   "Bekaboo/dropbar.nvim",
+  enabled = false,
   event = "VeryLazy",
   -- config = function()
   --   local dropbar_api = require("dropbar.api")
