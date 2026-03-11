@@ -71,11 +71,15 @@ local function apply_theme()
   vim.api.nvim_set_hl(0, "@lsp.type.number", { link = "Number" })
   vim.api.nvim_set_hl(0, "@lsp.type.comment", { link = "Comment" })
 
-  -- Diff
-  vim.api.nvim_set_hl(0, "DiffAdd", { fg = palette.tertiary, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "DiffChange", { fg = palette.info, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "DiffDelete", { fg = palette.error, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "DiffText", { fg = palette.fg, bg = palette.visual })
+  -- Diff (tints derived per-mode so both dark and light look correct)
+  local diff_add    = vim.o.background == "dark" and "#1a2e1a" or "#d4edda"
+  local diff_change = vim.o.background == "dark" and "#1a2233" or "#d0e4f5"
+  local diff_delete = vim.o.background == "dark" and "#2e1a1a" or "#f5d4d0"
+  local diff_text   = vim.o.background == "dark" and "#2a3d5c" or "#aacfee"
+  vim.api.nvim_set_hl(0, "DiffAdd",    { bg = diff_add })
+  vim.api.nvim_set_hl(0, "DiffChange", { bg = diff_change })
+  vim.api.nvim_set_hl(0, "DiffDelete", { bg = diff_delete })
+  vim.api.nvim_set_hl(0, "DiffText",   { bg = diff_text, bold = true })
 
   -- Diagnostics
   vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error })
