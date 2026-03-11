@@ -20,7 +20,7 @@ return {
         exclude = { "mdx_analyzer" },
       },
       ensure_installed = {
-        -- "tsgo",
+        "tsgo",
         "lua_ls",
         "pyright",
         "bashls",
@@ -34,7 +34,8 @@ return {
         "yamlls",
         "mdx_analyzer",
         "graphql",
-        "eslint",
+        -- "eslint",
+        "oxlint",
       },
     })
 

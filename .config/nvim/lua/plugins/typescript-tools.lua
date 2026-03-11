@@ -2,6 +2,7 @@
 -- which is the only way I found to get support for styled components support these days...
 return {
   "pmizio/typescript-tools.nvim",
+  enabled = false,
   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   opts = {
     root_dir = function(bufnr, on_dir)
