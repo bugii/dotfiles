@@ -101,6 +101,9 @@ local function apply_theme()
   vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { link = "RenderMarkdownH6" })
   vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = palette.bg })
 
+  -- Neotest
+  vim.api.nvim_set_hl(0, "NeotestRunning", { fg = palette.secondary })
+
   -- Mini
   vim.api.nvim_set_hl(0, "MiniHipatternsFixme", { fg = palette.error, bold = true, reverse = true })
   vim.api.nvim_set_hl(0, "MiniHipatternsHack", { fg = palette.secondary, bold = true, reverse = true })
