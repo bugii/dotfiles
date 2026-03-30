@@ -6,18 +6,18 @@ return {
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
-    -- "marilari88/neotest-vitest",
+    "marilari88/neotest-vitest",
     "nsidorenco/neotest-vstest",
-    "Issafalcon/neotest-dotnet",
+    -- "Issafalcon/neotest-dotnet",
   },
   config = function()
     local neotest = require("neotest")
 
     neotest.setup({
       adapters = {
-        -- require("neotest-vitest"),
+        require("neotest-vitest"),
         require("neotest-vstest"),
-        require("neotest-dotnet"),
+        -- require("neotest-dotnet"),
       },
     })
 

@@ -12,7 +12,6 @@ end
 local appearance_mode = get_appearance() == "Dark" and "dark" or "light"
 local palette_module = dofile(os.getenv("HOME") .. "/.config/palette.lua")
 local palette = palette_module.get(appearance_mode)
-local surface_color = palette.surface
 local colors = {
   foreground = palette.fg,
   background = palette.bg,
@@ -293,7 +292,7 @@ tabline.setup({
         b = { fg = config.colors.foreground, bg = config.colors.background },
       },
       tab = {
-        active = { fg = config.colors.foreground, bg = surface_color },
+        active = { fg = config.colors.foreground, bg = palette.surface },
         inactive = { fg = config.colors.foreground, bg = config.colors.background },
         inactive_hover = { fg = config.colors.foreground, bg = config.colors.background },
       },
