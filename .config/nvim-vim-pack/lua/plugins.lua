@@ -31,6 +31,7 @@ vim.pack.add({
   "https://github.com/kristijanhusak/vim-dadbod-ui",
   "https://github.com/mrjones2014/smart-splits.nvim",
   "https://github.com/folke/snacks.nvim",
+  "https://github.com/MagicDuck/grug-far.nvim",
 })
 
 -- Treesitter ---------------------------------------------------------------------------------------
@@ -562,9 +563,23 @@ vim.keymap.set("n", "gt", function() Snacks.picker.lsp_type_definitions() end, {
 vim.keymap.set("n", "<leader>fs", function() Snacks.picker.lsp_symbols() end, { desc = "[F]ind [S]ymbols" })
 vim.keymap.set("n", "<leader>fH", function() Snacks.picker.highlights() end, { desc = "[F]ind [H]ighlights" })
 
-vim.keymap.set('n', "<leader>gx", function() Snacks.gitbrowse.open() end, { desc = "Open gitbrowse for current file" })
+vim.keymap.set("n", "<leader>gx", function() Snacks.gitbrowse.open() end, { desc = "Open gitbrowse for current file" })
 
-vim.keymap.set('n', "<leader>gi", function() Snacks.picker.gh_issue() end, {desc = "GitHub Issues (open)" })
-vim.keymap.set('n', "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, {desc = "GitHub Issues (all)" })
-vim.keymap.set('n', "<leader>gp", function() Snacks.picker.gh_pr() end, {desc = "GitHub Pull Requests (open)" })
-vim.keymap.set('n', "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, {desc = "GitHub Pull Requests (all)" })
+vim.keymap.set("n", "<leader>gi", function() Snacks.picker.gh_issue() end, { desc = "GitHub Issues (open)" })
+vim.keymap.set(
+  "n",
+  "<leader>gI",
+  function() Snacks.picker.gh_issue({ state = "all" }) end,
+  { desc = "GitHub Issues (all)" }
+)
+vim.keymap.set("n", "<leader>gp", function() Snacks.picker.gh_pr() end, { desc = "GitHub Pull Requests (open)" })
+vim.keymap.set(
+  "n",
+  "<leader>gP",
+  function() Snacks.picker.gh_pr({ state = "all" }) end,
+  { desc = "GitHub Pull Requests (all)" }
+)
+
+-- Grug-far ------------------------------------------------------------------------
+
+vim.keymap.set("n", "<leader>sr", ":GrugFar <CR>", { desc = "Search and Replace" })

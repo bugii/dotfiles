@@ -47,7 +47,7 @@ vim.opt.foldnestmax = 10 -- Limit number of fold levels
 vim.opt.foldtext = "" -- Show text under fold with its highlighting
 
 require("theme")
-require("keymaps")
-require("diagnostics")
 require("lsp")
 require("plugins")
+require("diagnostics")
+require("keymaps")
