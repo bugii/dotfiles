@@ -1,3 +1,5 @@
+vim.lsp.document_color.enable(true, nil, { style = "virtual" })
+
 local function load_json_with_comments(filepath)
   local file = assert(io.open(filepath, "r"))
   local content = file:read("*a")

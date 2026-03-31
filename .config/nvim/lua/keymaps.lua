@@ -1,3 +1,6 @@
+vim.keymap.set("n", "[t", ":tabprevious<CR>", { silent = true, desc = "Previous tab" })
+vim.keymap.set("n", "]t", ":tabnext<CR>", { silent = true, desc = "Next tab" })
+
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "Remove highlight after search" })
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Diagnostic: open float" })
