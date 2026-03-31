@@ -1,4 +1,6 @@
 vim.pack.add({
+  "https://github.com/nvim-neotest/nvim-nio",
+  "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
   "https://github.com/neovim/nvim-lspconfig",
@@ -32,6 +34,9 @@ vim.pack.add({
   "https://github.com/mrjones2014/smart-splits.nvim",
   "https://github.com/folke/snacks.nvim",
   "https://github.com/MagicDuck/grug-far.nvim",
+  "https://github.com/marilari88/neotest-vitest",
+  "https://github.com/nsidorenco/neotest-vstest",
+  "https://github.com/nvim-neotest/neotest",
 })
 
 -- Treesitter ---------------------------------------------------------------------------------------
@@ -583,3 +588,33 @@ vim.keymap.set(
 -- Grug-far ------------------------------------------------------------------------
 
 vim.keymap.set("n", "<leader>sr", ":GrugFar <CR>", { desc = "Search and Replace" })
+
+-- Neotest -------------------------------------------------------------------------
+local neotest = require("neotest")
+
+neotest.setup({
+  adapters = {
+    require("neotest-vitest"),
+    require("neotest-vstest"),
+    -- require("neotest-dotnet"),
+  },
+})
+
+vim.keymap.set("n", "<leader>tt", function() neotest.run.run(vim.fn.expand("%")) end, { desc = "Run File" })
+vim.keymap.set("n", "<leader>tr", function() neotest.run.run() end, { desc = "Run Nearest" })
+vim.keymap.set("n", "<leader>ts", function() neotest.summary.toggle() end, { desc = "Toggle Summary" })
+vim.keymap.set(
+  "n",
+  "<leader>to",
+  function() neotest.output.open({ enter = true, auto_close = true }) end,
+  { desc = "Show Output" }
+)
+vim.keymap.set("n", "<leader>tO", function() neotest.output_panel.toggle() end, { desc = "Toggle Output Panel" })
+vim.keymap.set("n", "<leader>tS", function() neotest.run.stop() end, { desc = "Stop" })
+
+vim.keymap.set(
+  "n",
+  "<leader>td",
+  function() neotest.run.run({ strategy = "dap", suite = false }) end,
+  { desc = "Debug Nearest" }
+)
