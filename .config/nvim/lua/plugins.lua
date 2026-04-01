@@ -37,6 +37,9 @@ vim.pack.add({
   "https://github.com/marilari88/neotest-vitest",
   "https://github.com/nsidorenco/neotest-vstest",
   "https://github.com/nvim-neotest/neotest",
+  "https://github.com/mfussenegger/nvim-dap",
+  "https://github.com/miroshQa/debugmaster.nvim",
+  "https://github.com/lucaSartore/nvim-dap-exception-breakpoints",
 })
 
 -- Treesitter ---------------------------------------------------------------------------------------
@@ -369,7 +372,7 @@ require("mason-lspconfig").setup({
 require("mason-tool-installer").setup({
   ensure_installed = {
     -- formatters
-    "prettierd",
+    -- "prettierd",
     "stylua",
     -- "black",
     "csharpier",
@@ -380,6 +383,7 @@ require("mason-tool-installer").setup({
     -- find all versions here: https://github.com/Crashdummyy/roslynLanguageServer
     -- { "roslyn", version = "5.3.0-2.25571.4" },
     "roslyn",
+    "oxfmt",
   },
 })
 
@@ -402,17 +406,17 @@ local conform = require("conform")
 conform.setup({
   formatters_by_ft = {
     lua = { "stylua" },
-    javascript = { "prettierd" },
-    typescript = { "prettierd" },
-    javascriptreact = { "prettierd" },
-    typescriptreact = { "prettierd" },
+    javascript = { "oxfmt" },
+    typescript = { "oxfmt" },
+    javascriptreact = { "oxfmt" },
+    typescriptreact = { "oxfmt" },
     python = { "black" },
-    css = { "prettierd" },
-    html = { "prettierd" },
-    json = { "prettierd" },
-    yaml = { "prettierd" },
-    markdown = { "prettierd" },
-    graphql = { "prettierd" },
+    css = { "oxfmt" },
+    html = { "oxfmt" },
+    json = { "oxfmt" },
+    yaml = { "oxfmt" },
+    markdown = { "oxfmt" },
+    graphql = { "oxfmt" },
     cs = { "csharpier" },
     rust = { "rustfmt" },
   },
@@ -618,3 +622,71 @@ vim.keymap.set(
   function() neotest.run.run({ strategy = "dap", suite = false }) end,
   { desc = "Debug Nearest" }
 )
+
+-- DAP --------------------------------------------------------------------------------
+
+local dm = require("debugmaster")
+-- make sure you don't have any other keymaps that starts with "<leader>d" to avoid delay
+-- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
+vim.keymap.set({ "n", "v" }, "<leader>d", dm.mode.toggle, { nowait = true })
+-- If you want to disable debug mode in addition to leader+d using the Escape key:
+-- vim.keymap.set("n", "<Esc>", dm.mode.disable)
+-- This might be unwanted if you already use Esc for ":noh"
+vim.keymap.set("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+dm.plugins.osv_integration.enabled = true -- needed if you want to debug neovim lua code
+local dap = require("dap")
+
+-- Configure your debug adapters here
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+dap.adapters["pwa-node"] = {
+  type = "server",
+  host = "localhost",
+  port = "${port}",
+  executable = {
+    command = "js-debug-adapter",
+    args = {
+      "${port}",
+    },
+  },
+}
+
+for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+  dap.configurations[language] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+      skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = require("dap.utils").pick_process,
+      cwd = "${workspaceFolder}",
+      skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+    },
+  }
+end
+
+dap.adapters.netcoredbg = {
+  type = "executable",
+  -- NOTE: on apple silicon you have to build it yourself, thus the path to the binary. Check their github for build instructions
+  command = "/usr/local/netcoredbg",
+  args = { "--interpreter=vscode" },
+}
+
+dap.configurations.cs = dap.configurations.cs or {}
+
+table.insert(dap.configurations.cs, {
+  type = "netcoredbg",
+  name = "Attach",
+  request = "attach",
+  processId = require("dap.utils").pick_process,
+})
+
+local set_exception_breakpoints = require("nvim-dap-exception-breakpoints")
+require("debugmaster").keys.add({ key = "de", action = set_exception_breakpoints })
