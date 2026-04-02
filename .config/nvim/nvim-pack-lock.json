@@ -105,10 +105,6 @@
       "rev": "8588c3c988c7ed49879dddf937b42681cfa7ce30",
       "src": "https://github.com/nsidorenco/neotest-vstest"
     },
-    "noice.nvim": {
-      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
-      "src": "https://github.com/folke/noice.nvim"
-    },
     "nvim-dap": {
       "rev": "4f5deb110d9ff8994d96c21df95e2271d11214f9",
       "src": "https://github.com/mfussenegger/nvim-dap"

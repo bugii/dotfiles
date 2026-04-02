@@ -268,9 +268,7 @@ require("blink.cmp").setup({
     },
   },
 
-  -- experimental signature help support
-  -- i use noice for that
-  signature = { enabled = false },
+  signature = { enabled = true },
 
   completion = {
     keyword = { range = "full" },
@@ -316,8 +314,7 @@ vim.keymap.set("n", "<C-x>", function() MiniBufremove.delete() end, { desc = "Op
 
 require("mini.notify").setup({
   lsp_progress = {
-    -- I use noice for that
-    enable = false,
+    enable = true,
   },
 })
 
