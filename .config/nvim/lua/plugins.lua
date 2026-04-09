@@ -16,7 +16,7 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.hipatterns",
   "https://github.com/nvim-mini/mini.files",
   "https://github.com/nvim-mini/mini.bufremove",
-  "https://github.com/nvim-mini/mini.notify",
+  -- "https://github.com/nvim-mini/mini.notify",
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
   "https://github.com/sindrets/diffview.nvim",
   "https://github.com/folke/flash.nvim",
@@ -312,11 +312,12 @@ local MiniBufremove = require("mini.bufremove")
 MiniBufremove.setup()
 vim.keymap.set("n", "<C-x>", function() MiniBufremove.delete() end, { desc = "Open Files" })
 
-require("mini.notify").setup({
-  lsp_progress = {
-    enable = true,
-  },
-})
+-- require("mini.notify").setup({
+--   lsp_progress = {
+--     -- some lsps (roslyn for ex) do not seem to properly work
+--     enable = false,
+--   },
+-- })
 
 -- Flash
 vim.keymap.set({ "n", "x", "o" }, "<CR>", function()
@@ -360,7 +361,7 @@ require("mason-lspconfig").setup({
     "typos_lsp",
     "yamlls",
     "mdx_analyzer",
-    "graphql",
+    -- "graphql",
     -- "eslint",
     "oxlint",
   },

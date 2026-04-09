@@ -54,7 +54,7 @@ vim.lsp.config.relay_lsp = {
     local relay_binary = get_relay_binary_path(root_dir)
     return vim.lsp.rpc.start(build_relay_command(relay_binary, root_dir), dispatchers)
   end,
-  filetypes = { "typescript", "typescriptreact" },
+  filetypes = { "typescript", "typescriptreact", "graphql" },
   root_dir = function(bufnr, on_dir)
     -- we can't use package.json because it would chose a submodule
     local root = vim.fs.root(bufnr, { "node_modules", ".git" })
