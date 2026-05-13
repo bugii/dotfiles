@@ -21,3 +21,9 @@ vim.keymap.set("n", "<leader><leader>tsn", function()
 
   print(vim.inspect(captures))
 end, { desc = "Print treesitter node" })
+
+vim.keymap.set("n", "<leader>cp", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end, { desc = "Copy file path (absolute)" })
