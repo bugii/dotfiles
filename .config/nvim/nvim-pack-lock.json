@@ -26,7 +26,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "grug-far.nvim": {
-      "rev": "5506c2f59dc9ab2ed6c233585412b24d31d51521",
+      "rev": "c995bbacf8229dc096ec1c3d60f8531059c86c1b",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
     "lazydev.nvim": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/nvim-mini/mini.diff"
     },
     "mini.files": {
-      "rev": "500f9e18f3ae387b5aecf2261e33845bc5dd7b68",
+      "rev": "02874bc653fbecf2bee2c65441d0ebd09110f011",
       "src": "https://github.com/nvim-mini/mini.files"
     },
     "mini.hipatterns": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/nvim-mini/mini.notify"
     },
     "mini.surround": {
-      "rev": "d12d8e6ea8e4d9d3e6fb0e3ff11c84fcce2299ac",
+      "rev": "9fd5ebef2b34cc4ac3c0f1811a6726ea6d92fa91",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "neotest": {
@@ -114,7 +114,7 @@
       "src": "https://github.com/lucaSartore/nvim-dap-exception-breakpoints"
     },
     "nvim-lspconfig": {
-      "rev": "07dff35e7c95288861200b788ef32d6103f107f0",
+      "rev": "ed19590a3a9792901553c388d1aadafce012f80d",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -138,11 +138,11 @@
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "roslyn.nvim": {
-      "rev": "dedfc3f539c51a5841feb572e8b73ec58ff2ca9d",
+      "rev": "9c5da79216e5776e020dcc6c157983f5352f3f11",
       "src": "https://github.com/seblyng/roslyn.nvim"
     },
     "smart-splits.nvim": {
-      "rev": "1865e6826b1cd90098f198acb0f5b744a7b40c22",
+      "rev": "6806149fd36d1c5e797debe3e18b2c07219b685a",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
