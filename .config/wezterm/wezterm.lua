@@ -265,6 +265,22 @@ workspace_picker.setup({
       { name = "ai" },
     },
   },
+  {
+    path = "~/Projects/DG/Dg.CustomerLoyalty.git/",
+    type = "worktreeroot",
+    tabs = {
+      { name = "editor" },
+      {
+        name = "terminals",
+        direction = "Right",
+        panes = {
+          { name = "app" },
+          { name = "other" },
+        },
+      },
+      { name = "ai" },
+    },
+  },
 })
 workspace_picker.apply_to_config(config)
 

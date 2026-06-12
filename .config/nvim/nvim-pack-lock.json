@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "0a695750d747db1e7e70bcf0267ef8951c95fc83",
+      "rev": "906c32c8a034dd3d51353d63226bf91aeacd927c",
       "src": "https://github.com/williamboman/mason-lspconfig.nvim"
     },
     "mason-tool-installer.nvim": {
@@ -46,7 +46,7 @@
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
     },
     "mason.nvim": {
-      "rev": "16ba83bfc8a25f52bb545134f5bee082b195c460",
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/williamboman/mason.nvim"
     },
     "mdx.nvim": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/nvim-mini/mini.hipatterns"
     },
     "mini.icons": {
-      "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
+      "rev": "284509648db084c5e40a31afa9abb9887c49e04a",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.notify": {
@@ -112,6 +112,10 @@
     "nvim-dap-exception-breakpoints": {
       "rev": "6bc8d52fb48d20c8cd61920a8c1a4b487eff3afd",
       "src": "https://github.com/lucaSartore/nvim-dap-exception-breakpoints"
+    },
+    "nvim-dap-view": {
+      "rev": "91a2b0eab74cc889499587166cc6e3d53a7e1e45",
+      "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-lspconfig": {
       "rev": "ed19590a3a9792901553c388d1aadafce012f80d",
