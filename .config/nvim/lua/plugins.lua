@@ -479,12 +479,18 @@ end, {
   desc = "Re-enable autoformat-on-save",
 })
 
--- Smart splits ---------------------------------------------------------------------------------
+-- Splits ---------------------------------------------------------------------------------------
+-- smart-splits handles both backends: it auto-detects herdr via HERDR_ENV and falls
+-- back to wezterm otherwise, so one set of mappings covers every terminal.
 local smartsplits = require("smart-splits")
-vim.keymap.set("n", "<C-h>", smartsplits.move_cursor_left)
-vim.keymap.set("n", "<C-j>", smartsplits.move_cursor_down)
-vim.keymap.set("n", "<C-k>", smartsplits.move_cursor_up)
-vim.keymap.set("n", "<C-l>", smartsplits.move_cursor_right)
+vim.keymap.set("n", "<C-h>", smartsplits.move_cursor_left, { desc = "Navigate left" })
+vim.keymap.set("n", "<C-j>", smartsplits.move_cursor_down, { desc = "Navigate down" })
+vim.keymap.set("n", "<C-k>", smartsplits.move_cursor_up, { desc = "Navigate up" })
+vim.keymap.set("n", "<C-l>", smartsplits.move_cursor_right, { desc = "Navigate right" })
+vim.keymap.set("n", "<M-h>", smartsplits.resize_left, { desc = "Resize left" })
+vim.keymap.set("n", "<M-j>", smartsplits.resize_down, { desc = "Resize down" })
+vim.keymap.set("n", "<M-k>", smartsplits.resize_up, { desc = "Resize up" })
+vim.keymap.set("n", "<M-l>", smartsplits.resize_right, { desc = "Resize right" })
 
 -- Snacks
 require("snacks").setup({

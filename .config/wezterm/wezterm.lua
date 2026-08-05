@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
-local workspace_picker = wezterm.plugin.require("https://github.com/bugii/workspace-picker-plugin")
+-- Disabled: herdr is the multiplexer now, so WezTerm's own multiplexing layer
+-- (leader, splits, pane nav, workspace picker) is turned off to avoid key collisions.
+-- local workspace_picker = wezterm.plugin.require("https://github.com/bugii/workspace-picker-plugin")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -48,6 +50,9 @@ local colors = {
     palette.secondary,
   },
 }
+-- Disabled: herdr owns CTRL+hjkl now (see the smart-splits.nvim plugin bindings
+-- in ~/.config/herdr/config.toml). WezTerm must not intercept those chords.
+--[==[
 -- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
 local function is_vim(pane)
   -- this is set by the plugin, and unset on ExitPre in Neovim
@@ -81,19 +86,45 @@ local function split_nav(resize_or_move, key)
     end),
   }
 end
+]==]
+
+-- nvim binds alt+hjkl (smart-splits resize; herdr leaves those chords alone and
+-- passes them to the pane). Making Option a bare Meta modifier to deliver those
+-- four chords killed every other Option composition, so opt+u no longer produced
+-- ü. Instead both Option keys compose again and only these four physical chords
+-- are re-sent as Meta. "phys:" is matched on the RawKeyEvent, before dead-key/IME
+-- composition, so it wins for hjkl while every other Option chord still composes.
+local meta_hjkl_keys = {}
+for _, key in ipairs({ "H", "J", "K", "L" }) do
+  table.insert(meta_hjkl_keys, {
+    key = "phys:" .. key,
+    mods = "OPT",
+    action = wezterm.action.SendKey({ key = key:lower(), mods = "ALT" }),
+  })
+end
 
 local config = {
+  -- Both Option keys compose accented characters (opt+u u -> ü).
   send_composed_key_when_left_alt_is_pressed = true,
   send_composed_key_when_right_alt_is_pressed = true,
+  keys = meta_hjkl_keys,
+  -- Kitty keyboard protocol. herdr negotiates it with the outer terminal; with
+  -- it on, Escape arrives as a complete CSI-u sequence instead of a bare 0x1b
+  -- byte, so herdr no longer has to hold a lone escape for its input timeout to
+  -- see whether an alt chord follows. That hold is what makes <Esc> feel laggy
+  -- in nvim (see "flushing lone escape after input timeout" in herdr-client.log).
+  enable_kitty_keyboard = true,
   max_fps = 120,
   font = wezterm.font_with_fallback({
+    "JetBrains Mono",
     "CommitMono Nerd Font",
-    "JetBrainsMono Nerd Font",
     "0xProto Nerd Font",
     "FiraCode Nerd Font Mono",
   }),
   font_size = 16,
   colors = colors,
+  -- Disabled: CTRL+a is herdr's prefix, and WezTerm's leader would swallow it.
+  --[==[
   leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
     -- splitting
@@ -147,8 +178,11 @@ local config = {
     split_nav("resize", "k"),
     split_nav("resize", "l"),
   },
+  ]==]
 }
 
+-- Disabled: sessionizer/workspace picker superseded by herdr workspaces.
+--[==[
 workspace_picker.setup({
   {
     path = "~/dotfiles",
@@ -283,6 +317,7 @@ workspace_picker.setup({
   },
 })
 workspace_picker.apply_to_config(config)
+]==]
 
 tabline.setup({
   options = {

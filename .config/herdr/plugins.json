@@ -1,0 +1,247 @@
+[
+  {
+    "plugin_id": "herdr-bar",
+    "name": "Bar",
+    "version": "0.1.0",
+    "min_herdr_version": "0.7.4",
+    "description": "Cmd+K command bar: fuzzy-jump to any tab or agent",
+    "manifest_path": "/Users/dario/dotfiles/.config/herdr/plugins/github/herdr-bar-96eebe452a9c/herdr-plugin.toml",
+    "plugin_root": "/Users/dario/dotfiles/.config/herdr/plugins/github/herdr-bar-96eebe452a9c",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "actions": [
+      {
+        "id": "open",
+        "title": "Open bar",
+        "description": "Fuzzy-jump to any tab or agent",
+        "contexts": [
+          "global"
+        ],
+        "command": [
+          "sh",
+          "-c",
+          "herdr_bin=\"${HERDR_BIN_PATH:-herdr}\"; [ -x \"$herdr_bin\" ] || herdr_bin=herdr; exec \"$herdr_bin\" plugin pane open --plugin herdr-bar --entrypoint bar --placement popup"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "bar",
+        "title": "Bar",
+        "description": "Fuzzy-jump to any tab or agent",
+        "placement": "popup",
+        "width": "74%",
+        "height": "62%",
+        "command": [
+          "python3",
+          "run.py"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "jeffarese",
+      "repo": "herdr-bar",
+      "resolved_commit": "58c23e5c8d7926044f67524f403257bacdf88f6b",
+      "managed_path": "/Users/dario/.config/herdr/plugins/github/herdr-bar-96eebe452a9c",
+      "installed_unix_ms": 1785390690847
+    }
+  },
+  {
+    "plugin_id": "smart-splits.nvim",
+    "name": "smart-splits.nvim",
+    "version": "0.1.0",
+    "min_herdr_version": "0.7.0",
+    "description": "Seamless Ctrl+h/j/k/l navigation across herdr panes and Vim/Neovim splits",
+    "manifest_path": "/Users/dario/dotfiles/.local/share/nvim/site/pack/core/opt/smart-splits.nvim/herdr-plugin.toml",
+    "plugin_root": "/Users/dario/dotfiles/.local/share/nvim/site/pack/core/opt/smart-splits.nvim",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "actions": [
+      {
+        "id": "down",
+        "title": "Navigate down (Vim/herdr)",
+        "contexts": [
+          "global"
+        ],
+        "command": [
+          "bash",
+          "scripts/herdr-navigate.sh",
+          "down"
+        ]
+      },
+      {
+        "id": "left",
+        "title": "Navigate left (Vim/herdr)",
+        "contexts": [
+          "global"
+        ],
+        "command": [
+          "bash",
+          "scripts/herdr-navigate.sh",
+          "left"
+        ]
+      },
+      {
+        "id": "right",
+        "title": "Navigate right (Vim/herdr)",
+        "contexts": [
+          "global"
+        ],
+        "command": [
+          "bash",
+          "scripts/herdr-navigate.sh",
+          "right"
+        ]
+      },
+      {
+        "id": "up",
+        "title": "Navigate up (Vim/herdr)",
+        "contexts": [
+          "global"
+        ],
+        "command": [
+          "bash",
+          "scripts/herdr-navigate.sh",
+          "up"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "local"
+    }
+  },
+  {
+    "plugin_id": "usagebar",
+    "name": "Agent Usage",
+    "version": "0.5.6",
+    "min_herdr_version": "0.7.4",
+    "description": "Sidebar context meters, provider limit windows, and rate-limit toasts for Claude, Codex, OpenCode Go, OMP, Pi coding agent, and Grok",
+    "manifest_path": "/Users/dario/dotfiles/.config/herdr/plugins/github/usagebar-33803b79d616/herdr-plugin.toml",
+    "plugin_root": "/Users/dario/dotfiles/.config/herdr/plugins/github/usagebar-33803b79d616",
+    "enabled": true,
+    "platforms": [
+      "macos",
+      "linux"
+    ],
+    "actions": [
+      {
+        "id": "check-updates",
+        "title": "Check for Agent Usage updates",
+        "contexts": [
+          "workspace",
+          "pane"
+        ],
+        "command": [
+          "bash",
+          "bin/run-update-check.sh"
+        ]
+      },
+      {
+        "id": "enable-toast",
+        "title": "Enable Herdr toast delivery (safe append)",
+        "contexts": [
+          "workspace",
+          "pane"
+        ],
+        "command": [
+          "bash",
+          "bin/run-setup.sh",
+          "--write-toast"
+        ]
+      },
+      {
+        "id": "open-limits",
+        "title": "Open Agent Usage pane",
+        "contexts": [
+          "workspace",
+          "pane"
+        ],
+        "command": [
+          "bash",
+          "bin/open-limits-pane.sh"
+        ]
+      },
+      {
+        "id": "refresh",
+        "title": "Refresh usage status",
+        "contexts": [
+          "workspace",
+          "pane"
+        ],
+        "command": [
+          "bash",
+          "bin/run-status.sh"
+        ]
+      },
+      {
+        "id": "setup",
+        "title": "Setup Agent Usage (show config snippets)",
+        "contexts": [
+          "workspace",
+          "pane"
+        ],
+        "command": [
+          "bash",
+          "bin/run-setup.sh"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "on": "pane.agent_status_changed",
+        "command": [
+          "bash",
+          "bin/run-notify.sh"
+        ]
+      },
+      {
+        "on": "pane.agent_status_changed",
+        "command": [
+          "bash",
+          "bin/run-status.sh"
+        ]
+      },
+      {
+        "on": "pane.focused",
+        "command": [
+          "bash",
+          "bin/run-status.sh"
+        ]
+      },
+      {
+        "on": "pane.focused",
+        "command": [
+          "bash",
+          "bin/run-update-check.sh",
+          "--auto"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "limits",
+        "title": "Agent Usage",
+        "placement": "split",
+        "command": [
+          "bash",
+          "bin/run-limits-pane.sh"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "senna-lang",
+      "repo": "herdr-agent-usage",
+      "resolved_commit": "9778242dd9058ab6562054af49be373f1fdd82fa",
+      "managed_path": "/Users/dario/.config/herdr/plugins/github/usagebar-33803b79d616",
+      "installed_unix_ms": 1785848063832
+    }
+  }
+]

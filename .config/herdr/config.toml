@@ -1,0 +1,139 @@
+onboarding = false
+
+[theme]
+name = "terminal"
+auto_switch = false
+
+[keys]
+# screen/tmux-style prefix; press twice to send a literal ctrl+a
+prefix = "ctrl+a"
+
+# Move panes around, like vim's ctrl-w H/J/K/L (set explicitly; also the default)
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+# Scrollback/selection mode; tmux-style, and herdr's default
+copy_mode = "prefix+["
+
+# Splits, tmux style: | splits side-by-side, - splits stacked.
+# Note herdr's "vertical" = vertical divider = panes side by side (tmux -h),
+# and "horizontal" = horizontal divider = panes stacked (tmux -v).
+# prefix+v and prefix+minus are herdr's defaults, kept as aliases.
+split_vertical = ["prefix+v", "prefix+|", "prefix+backslash"]
+split_horizontal = ["prefix+minus"]
+
+# Worktrees. Ships unset; pairs with new_worktree on the default prefix+shift+g.
+# Acts on the selected Git workspace, listing that repo's existing checkouts:
+# an already-open checkout is focused, a closed one opens in the same group.
+open_worktree = "prefix+shift+o"
+
+# --- Navigation -------------------------------------------------------------------
+
+# Jump back to the previously focused pane, like vim's ctrl-w p
+last_pane = "prefix+a"
+
+# Session navigator unbound: the herdr-bar fuzzy picker (prefix+f) replaces it.
+# Navigate mode is still reachable via workspace_picker (prefix+w).
+goto = ""
+
+# Navigate mode (prefix+w): ctrl+n/ctrl+p list movement, plus the arrows.
+# These are local to navigate mode, so bare ctrl+n/ctrl+p stay free for shell
+# history and nvim completion everywhere else.
+navigate_workspace_up = ["up", "ctrl+p"]
+navigate_workspace_down = ["down", "ctrl+n"]
+
+# Seamless nvim-split <-> herdr-pane navigation via the herdr plugin bundled with
+# smart-splits.nvim (linked from the plugin checkout; needs jq on PATH). Each action
+# asks `herdr pane process-info` whether the focused pane runs vim/nvim: if so the
+# chord is forwarded into the pane, otherwise herdr's pane focus moves — and with no
+# neighbour in that direction the key falls back through to the app (shell ctrl+l).
+#
+# alt+hjkl is deliberately unbound here: the keys reach the pane, where nvim's
+# smart-splits mappings resize the split and cross into herdr's panes at the edge.
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "smart-splits.nvim.left"
+description = "navigate left (nvim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "smart-splits.nvim.down"
+description = "navigate down (nvim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "smart-splits.nvim.up"
+description = "navigate up (nvim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "smart-splits.nvim.right"
+description = "navigate right (nvim/herdr)"
+
+# Fuzzy "Cmd+K" bar: jump to any tab, agent or workspace by title, cwd, branch
+# or tab number, with a live preview. prefix+f = find; ctrl+alt+f is the
+# prefix-free chord. Note prefix+k is focus_pane_up, so the plugin README's
+# suggested prefix+k is not usable here.
+[[keys.command]]
+key = "prefix+f"
+type = "plugin_action"
+command = "herdr-bar.open"
+description = "fuzzy jump (tabs/agents/workspaces)"
+
+[[keys.command]]
+key = "ctrl+alt+f"
+type = "plugin_action"
+command = "herdr-bar.open"
+description = "fuzzy jump (tabs/agents/workspaces)"
+
+# lazygit in a session-modal popup, reusing prefix+g now that the session
+# navigator is unbound. Popups leave the tiled pane layout untouched and close
+# when the command exits.
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "lazygit"
+description = "lazygit"
+width = "80%"
+height = "80%"
+
+# Agent Usage (usagebar): prefix-free chords, no conflicts with the smart-splits
+# ctrl+hjkl nav bindings or the prefix table above.
+[[keys.command]]
+key = "ctrl+shift+u"
+type = "plugin_action"
+command = "usagebar.open-limits"
+description = "Agent Usage: open limits pane"
+
+[[keys.command]]
+key = "ctrl+shift+m"
+type = "plugin_action"
+command = "usagebar.refresh"
+description = "Agent Usage: refresh sidebar meters"
+
+# --- added by Agent Usage (usagebar) setup ---
+[ui.toast]
+delivery = "herdr" # or "system" / "terminal"
+
+[ui.toast.herdr]
+position = "bottom-left"
+
+# Agent sidebar: space name and tab name on row 1, provider rate limit ($limit)
+# next to the agent name, context meter ($context) on its own row underneath.
+# `workspace` always renders; the built-in `tab` token stays blank while a tab
+# keeps its auto-assigned number, so renamed tabs are the only ones that add a
+# second word. (The plugin's $title token is an either/or fallback — tab name
+# OR space name — so it cannot show both.)
+[ui.sidebar.agents]
+row_gap = 0
+rows = [
+  ["state_icon", { token = "workspace", bold = true }, { token = "tab", dim = true }],
+  ["agent", "$limit"],
+  ["$context"],
+]
