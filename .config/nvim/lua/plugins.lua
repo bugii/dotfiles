@@ -348,7 +348,7 @@ require("mason-lspconfig").setup({
     exclude = { "mdx_analyzer" },
   },
   ensure_installed = {
-    "tsgo",
+    "tsc",
     "lua_ls",
     "pyright",
     "bashls",

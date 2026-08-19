@@ -103,37 +103,13 @@ description = "lazygit"
 width = "80%"
 height = "80%"
 
-# Agent Usage (usagebar): prefix-free chords, no conflicts with the smart-splits
-# ctrl+hjkl nav bindings or the prefix table above.
-[[keys.command]]
-key = "ctrl+shift+u"
-type = "plugin_action"
-command = "usagebar.open-limits"
-description = "Agent Usage: open limits pane"
-
-[[keys.command]]
-key = "ctrl+shift+m"
-type = "plugin_action"
-command = "usagebar.refresh"
-description = "Agent Usage: refresh sidebar meters"
-
-# --- added by Agent Usage (usagebar) setup ---
-[ui.toast]
-delivery = "herdr" # or "system" / "terminal"
-
-[ui.toast.herdr]
-position = "bottom-left"
-
-# Agent sidebar: space name and tab name on row 1, provider rate limit ($limit)
-# next to the agent name, context meter ($context) on its own row underneath.
+# Agent sidebar: space name and tab name on row 1, agent name underneath.
 # `workspace` always renders; the built-in `tab` token stays blank while a tab
 # keeps its auto-assigned number, so renamed tabs are the only ones that add a
-# second word. (The plugin's $title token is an either/or fallback — tab name
-# OR space name — so it cannot show both.)
+# second word.
 [ui.sidebar.agents]
 row_gap = 0
 rows = [
   ["state_icon", { token = "workspace", bold = true }, { token = "tab", dim = true }],
-  ["agent", "$limit"],
-  ["$context"],
+  ["agent"],
 ]
