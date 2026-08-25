@@ -1,4 +1,5 @@
-theme = Builtin Pastel Dark
+theme = light:GitHub Light Default,dark:Builtin Pastel Dark
+window-theme = auto
 
 font-family = JetBrains Mono
 font-family = CommitMono Nerd Font

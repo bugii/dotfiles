@@ -18,7 +18,7 @@
       "src": "https://github.com/sindrets/diffview.nvim"
     },
     "flash.nvim": {
-      "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
+      "rev": "5f0f270fdc7c5b0c21d903ee85b9cb06f2ac636a",
       "src": "https://github.com/folke/flash.nvim"
     },
     "friendly-snippets": {
@@ -118,11 +118,11 @@
       "src": "https://github.com/lucaSartore/nvim-dap-exception-breakpoints"
     },
     "nvim-dap-view": {
-      "rev": "4e73e57008df10f9971b60c3a11e6aa11ba9f94a",
+      "rev": "b9d8e6ce7e4c5d2b9bb35f57578948ff7e183b71",
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-lspconfig": {
-      "rev": "a00eb57db2ef4d1ff2d4ef50ead2029cebd09f01",
+      "rev": "af9adce488c75ca0a81017945c2b7fa7b461bc23",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -130,7 +130,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
-      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
+      "rev": "8b98b4470eb326f1c7b50dae79f8c963568e5720",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -150,7 +150,7 @@
       "src": "https://github.com/seblyng/roslyn.nvim"
     },
     "smart-splits.nvim": {
-      "rev": "289971cfdbc7f7b1c91670a228b239d870130af7",
+      "rev": "5e92431aa7f5e618c2f6825f682df6d94f6e0a02",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
