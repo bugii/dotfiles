@@ -9,5 +9,13 @@
       "enabled": true,
       "oauth": {}
     }
+  },
+  "tools": {
+    "atlassian_*": false,
+    "atlassian_get*": true,
+    "atlassian_search*": true,
+    "atlassian_fetch": true,
+    "atlassian_lookupJiraAccountId": true,
+    "atlassian_atlassianUserInfo": true
   }
 }
