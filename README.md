@@ -23,7 +23,7 @@ Keep in mind that the structure of this repository has to match the structure th
 
 For all the tools to work properly you may need to install the following:
 
-1. Terminal: wezterm
+1. Terminal: ghostty (multiplexed with herdr)
 2. Shell: zsh
 3. Neovim
 4. Utilities: Fzf, zoxide, git, ripgrep (for file picker)

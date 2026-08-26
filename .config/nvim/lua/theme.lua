@@ -1,224 +1,33 @@
+-- Colorscheme, kept in sync with ~/.config/ghostty/config:
+--   light -> GitHub Light Default, dark -> GitHub Dark Default
+-- Registered here rather than in plugins.lua because init.lua requires this
+-- module first, so the colorscheme is applied before lualine's `theme = "auto"`
+-- samples the highlight groups.
+vim.pack.add({ "https://github.com/projekt0n/github-nvim-theme" })
+
+-- Neovim detects the terminal background via OSC 11 and sets 'background' after
+-- startup. github-nvim-theme ships the two variants as separate colorschemes and
+-- has no switching of its own, so map 'background' onto them here.
+local applying = false
+
 local function apply_theme()
-  local palette = dofile(vim.env.HOME .. "/.config/palette.lua").get(vim.o.background)
-  -- Clear any stale highlight groups from a previously loaded colorscheme
-  vim.cmd("highlight clear")
-  if vim.fn.exists("syntax_on") == 1 then vim.cmd("syntax reset") end
-  vim.g.colors_name = "dedo"
-
-  -- UI Elements
-  vim.api.nvim_set_hl(0, "Normal", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "NormalNC", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "WinBar", { fg = palette.fg, bg = palette.bg, bold = true })
-  vim.api.nvim_set_hl(0, "WinBarNC", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "Special", { fg = palette.primary })
-  vim.api.nvim_set_hl(0, "NormalFloat", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "FloatBorder", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "CursorLine", { bg = palette.surface })
-  vim.api.nvim_set_hl(0, "LineNr", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "Visual", { bg = palette.visual })
-  vim.api.nvim_set_hl(0, "Search", { fg = palette.bg, bg = palette.tertiary })
-  vim.api.nvim_set_hl(0, "IncSearch", { fg = palette.bg, bg = palette.primary })
-  vim.api.nvim_set_hl(0, "StatusLine", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.comment, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "Pmenu", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "PmenuSel", { fg = palette.fg, bg = palette.visual })
-  vim.api.nvim_set_hl(0, "PmenuSbar", { bg = palette.surface })
-  vim.api.nvim_set_hl(0, "PmenuThumb", { bg = palette.muted })
-  vim.api.nvim_set_hl(0, "TabLine", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "TabLineSel", { fg = palette.bg, bg = palette.primary })
-  vim.api.nvim_set_hl(0, "TabLineFill", { bg = palette.bg })
-  vim.api.nvim_set_hl(0, "Title", { fg = palette.primary })
-  vim.api.nvim_set_hl(0, "Folded", { fg = palette.comment, bg = palette.visual })
-  vim.api.nvim_set_hl(0, "SignColumn", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "ColorColumn", { bg = palette.surface })
-  vim.api.nvim_set_hl(0, "WinSeparator", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "VertSplit", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "Substitute", { fg = palette.fg, bg = palette.secondary })
-  vim.api.nvim_set_hl(0, "CursorLineNr", { fg = palette.fg, bold = true })
-  vim.api.nvim_set_hl(0, "CursorColumn", { bg = palette.surface })
-  vim.api.nvim_set_hl(0, "MatchParen", { fg = palette.warning, bold = true })
-  vim.api.nvim_set_hl(0, "CurSearch", { fg = palette.bg, bg = palette.warning, bold = true })
-  vim.api.nvim_set_hl(0, "Cursor", { fg = palette.bg, bg = palette.fg })
-  vim.api.nvim_set_hl(0, "TermCursor", { fg = palette.bg, bg = palette.fg })
-  vim.api.nvim_set_hl(0, "NonText", { fg = palette.surface })
-  vim.api.nvim_set_hl(0, "Whitespace", { fg = palette.surface })
-  vim.api.nvim_set_hl(0, "SpecialKey", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = palette.bg })
-  vim.api.nvim_set_hl(0, "Conceal", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "Directory", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "Question", { fg = palette.tertiary })
-  vim.api.nvim_set_hl(0, "MoreMsg", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "ModeMsg", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "MsgArea", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "ErrorMsg", { fg = palette.error })
-  vim.api.nvim_set_hl(0, "WarningMsg", { fg = palette.warning })
-  vim.api.nvim_set_hl(0, "WildMenu", { fg = palette.bg, bg = palette.primary })
-
-  -- Syntax
-  vim.api.nvim_set_hl(0, "Identifier", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "Comment", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "String", { fg = palette.tertiary })
-  vim.api.nvim_set_hl(0, "Number", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "Boolean", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "Float", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "Function", { fg = palette.accent, bold = true })
-  vim.api.nvim_set_hl(0, "Statement", { fg = palette.muted, bold = true })
-  vim.api.nvim_set_hl(0, "Keyword", { fg = palette.muted, italic = true })
-  vim.api.nvim_set_hl(0, "@variable", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "@variable.parameter", { fg = palette.fg, italic = true })
-  vim.api.nvim_set_hl(0, "@variable.member", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "@property", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "Constant", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "Operator", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "@punctuation.special", { fg = palette.primary })
-  vim.api.nvim_set_hl(0, "@constructor", { fg = palette.fg, bold = true, italic = true })
-  vim.api.nvim_set_hl(0, "Type", { fg = palette.fg, bold = true, italic = true })
-  vim.api.nvim_set_hl(0, "@type.builtin", { fg = palette.fg, bold = true, italic = true })
-  vim.api.nvim_set_hl(0, "@string.escape", { fg = palette.tertiary })
-  vim.api.nvim_set_hl(0, "@string.special", { fg = palette.tertiary })
-  vim.api.nvim_set_hl(0, "@tag.attribute.tsx", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "@tag.builtin.tsx", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "@tag.tsx", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "@tag.delimiter", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "@constant.builtin.tsx", { link = "Constant" })
-
-  -- LSP semantic tokens (prevent default colorscheme from overriding treesitter)
-  vim.api.nvim_set_hl(0, "@lsp.type.function", { link = "Function" })
-  vim.api.nvim_set_hl(0, "@lsp.type.method", { link = "Function" })
-  vim.api.nvim_set_hl(0, "@lsp.type.variable", { link = "@variable" })
-  vim.api.nvim_set_hl(0, "@lsp.type.parameter", { link = "@variable.parameter" })
-  vim.api.nvim_set_hl(0, "@lsp.type.property", { link = "@variable.member" })
-  vim.api.nvim_set_hl(0, "@lsp.type.keyword", { link = "Keyword" })
-  vim.api.nvim_set_hl(0, "@lsp.type.type", { link = "Type" })
-  vim.api.nvim_set_hl(0, "@lsp.type.class", { link = "Type" })
-  vim.api.nvim_set_hl(0, "@lsp.type.interface", { link = "Type" })
-  vim.api.nvim_set_hl(0, "@lsp.type.enum", { link = "Type" })
-  vim.api.nvim_set_hl(0, "@lsp.type.enumMember", { link = "Constant" })
-  vim.api.nvim_set_hl(0, "@lsp.type.namespace", { link = "Type" })
-  vim.api.nvim_set_hl(0, "@lsp.type.string", { link = "String" })
-  vim.api.nvim_set_hl(0, "@lsp.type.number", { link = "Number" })
-  vim.api.nvim_set_hl(0, "@lsp.type.comment", { link = "Comment" })
-
-  -- LSP document highlight, inlay hints, signature
-  vim.api.nvim_set_hl(0, "LspReferenceText", { bg = palette.visual })
-  vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = palette.visual })
-  vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = palette.visual })
-  vim.api.nvim_set_hl(0, "LspInlayHint", { fg = palette.comment, bg = palette.surface, italic = true })
-  vim.api.nvim_set_hl(0, "LspSignatureActiveParameter", { fg = palette.tertiary, bold = true })
-  vim.api.nvim_set_hl(0, "LspCodeLens", { fg = palette.comment, italic = true })
-
-  -- Diff (tints derived per-mode so both dark and light look correct)
-  local diff_add = vim.o.background == "dark" and "#1a2e1a" or "#d4edda"
-  local diff_change = vim.o.background == "dark" and "#1a2233" or "#d0e4f5"
-  local diff_delete = vim.o.background == "dark" and "#2e1a1a" or "#f5d4d0"
-  local diff_text = vim.o.background == "dark" and "#2a3d5c" or "#aacfee"
-  vim.api.nvim_set_hl(0, "DiffAdd", { fg = palette.tertiary, bg = diff_add })
-  vim.api.nvim_set_hl(0, "DiffChange", { fg = palette.warning, bg = diff_change })
-  vim.api.nvim_set_hl(0, "DiffDelete", { fg = palette.error, bg = diff_delete })
-  vim.api.nvim_set_hl(0, "DiffText", { bg = diff_text, bold = true })
-
-  -- Diagnostics
-  vim.api.nvim_set_hl(0, "DiagnosticError", { fg = palette.error })
-  vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = palette.warning })
-  vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = palette.info })
-  vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = palette.error })
-  vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = palette.warning })
-  vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = palette.info })
-  vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = palette.muted })
-
-  -- Plugins =========================================================================
-  -- Render markdown (real heading fg groups + subtle bg bands)
-  local h_bg = vim.o.background == "dark" and "#171717" or "#F2E9E1"
-  vim.api.nvim_set_hl(0, "RenderMarkdownH1", { fg = palette.primary, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH2", { fg = palette.accent, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH3", { fg = palette.secondary, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH4", { fg = palette.tertiary, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH5", { fg = palette.info, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH6", { fg = palette.muted, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = palette.primary, bg = h_bg, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = palette.accent, bg = h_bg, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = palette.secondary, bg = h_bg, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = palette.tertiary, bg = h_bg, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = palette.info, bg = h_bg, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = palette.muted, bg = h_bg, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = palette.surface })
-  vim.api.nvim_set_hl(0, "RenderMarkdownCodeInline", { fg = palette.tertiary, bg = palette.surface })
-  vim.api.nvim_set_hl(0, "RenderMarkdownBullet", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "RenderMarkdownDash", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "RenderMarkdownQuote", { fg = palette.comment, italic = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownLink", { fg = palette.secondary, underline = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownChecked", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "RenderMarkdownUnchecked", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "RenderMarkdownTableHead", { fg = palette.muted, bold = true })
-  vim.api.nvim_set_hl(0, "RenderMarkdownTableRow", { fg = palette.fg })
-
-  -- Neotest
-  vim.api.nvim_set_hl(0, "NeotestRunning", { fg = palette.secondary })
-
-  -- Mini
-  vim.api.nvim_set_hl(0, "MiniHipatternsFixme", { fg = palette.error, bold = true, reverse = true })
-  vim.api.nvim_set_hl(0, "MiniHipatternsHack", { fg = palette.secondary, bold = true, reverse = true })
-  vim.api.nvim_set_hl(0, "MiniHipatternsTodo", { fg = palette.primary, bold = true, reverse = true })
-  vim.api.nvim_set_hl(0, "MiniHipatternsNote", { fg = palette.tertiary, bold = true, reverse = true })
-
-  -- Mini.files
-  vim.api.nvim_set_hl(0, "MiniFilesTitle", { fg = palette.muted })
-  vim.api.nvim_set_hl(0, "MiniFilesTitleFocused", { fg = palette.primary, bold = true })
-  vim.api.nvim_set_hl(0, "MiniFilesBorder", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "MiniFilesNormal", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "MiniFilesDirectory", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "MiniFilesFile", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "MiniFilesCursorLine", { bg = palette.surface })
-
-  -- Mini.diff
-  vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = palette.warning })
-  vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = palette.error })
-  vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { link = "DiffAdd" })
-  vim.api.nvim_set_hl(0, "MiniDiffOverChange", { link = "DiffText" })
-  vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { link = "DiffDelete" })
-  vim.api.nvim_set_hl(0, "MiniDiffOverContext", { bg = palette.surface })
-
-  -- Flash
-  vim.api.nvim_set_hl(0, "FlashLabel", { fg = palette.bg, bg = palette.error, bold = true })
-  vim.api.nvim_set_hl(0, "FlashMatch", { fg = palette.bg, bg = palette.tertiary })
-  vim.api.nvim_set_hl(0, "FlashCurrent", { fg = palette.bg, bg = palette.primary, bold = true })
-  vim.api.nvim_set_hl(0, "FlashBackdrop", { fg = palette.comment })
-
-  -- Blink.cmp
-  vim.api.nvim_set_hl(0, "BlinkCmpMenu", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = palette.visual })
-  vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = palette.accent, bold = true })
-  vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "BlinkCmpDoc", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpActiveParameter", { link = "LspSignatureActiveParameter" })
-  vim.api.nvim_set_hl(0, "BlinkCmpKind", { fg = palette.muted })
-
-  -- Snacks (picker + input)
-  vim.api.nvim_set_hl(0, "SnacksNormal", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "SnacksNormalNC", { fg = palette.fg, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "SnacksPickerTitle", { fg = palette.primary, bold = true })
-  vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = palette.comment })
-  vim.api.nvim_set_hl(0, "SnacksPickerMatch", { fg = palette.accent, bold = true })
-  vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = palette.fg })
-  vim.api.nvim_set_hl(0, "SnacksPickerDirectory", { fg = palette.secondary })
-  vim.api.nvim_set_hl(0, "SnacksInputBorder", { fg = palette.muted, bg = palette.bg })
-  vim.api.nvim_set_hl(0, "SnacksInputTitle", { fg = palette.primary, bold = true })
-  vim.api.nvim_set_hl(0, "SnacksInputIcon", { fg = palette.primary })
+  if applying then return end -- `:colorscheme` sets 'background', which re-enters
+  applying = true
+  local scheme = vim.o.background == "light" and "github_light_default" or "github_dark_default"
+  pcall(vim.cmd.colorscheme, scheme)
+  applying = false
 end
 
 apply_theme()
 
 vim.api.nvim_create_autocmd("OptionSet", {
-  group = vim.api.nvim_create_augroup("DedoTheme", { clear = true }),
+  group = vim.api.nvim_create_augroup("Theme", { clear = true }),
   pattern = "background",
-  callback = function() apply_theme() end,
-  desc = "Detect background option change",
+  -- Required: autocmds don't nest by default, so without this the `:colorscheme`
+  -- above fires no ColorScheme event and every plugin that re-applies its default
+  -- highlights on ColorScheme (blink.cmp, snacks, render-markdown, ...) keeps the
+  -- highlights of the previous variant.
+  nested = true,
+  callback = apply_theme,
+  desc = "Follow terminal light/dark appearance",
 })

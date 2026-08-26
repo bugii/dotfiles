@@ -1,4 +1,4 @@
-theme = light:GitHub Light Default,dark:Builtin Pastel Dark
+theme = light:GitHub Light Default,dark:GitHub Dark Default
 window-theme = auto
 
 font-family = JetBrains Mono

@@ -27,6 +27,7 @@ vim.pack.add({
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/davidmh/mdx.nvim",
   "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+  "https://github.com/brianhuster/live-preview.nvim",
   "https://github.com/seblyng/roslyn.nvim",
   "https://github.com/tpope/vim-dadbod",
   "https://github.com/kristijanhusak/vim-dadbod-completion",
@@ -593,8 +594,16 @@ vim.keymap.set(
   { desc = "GitHub Pull Requests (all)" }
 )
 
--- Grug-far ------------------------------------------------------------------------
+-- Live preview ---------------------------------------------------------------------
+vim.keymap.set("n", "<leader>p", function()
+  if require("livepreview").is_running() then
+    vim.cmd("LivePreview close")
+  else
+    vim.cmd("LivePreview start")
+  end
+end, { desc = "Toggle live preview (browser)" })
 
+-- Grug-far ------------------------------------------------------------------------
 vim.keymap.set("n", "<leader>sr", ":GrugFar <CR>", { desc = "Search and Replace" })
 
 -- Neotest -------------------------------------------------------------------------
