@@ -93,3 +93,9 @@ eval "$(atuin init zsh --disable-up-arrow)"
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/dario/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/dario/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dario/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/dario/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dario/google-cloud-sdk/completion.zsh.inc'; fi

@@ -9,3 +9,5 @@ raycast
 # herdr-managed plugin checkouts: third-party source with nested .git dirs.
 # plugins.json is the real registry (pins resolved commit) and stays tracked.
 .config/herdr/plugins/github/
+.config/gcloud/
+.config/herdr/release-notes.json
