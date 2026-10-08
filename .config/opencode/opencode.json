@@ -1,8 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
-  "plugin": ["opencode-claude-auth", "@datadog/opencode-plugin"],
+  "plugins": ["file:///Users/dario/.local/share/opencode-plugins/opencode-claude-auth-v2"],
   "mcp": {
+    "datadog": {
+      "type": "remote",
+      "url": "https://mcp.datadoghq.eu/v1/mcp",
+      "enabled": true,
+      "oauth": {}
+    },
     "atlassian": {
       "type": "remote",
       "url": "https://mcp.atlassian.com/v1/mcp",
