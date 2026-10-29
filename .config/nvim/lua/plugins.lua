@@ -32,7 +32,7 @@ vim.pack.add({
   "https://github.com/tpope/vim-dadbod",
   "https://github.com/kristijanhusak/vim-dadbod-completion",
   "https://github.com/kristijanhusak/vim-dadbod-ui",
-  "https://github.com/mrjones2014/smart-splits.nvim",
+  { src = "https://github.com/smart-splits-nvim/smart-splits.nvim", version = vim.version.range("2.*") },
   "https://github.com/folke/snacks.nvim",
   "https://github.com/MagicDuck/grug-far.nvim",
   "https://github.com/marilari88/neotest-vitest",

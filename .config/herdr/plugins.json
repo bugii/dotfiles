@@ -2,9 +2,9 @@
   {
     "plugin_id": "herdr-bar",
     "name": "Bar",
-    "version": "0.1.0",
-    "min_herdr_version": "0.7.4",
-    "description": "Cmd+K command bar: fuzzy-jump to any tab or agent",
+    "version": "0.7.3",
+    "min_herdr_version": "0.9.0",
+    "description": "Cmd+K command bar with agent icons, fuzzy search, and optional automatic tab titles",
     "manifest_path": "/Users/dario/dotfiles/.config/herdr/plugins/github/herdr-bar-96eebe452a9c/herdr-plugin.toml",
     "plugin_root": "/Users/dario/dotfiles/.config/herdr/plugins/github/herdr-bar-96eebe452a9c",
     "enabled": true,
@@ -12,11 +12,20 @@
       "linux",
       "macos"
     ],
+    "startup": [
+      {
+        "command": [
+          "python3",
+          "run.py",
+          "--start-titles"
+        ]
+      }
+    ],
     "actions": [
       {
         "id": "open",
         "title": "Open bar",
-        "description": "Fuzzy-jump to any tab or agent",
+        "description": "Fuzzy-jump to any tab, pane, or agent",
         "contexts": [
           "global"
         ],
@@ -25,13 +34,50 @@
           "-c",
           "herdr_bin=\"${HERDR_BIN_PATH:-herdr}\"; [ -x \"$herdr_bin\" ] || herdr_bin=herdr; exec \"$herdr_bin\" plugin pane open --plugin herdr-bar --entrypoint bar --placement popup"
         ]
+      },
+      {
+        "id": "start-titles",
+        "title": "Start tab watcher",
+        "description": "Start task title and tab status updates enabled in the plugin config",
+        "contexts": [
+          "global"
+        ],
+        "command": [
+          "python3",
+          "run.py",
+          "--start-titles",
+          "--resume"
+        ]
+      },
+      {
+        "id": "stop-titles",
+        "title": "Stop tab watcher",
+        "description": "Stop this server's title and status watcher, restoring bare tab names",
+        "contexts": [
+          "global"
+        ],
+        "command": [
+          "python3",
+          "run.py",
+          "--stop-titles"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "on": "pane.agent_detected",
+        "command": [
+          "python3",
+          "run.py",
+          "--start-titles"
+        ]
       }
     ],
     "panes": [
       {
         "id": "bar",
         "title": "Bar",
-        "description": "Fuzzy-jump to any tab or agent",
+        "description": "Fuzzy-jump to any tab, pane, or agent",
         "placement": "popup",
         "width": "74%",
         "height": "62%",
@@ -45,9 +91,9 @@
       "kind": "github",
       "owner": "jeffarese",
       "repo": "herdr-bar",
-      "resolved_commit": "58c23e5c8d7926044f67524f403257bacdf88f6b",
+      "resolved_commit": "e22455068e26340b6be02cec8a07707fc1f11ae1",
       "managed_path": "/Users/dario/.config/herdr/plugins/github/herdr-bar-96eebe452a9c",
-      "installed_unix_ms": 1785390690847
+      "installed_unix_ms": 1791870548052
     }
   },
   {
